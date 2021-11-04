@@ -1,0 +1,42 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+
+<link href="css/reset.css" type="text/css" rel="stylesheet" />
+<link href="css/common.css" type="text/css" rel="stylesheet" />
+<link href="css/index.css" type="text/css" rel="stylesheet" />
+<!-- Ãß°¡ -->
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
+<link rel="stylesheet" href="_css/bootstrap-theme.min.css" />
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/prefixfree.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!--js-->
+<script>
+    $(document).ready(function() {
+        $(".sub_nav_box").hide();
+        $(".sub_nav li").click(function() { 
+            $(".sub_nav_box").stop().slideUp(); 
+            $(this).parent(".sub_nav").next(".sub_nav_box").stop().slideDown();
+        });
+    });
+    
+    $(function() {
+        $('.admin_contents:not(:first)').hide();
+        $('.sub_nav_list > li').click(function() {
+            $('.admin_contents').hide();
+            var linkId = $(this).find('a').attr('href');
+            $(linkId).show();
+            $(this).addClass('on');
+            $(this).siblings().removeClass('on');
+        });
+
+        $('ul.sub_nav').click(function() {
+            $('.admin_contents').hide();
+            var linkId = $(this).data('href');
+            $(linkId).show();
+
+            $(this).addClass('on');
+            $(this).siblings().removeClass('on');
+        });
+    });        
+</script>
