@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="kr.co.there.place.model.PlaceDao">
+
+	<select id="selectAll" resultType="bean">
+	select * from place
+	</select>
+	
+	<select id="selectOne" resultType="bean">
+	select * from place where place_idx=#{val}
+	</select>
+
+	 
+	<update id="insertOne" parameterType="bean">
+	insert into place (place_name, place_addr, place_opentime, place_endtime, 
+	place_tel, place_content,place_category, place_longitude, place_latitude) 
+	values (#{placeName}, #{placeAddr}, #{placeOpentime}, #{placeEndtime},
+	 #{placeTel}, #{placeContent}, #{placeCategory}, #{placeLng}, #{placeLat})
+	</update>
+
+
+	<update id="updateOne" parameterType="bean">
+	update place set place_name=#{placeName}, place_addr=#{placeAddr}, 
+	place_opentime=#{placeOpentime}, place_endtime=#{placeEndtime}, 
+	place_tel=#{placeTel}, place_content=#{placeContent},place_category=#{placeCategory},
+	place_longitude=#{placeLng}, place_latitude=#{placeLat}
+	where place_idx=#{placeIdx}
+	</update>
+
+	<delete id="deleteOne" parameterType="int">
+	delete from dept where deptno=#{val}
+	</delete>
+
+
+</mapper>
+
+
