@@ -35,8 +35,7 @@
 - [ ] 10) 물리 ERD  
 
 ## 🔗 ER 다이어그램 모델링
-[There](https://aquerytool.com/aquerymain/index/?rurl=d5c5c618-385a-41ae-8237-e31a3fc183d3&)
-pw는 카카오톡 공유참고
+추후 
 
 ## 🔗 프로젝트 문서 산출물 전용 레파지토리 주소
 
