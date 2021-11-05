@@ -1,20 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
  <div class="header">
         <h1 class="hide">header</h1>
         <ul class="logo" id="nomargin">
-            <!--·Î°í ¹× ¾Ë¸² ¿µ¿ª -->
+            <!--ë¡œê³  ë° ì•Œë¦¼ ì˜ì—­ -->
             <li>
                 <a href="admin_index.html">
                     <div>
-                        <img src="img/header_logo.png" alt="header_logo.png" />
+                        <img src="${imgPath }/logo_basic.PNG" alt="header_logo.png" />
                     </div>
                 </a>
             </li>
         </ul>
         <ul class="lnb_login" id="nomargin">
-            <li><a href="#none">000 °ü¸®ÀÚ´Ô È¯¿µÇÕ´Ï´Ù.</a></li>
+            <li><a href="#none">000 ê´€ë¦¬ìžë‹˜ í™˜ì˜í•©ë‹ˆë‹¤.</a></li>
         </ul>
 </div>
 
@@ -23,12 +23,12 @@
 <div id="wrapper">
     
     
-    <!--side ¸Þ´º-->
+    <!--side ë©”ë‰´-->
     <div class="left_wrap">
         <ul class="sub_nav" data-href="#form_link01">
             <li>
                 <a href="#none">
-                    <p class="sub_nav_title">¸ÞÀÎ</p>
+                    <p class="sub_nav_title">ë©”ì¸</p>
                 </a>
             </li>
         </ul>
@@ -37,14 +37,14 @@
         <ul class="sub_nav" data-href="#form_link02" id="nomargin">
             <li>
                 <a href="#none">
-                    <p class="sub_nav_title">°Ô½ÃÆÇ °ü¸®</p>
+                    <p class="sub_nav_title">ê²Œì‹œíŒ ê´€ë¦¬</p>
                 </a>
             </li>
         </ul>
         <div class="sub_nav_box">
             <ul class="sub_nav_list">
-                <li class="on"><a href="#form_link02">&#12596; ¸Å°ÅÁø °Ô½ÃÆÇ</a></li>
-                <li><a href="#form_link03">&#12596; ¸Å°ÅÁø µî·Ï</a></li>
+                <li class="on"><a href="#form_link02">&#12596; ë§¤ê±°ì§„ ê²Œì‹œíŒ</a></li>
+                <li><a href="#form_link03">&#12596; ë§¤ê±°ì§„ ë“±ë¡</a></li>
             </ul>
         </div>
         
@@ -52,14 +52,14 @@
         <ul class="sub_nav" data-href="#form_link04" id="nomargin">
             <li>
                 <a href="#">
-                    <p class="sub_nav_title">Àå¼Ò °ü¸®</p>
+                    <p class="sub_nav_title">ìž¥ì†Œ ê´€ë¦¬</p>
                 </a>
             </li>
         </ul>
         <div class="sub_nav_box">
             <ul class="sub_nav_list">
-                <li class="on"><a href="#form_link04">&#12596; Àå¼Ò µî·Ï</a></li>
-                <li><a href="#form_link05">&#12596; Àå¼Ò ¸ñ·Ï</a></li>
+                <li class="on"><a href="#form_link04">&#12596; ìž¥ì†Œ ë“±ë¡</a></li>
+                <li><a href="#form_link05">&#12596; ìž¥ì†Œ ëª©ë¡</a></li>
             </ul>
         </div>
         
@@ -67,13 +67,13 @@
         <ul class="sub_nav" data-href="#form_link06" id="nomargin">
             <li>
                 <a href="#">
-                    <p class="sub_nav_title">È¸¿ø °ü¸®</p>
+                    <p class="sub_nav_title">íšŒì› ê´€ë¦¬</p>
                 </a>
             </li>
         </ul>
         <div class="sub_nav_box">
             <ul class="sub_nav_list" id="nomargin">
-                <li class="on"><a href="#form_link06">&#12596; È¸¿ø ¸ñ·Ï</a></li>
+                <li class="on"><a href="#form_link06">&#12596; íšŒì› ëª©ë¡</a></li>
             </ul>
         </div>
     </div>
