@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,30 +10,30 @@
 <body>
 <%@ include file="template/header.jspf" %>
        
-        <!-- ¸ÞÀÎ -->
+        <!-- ë©”ì¸ -->
         <section class="admin_contents" id="form_link01">
             <div class="page-header">
-                <h2>°ü¸®ÀÚ ¸ÞÀÎ <SMALL>Admin Main</SMALL></h2>
+                <h2>ê´€ë¦¬ìž ë©”ì¸ <SMALL>Admin Main</SMALL></h2>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    ¸Å°ÅÁø ±Û ¸ñ·Ï, Àå¼Ò °ü¸®, È¸¿ø ¸®½ºÆ®¸¦ ÇÑ ¹ø¿¡ º¼ ¼ö ÀÖ½À´Ï´Ù.<br /> <strong>¼öÁ¤ ¹× °ü¸®´Â °¢°¢ÀÇ °ü¸®ÀÚ ¸Þ´º¿¡¼­ ½ÇÇàÇØÁÖ¼¼¿ä.</strong>
+                    ë§¤ê±°ì§„ ê¸€ ëª©ë¡, ìž¥ì†Œ ê´€ë¦¬, íšŒì› ë¦¬ìŠ¤íŠ¸ë¥¼ í•œ ë²ˆì— ë³¼ ìˆ˜ ìžˆìŠµë‹ˆë‹¤.<br /> <strong>ìˆ˜ì • ë° ê´€ë¦¬ëŠ” ê°ê°ì˜ ê´€ë¦¬ìž ë©”ë‰´ì—ì„œ ì‹¤í–‰í•´ì£¼ì„¸ìš”.</strong>
                 </div>
             </div>
 
 
-            <!--Àå¼Ò ¸ñ·Ï-->
+            <!--ìž¥ì†Œ ëª©ë¡-->
             <div class="container col-md-6">
                 <div class="page-header">
-                    <h3>Àå¼Ò ¸ñ·ÏÇöÈ² <SMALL>ÇöÀç±îÁö µî·ÏµÈ Àå¼Ò</SMALL></h3>
+                    <h3>ìž¥ì†Œ ëª©ë¡í˜„í™© <SMALL>í˜„ìž¬ê¹Œì§€ ë“±ë¡ëœ ìž¥ì†Œ</SMALL></h3>
                 </div>
 
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th class="col-md-2">Àå¼Ò ¹øÈ£</th>
-                            <th>Àå¼Ò ÀÌ¸§</th> 
-                            <th>ÀüÈ­¹øÈ£</th>
+                            <th class="col-md-2">ìž¥ì†Œ ë²ˆí˜¸</th>
+                            <th>ìž¥ì†Œ ì´ë¦„</th> 
+                            <th>ì „í™”ë²ˆí˜¸</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,18 +60,18 @@
             </div> 
 
 
-            <!--È¸¿ø ¸ñ·Ï-->
+            <!--íšŒì› ëª©ë¡-->
             <div class="container col-md-6">
                 <div class="page-header">
-                    <h3>È¸¿ø ÇöÈ² <SMALL>ÇöÀç±îÁö °¡ÀÔÇÑ È¸¿ø ¸ñ·Ï</SMALL></h3>
+                    <h3>íšŒì› í˜„í™© <SMALL>í˜„ìž¬ê¹Œì§€ ê°€ìž…í•œ íšŒì› ëª©ë¡</SMALL></h3>
                 </div>
 
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th class="col-md-2">È¸¿ø ¹øÈ£</th> 
-                            <th>È¸¿ø ¾ÆÀÌµð</th> 
-                            <th>°¡ÀÔÀÏ</th>
+                            <th class="col-md-2">íšŒì› ë²ˆí˜¸</th> 
+                            <th>íšŒì› ì•„ì´ë””</th> 
+                            <th>ê°€ìž…ì¼</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -99,17 +99,17 @@
                 </table>
             </div>         
 
-            <!--¸Å°ÅÁø ±Û¸ñ·Ï -->
+            <!--ë§¤ê±°ì§„ ê¸€ëª©ë¡ -->
             <div class="container clear col-md-12 margin-b">
                 <div class="page-header">
-                    <h3>¸Å°ÅÁø ±Û ÇöÈ² <SMALL>ÇöÀç±îÁö µî·ÏµÈ ¸Å°ÅÁø °Ô½Ã±Û</SMALL></h3>
+                    <h3>ë§¤ê±°ì§„ ê¸€ í˜„í™© <SMALL>í˜„ìž¬ê¹Œì§€ ë“±ë¡ëœ ë§¤ê±°ì§„ ê²Œì‹œê¸€</SMALL></h3>
                 </div>
 
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th class="col-md-1">±Û ¹øÈ£</th> 
-                            <th>¸Å°ÅÁø Á¦¸ñ</th>
+                            <th class="col-md-1">ê¸€ ë²ˆí˜¸</th> 
+                            <th>ë§¤ê±°ì§„ ì œëª©</th>
                         </tr>
                     </thead>
 

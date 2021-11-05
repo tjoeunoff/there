@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<footer id="footer">
+    <div class="container">
+        <div class="foot-info-link">
+            <p>&copy; 2021 OFFLineTeam All Rights Reserved.</p>
+        </div>
 
-</body>
-</html>
+    </div>
+</footer>
+<!-- // footer -->
