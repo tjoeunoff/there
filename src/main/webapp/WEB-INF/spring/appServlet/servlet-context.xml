@@ -14,6 +14,7 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/webjars/**" location="/webjars/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -22,7 +23,21 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="kr.co.there" />
-	
-	
+	<!-- 
+	1kb=1024
+	1mb=1024*1024
+	5mb=5*1024*1024
+	10mb=10*1024*1024
+	 -->
+	<!-- 업로드 패스 설정 -->
+	<beans:bean
+	class="java.lang.String" id="uploadPath">
+		<beans:constructor-arg value="D:/DockerAWS/framework/workspace/there/src/main/webapp/resources"></beans:constructor-arg>
+	</beans:bean>
+	<!-- MultipartResolver -->
+	<beans:bean id="multipartResolver"
+	class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="100000000"/>
+	</beans:bean>
 	
 </beans:beans>
