@@ -3,13 +3,9 @@ package kr.co.there.mzbbs.model.entity;
 import java.util.Date;
 import java.util.Objects;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+//@Data
+//@NoArgsConstructor
+//@AllArgsConstructor
 public class MzbbsVo {
 	private int magazine_idx;
 	private String magazine_subject;

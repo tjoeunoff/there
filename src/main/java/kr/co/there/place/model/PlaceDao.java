@@ -8,10 +8,10 @@ import kr.co.there.place.model.entity.PlaceVo;
 public interface PlaceDao {
 
 	List<PlaceVo> selectAll() throws SQLException;
-	PlaceVo selectOne(int placeIdx) throws SQLException;
+	PlaceVo selectOne(int place_idx) throws SQLException;
 	int insertOne(PlaceVo bean) throws SQLException;
 	int updateOne(PlaceVo bean) throws SQLException;
-	int deleteOne(int placeIdx) throws SQLException;
-
+	int updateViewcnt(int place_idx) throws SQLException;
+	int deleteOne(int place_idx) throws SQLException;
 	
 }

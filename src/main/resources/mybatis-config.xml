@@ -6,7 +6,7 @@
 <configuration>
 	
 	<typeAliases>
-		<typeAlias type="kr.co.there.place.model.entity.PlaceVo" alias="bean"/>
+		<typeAlias type="kr.co.there.place.model.entity.PlaceVo" alias="plbean"/>
 		<typeAlias type="kr.co.there.mzbbs.model.entity.MzbbsVo" alias="mzbean"/>
 	</typeAliases>
 	

@@ -7,33 +7,38 @@
 
 <mapper namespace="kr.co.there.place.model.PlaceDao">
 
-	<select id="selectAll" resultType="bean">
+	<select id="selectAll" resultType="plbean">
 	select * from place
 	</select>
 	
-	<select id="selectOne" resultType="bean">
+	<select id="selectOne" resultType="plbean">
 	select * from place where place_idx=#{val}
 	</select>
 
 	 
-	<update id="insertOne" parameterType="bean">
+	<update id="insertOne" parameterType="plbean">
 	insert into place (place_name, place_addr, place_opentime, place_endtime, 
 	place_tel, place_content,place_category, place_longitude, place_latitude) 
-	values (#{placeName}, #{placeAddr}, #{placeOpentime}, #{placeEndtime},
-	 #{placeTel}, #{placeContent}, #{placeCategory}, #{placeLng}, #{placeLat})
+	values (#{place_name}, #{place_addr}, #{place_opentime}, #{place_endtime},
+	 #{place_tel}, #{place_content}, #{place_category}, #{place_longitude}, #{place_latitude})
 	</update>
 
 
-	<update id="updateOne" parameterType="bean">
-	update place set place_name=#{placeName}, place_addr=#{placeAddr}, 
-	place_opentime=#{placeOpentime}, place_endtime=#{placeEndtime}, 
-	place_tel=#{placeTel}, place_content=#{placeContent},place_category=#{placeCategory},
-	place_longitude=#{placeLng}, place_latitude=#{placeLat}
-	where place_idx=#{placeIdx}
+	<update id="updateOne" parameterType="plbean">
+	update place set place_name=#{place_name}, place_addr=#{place_addr}, 
+	place_opentime=#{place_opentime}, place_endtime=#{place_endtime}, 
+	place_tel=#{place_tel}, place_content=#{place_content},place_category=#{place_category},
+	place_longitude=#{place_longitude}, place_latitude=#{place_latitude}
+	where place_idx=#{place_idx}
 	</update>
+
+	<update id="updateViewCnt" parameterType="int">
+	update place set place_viewcnt=place_viewcnt+1 where place_idx=#{val}
+	</update>
+
 
 	<delete id="deleteOne" parameterType="int">
-	delete from dept where deptno=#{val}
+	delete from place where place_idx=#{val}
 	</delete>
 
 
