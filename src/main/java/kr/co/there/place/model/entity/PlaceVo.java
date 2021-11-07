@@ -2,12 +2,6 @@ package kr.co.there.place.model.entity;
 
 import java.util.Objects;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 
 //@Getter
 //@Setter
