@@ -1,37 +1,47 @@
 package kr.co.there.place.controller;
 
 import java.sql.SQLException;
-import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import kr.co.there.place.model.entity.PlaceVo;
 import kr.co.there.place.service.PlaceService;
-import lombok.extern.log4j.Log4j;
 
-@Log4j
-@RestController
+@Controller
 @RequestMapping("/admin/place")
 public class PlaceController {
-	Logger log = LoggerFactory.getLogger(PlaceController.class);
 	
 	@Autowired
 	PlaceService placeservice;
 	
+	
 	@GetMapping("/")
-	public List<PlaceVo> list() throws SQLException {
-		return placeservice.list();	
+	public String list(Model model) throws Exception {
+		model.addAttribute("list",placeservice.list());
+		return "/admin/place/admin_place_list";	
 	}
 	
+	@GetMapping("/{place_idx}")
+	public String detail(@PathVariable("place_idx") int place_idx, Model model) {
+		try {
+			model.addAttribute("plbean",placeservice.One(place_idx, false));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+//		try {
+//			placeservice.objMapping(model, place_idx);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		return "/admin/place/admin_place_detail";
+	}	
+	
+	
+	
 
-	
-	
 	
 }

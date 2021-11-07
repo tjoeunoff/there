@@ -23,13 +23,17 @@
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
-                    <th class="col-md-1">장소 번호</th> <th class="col-md-9">장소 이름</th> <th>전화번호</th>
+                    <th class="col-md-1">장소 번호</th>
+                     <th class="col-md-9">장소 이름</th> 
+                     <th>전화번호</th>
                 </tr>
             </thead>
             <tbody>
-            	<c:forEach items="${list }" var="bean">
+            	<c:forEach items="${list }" var="plbean">
                 <tr>
-                    <td><a href="#">${bean.placeIdx }</a></td> <td><a href="#">location4</a></td> <td><a href="#">tel4</a></td>
+                    <td><a href="#">${plbean.place_idx }</a></td> 
+                    <td><a href="#">${plbean.place_name }</a></td> 
+                    <td><a href="#">${plbean.place_tel }</a></td>
                 </tr>
                 </c:forEach>
             </tbody>
