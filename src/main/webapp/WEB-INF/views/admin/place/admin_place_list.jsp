@@ -13,7 +13,7 @@
 <section class="admin_contents" id="form_link05">
     <div class="container col-md-12">
         <div class="page-header">
-            <h2>장소 목록 <SMALL>Location List</SMALL></h2>
+            <h2>장소 목록 <SMALL>Place List</SMALL></h2>
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -30,10 +30,11 @@
             </thead>
             <tbody>
             	<c:forEach items="${list }" var="plbean">
+            	<c:url value="${plbean.place_idx }" var="row"></c:url>
                 <tr>
-                    <td><a href="#">${plbean.place_idx }</a></td> 
-                    <td><a href="#">${plbean.place_name }</a></td> 
-                    <td><a href="#">${plbean.place_tel }</a></td>
+                    <td><a href="${row }">${plbean.place_idx }</a></td> 
+                    <td><a href="${row }">${plbean.place_name }</a></td> 
+                    <td><a href="${row }">${plbean.place_tel }</a></td>
                 </tr>
                 </c:forEach>
             </tbody>
