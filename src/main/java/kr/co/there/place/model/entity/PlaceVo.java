@@ -10,7 +10,7 @@ import java.util.Objects;
 //@AllArgsConstructor
 
 public class PlaceVo{
-	private int place_idx, place_viewcont;
+	private int place_idx, place_viewcnt;
 	private String place_name, place_category, place_addr,
 		place_opentime, place_endtime, place_tel, place_content, place_thumb, place_hashtag;
 	private float place_latitude, place_longitude;
@@ -35,14 +35,14 @@ public void setPlace_idx(int place_idx) {
 
 
 
-public int getPlace_viewcont() {
-	return place_viewcont;
+public int getplace_viewcnt() {
+	return place_viewcnt;
 }
 
 
 
-public void setPlace_viewcont(int place_viewcont) {
-	this.place_viewcont = place_viewcont;
+public void setplace_viewcnt(int place_viewcnt) {
+	this.place_viewcnt = place_viewcnt;
 }
 
 
@@ -179,12 +179,12 @@ public void setPlace_longitude(float place_longitude) {
 
 
 
-public PlaceVo(int place_idx, int place_viewcont, String place_name, String place_category, String place_addr,
+public PlaceVo(int place_idx, int place_viewcnt, String place_name, String place_category, String place_addr,
 		String place_opentime, String place_endtime, String place_tel, String place_content, String place_thumb,
 		String place_hashtag, float place_latitude, float place_longitude) {
 	super();
 	this.place_idx = place_idx;
-	this.place_viewcont = place_viewcont;
+	this.place_viewcnt = place_viewcnt;
 	this.place_name = place_name;
 	this.place_category = place_category;
 	this.place_addr = place_addr;
@@ -203,7 +203,7 @@ public PlaceVo(int place_idx, int place_viewcont, String place_name, String plac
 @Override
 public int hashCode() {
 	return Objects.hash(place_addr, place_category, place_content, place_endtime, place_hashtag, place_idx,
-			place_latitude, place_longitude, place_name, place_opentime, place_tel, place_thumb, place_viewcont);
+			place_latitude, place_longitude, place_name, place_opentime, place_tel, place_thumb, place_viewcnt);
 }
 
 
@@ -224,14 +224,14 @@ public boolean equals(Object obj) {
 			&& Float.floatToIntBits(place_longitude) == Float.floatToIntBits(other.place_longitude)
 			&& Objects.equals(place_name, other.place_name) && Objects.equals(place_opentime, other.place_opentime)
 			&& Objects.equals(place_tel, other.place_tel) && Objects.equals(place_thumb, other.place_thumb)
-			&& place_viewcont == other.place_viewcont;
+			&& place_viewcnt == other.place_viewcnt;
 }
 
 
 
 @Override
 public String toString() {
-	return "PlaceVo [place_idx=" + place_idx + ", place_viewcont=" + place_viewcont + ", place_name=" + place_name
+	return "PlaceVo [place_idx=" + place_idx + ", place_viewcnt=" + place_viewcnt + ", place_name=" + place_name
 			+ ", place_category=" + place_category + ", place_addr=" + place_addr + ", place_opentime=" + place_opentime
 			+ ", place_endtime=" + place_endtime + ", place_tel=" + place_tel + ", place_content=" + place_content
 			+ ", place_thumb=" + place_thumb + ", place_hashtag=" + place_hashtag + ", place_latitude=" + place_latitude

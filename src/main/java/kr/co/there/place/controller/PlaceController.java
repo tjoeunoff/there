@@ -32,11 +32,6 @@ public class PlaceController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-//		try {
-//			placeservice.objMapping(model, place_idx);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
 		return "/admin/place/admin_place_detail";
 	}	
 	

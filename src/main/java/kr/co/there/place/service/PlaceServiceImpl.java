@@ -17,8 +17,7 @@ public class PlaceServiceImpl implements PlaceService {
 	@Autowired
 	SqlSessionFactory sqlSessionFactory;
 
-	
-	
+
 	@Override
 	public List<PlaceVo> list() throws SQLException {
 		try(
@@ -28,8 +27,6 @@ public class PlaceServiceImpl implements PlaceService {
 				return placeDao.selectAll();	
 			}
 	}	
-	
-	
 
 
 	@Override
@@ -55,12 +52,16 @@ public class PlaceServiceImpl implements PlaceService {
 	}
 
 	
+	
+	
 	@Override
 	public boolean add(PlaceVo bean) throws SQLException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	
+	
 	
 	@Override
 	public boolean edit(PlaceVo bean) throws SQLException {
@@ -69,11 +70,15 @@ public class PlaceServiceImpl implements PlaceService {
 	}
 
 	
+	
+	
 	@Override
 	public boolean remove(int param) throws SQLException {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	
 	
 
 }
