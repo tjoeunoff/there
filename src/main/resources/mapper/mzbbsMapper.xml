@@ -19,6 +19,10 @@
 	<update id="updateOne" parameterType="mzbean">
 	update magazine set magazine_subject=#{magazine_subject}, magazine_content=#{magazine_content}, magazine_thumb=#{magazine_thumb}, magazine_hashtag=#{magazine_hashtag} where magazine_idx=#{magazine_idx}
 	</update>
+	
+	<update id="updateOneWithoutThumb" parameterType="mzbean">
+	update magazine set magazine_subject=#{magazine_subject}, magazine_content=#{magazine_content}, magazine_hashtag=#{magazine_hashtag} where magazine_idx=#{magazine_idx}
+	</update>
 
 	<update id="updateViewCnt" parameterType="int">
 	update magazine set magazine_viewcnt=magazine_viewcnt+1 where magazine_idx=#{val}

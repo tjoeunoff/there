@@ -32,9 +32,9 @@
             	<c:forEach items="${list }" var="plbean">
             	<c:url value="${plbean.place_idx }" var="row"></c:url>
                 <tr>
-                    <td><a href="${row }">${plbean.place_idx }</a></td> 
-                    <td><a href="${row }">${plbean.place_name }</a></td> 
-                    <td><a href="${row }">${plbean.place_tel }</a></td>
+                    <td><a href="${pageContext.request.contextPath}/admin/place/${plbean.place_idx }">${plbean.place_idx }</a></td> 
+                    <td><a href="${pageContext.request.contextPath}/admin/place/${plbean.place_idx }">${plbean.place_name }</a></td> 
+                    <td><a href="${pageContext.request.contextPath}/admin/place/${plbean.place_idx }">${plbean.place_tel }</a></td>
                 </tr>
                 </c:forEach>
             </tbody>

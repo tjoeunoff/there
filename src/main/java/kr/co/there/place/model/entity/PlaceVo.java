@@ -8,7 +8,6 @@ import java.util.Objects;
 //@Data
 //@NoArgsConstructor
 //@AllArgsConstructor
-
 public class PlaceVo{
 	private int place_idx, place_viewcnt;
 	private String place_name, place_category, place_addr,

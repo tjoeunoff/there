@@ -60,13 +60,23 @@ public class MzbbsServiceImpl implements MzbbsService {
 	}
 
 	@Override
-	public boolean edit(MzbbsVo mzbean) throws SQLException {
-		try(
-				SqlSession sqlSession=sqlSessionFactory.openSession();
-				){
-				MzbbsDao mzbbsDao=sqlSession.getMapper(MzbbsDao.class);
-				return mzbbsDao.updateOne(mzbean)>0 ? true:false;
-		}
+	public boolean edit(MzbbsVo mzbean,boolean doesThumbChange) throws SQLException {
+		if(doesThumbChange) {
+			try(
+					SqlSession sqlSession=sqlSessionFactory.openSession();
+					){
+					MzbbsDao mzbbsDao=sqlSession.getMapper(MzbbsDao.class);
+					return mzbbsDao.updateOne(mzbean)>0;
+			}
+		} //섬네일이 변경되는 경우
+		else {
+			try(
+					SqlSession sqlSession=sqlSessionFactory.openSession();
+					){
+					MzbbsDao mzbbsDao=sqlSession.getMapper(MzbbsDao.class);
+					return mzbbsDao.updateOneWithoutThumb(mzbean)>0;
+			}
+		} //섬네일이 유지되는 경우
 	}
 
 	@Override
@@ -75,7 +85,7 @@ public class MzbbsServiceImpl implements MzbbsService {
 				SqlSession sqlSession=sqlSessionFactory.openSession();
 				){
 				MzbbsDao mzbbsDao=sqlSession.getMapper(MzbbsDao.class);
-				return mzbbsDao.deleteOne(param)>0 ? true:false;
+				return mzbbsDao.deleteOne(param)>0;
 		}
 	}
 

@@ -3,6 +3,14 @@ package kr.co.there.mzbbs.model.entity;
 import java.util.Date;
 import java.util.Objects;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+//@Getter
+//@Setter
 //@Data
 //@NoArgsConstructor
 //@AllArgsConstructor
