@@ -18,4 +18,4 @@ table caption{width:0; height:0; visibility: hidden; text-indent: -999px; font-s
 table{border-collapse: collapse; border-spacing: 0;}
 header,footer,section,article,aside,nav,hgroup,details,menu,figure,figcaption{display: block;}
 body,input,select, button,textarea, h1,h2,h3,h4,h5,h6, table, div,p
-{font-family: 'NanumSquare', sans-serif; letter-spacing: -0.025em;}
+{font-family: 'Noto Sans KR', sans-serif; letter-spacing: -0.025em;}
