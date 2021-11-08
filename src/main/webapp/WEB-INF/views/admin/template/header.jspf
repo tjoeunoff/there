@@ -43,8 +43,8 @@
         </ul>
         <div class="sub_nav_box">
             <ul class="sub_nav_list">
-                <li class="on"><a href="#form_link02">&#12596; 매거진 게시판</a></li>
-                <li><a href="${pageContext.request.contextPath }/admin/magazine/">&#12596; 매거진 등록</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/magazine">&#12596; 매거진 게시판</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/magazine/form">&#12596; 매거진 등록</a></li>
             </ul>
         </div>
         
@@ -58,8 +58,8 @@
         </ul>
         <div class="sub_nav_box">
             <ul class="sub_nav_list">
-                <li class="on"><a href="#form_link04">&#12596; 장소 등록</a></li>
-                <li><a href="#form_link05">&#12596; 장소 목록</a></li>
+                <li class="on"><a href="#">&#12596; 장소 등록</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/place">&#12596; 장소 목록</a></li>
             </ul>
         </div>
         
@@ -73,7 +73,7 @@
         </ul>
         <div class="sub_nav_box">
             <ul class="sub_nav_list" id="nomargin">
-                <li class="on"><a href="#form_link07">&#12596; 회원 목록</a></li>
+                <li class="on"><a href="${pageContext.request.contextPath}/admin/member">&#12596; 회원 목록</a></li>
             </ul>
         </div>
     </div>

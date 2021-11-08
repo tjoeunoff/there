@@ -66,12 +66,12 @@ var setting = {
                 </div>
             </div>
             
-            <form action="${pageContext.request.contextPath}/admin/magazine" method="POST" class="form-horizontal col-md-12">
+            <form action="${pageContext.request.contextPath}/admin/magazine" method="POST" class="form-horizontal col-md-12" enctype="multipart/form-data">
                 
                 <div class="form-group">
                     <label for="magazine_subject" class="col-sm-2 control-label">매거진 제목</label>
                     <div class="col-sm-10">
-                        <input type="text" name="magazine_subject" pattern=".{1,45}" id="magazine_subject" class="form-control" value="${bean.magazineSubject}" placeholder="45자이내" required />
+                        <input type="text" name="magazine_subject" pattern=".{1,45}" id="magazine_subject" class="form-control" value="${mzbean.magazine_subject}" placeholder="45자이내" required />
                     </div>
                 </div>
                 <div class="form-group">
@@ -123,7 +123,7 @@ var setting = {
                     <label for="magazine_hashtag" class="col-sm-2 control-label">해시태그</label>
                     <div class="input-group-addon col-sm-1" id="magazine_hashtag">#</div>
                     <div class="col-sm-9">
-                        <input type="text" pattern=".{1,50}" name="magazine_hashtag" id="magazine_hashtag" class="form-control" value="${bean.magazineHashtag}" placeholder="50자 이내" aria-describedby="basic-addon1" required>
+                        <input type="text" pattern=".{1,50}" name="magazine_hashtag" id="magazine_hashtag" class="form-control" value="${mzbean.magazine_hashtag}" placeholder="50자 이내" aria-describedby="basic-addon1" required>
                     </div>
                 </div>  
                 

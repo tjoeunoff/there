@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
     <%@ include file="../template/include.jspf" %>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/search.js"></script>
 </head>
 <body>
     <%@ include file="../template/header.jspf" %>
@@ -41,20 +42,20 @@
                     <th>가입일</th>
                 </tr>
             </thead>
-            <!-- <c:forEach item="" var="bean"> -->
             <tbody>
+	            <c:forEach items="${list }" var="mbrbean">
                 <tr>
-                    <td>1</td>
-                    <td>asd</td>
-                    <td>홍길동</td>
-                    <td>asd123</td>
-                    <td>asd321</td>
-                    <td>asd@naver.com</td>
-                    <td>010-1111-1111</td>
-                    <td>2021-11-01</td>
+                    <td>${mbrbean.member_idx }</td>
+                    <td>${mbrbean.member_id }</td>
+                    <td>${mbrbean.member_name }</td>
+                    <td>${mbrbean.member_pw }</td>
+                    <td>${mbrbean.member_pwans }</td>
+                    <td>${mbrbean.member_email }</td>
+                    <td>${mbrbean.member_tel }</td>
+                    <td>${mbrbean.member_registdate }</td>
                 </tr>
+	            </c:forEach>
             </tbody>
-            <!-- </c:forEach> -->
         </table>
         <span id="pageIndicator"></span> 
     </section>

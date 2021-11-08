@@ -10,6 +10,16 @@
     <title>Document</title>
     <%@ include file="../template/include.jspf" %>
    	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/search.js"></script>
+   	<style>
+   	table a{
+   		text-decoration: none;
+   		display: block;
+   	}
+   	table a:hover{
+   		text-decoration: none;
+   	}
+   	
+   	</style>
 </head>
 <body>
 <%@ include file="../template/header.jspf" %>
@@ -23,7 +33,7 @@
             <select class="form-control searchSelect"></select>
             <input type="text" class="form-control searchInput" placeholder="Search for ..."/>
             <button type="button" class="btn btn-default searchButton">검색</button>
-            <a class="btn btn-default" href="customList.html" role="button">전체보기</a>
+            <a class="btn btn-default" href="${pageContext.request.contextPath }/admin/magazine" role="button">전체보기</a>
         </div>
 
         <p></p>
@@ -46,11 +56,11 @@
             <tbody>
             <c:forEach items="${list }" var="mzbean">
                 <tr>
-                    <td>${mzbean.magazine_idx }</td>
-                    <td>${mzbean.magazine_subject }</td>
-                    <td>${mzbean.magazine_viewcnt }</td>
-                    <td>${mzbean.magazine_thumb }</td>
-                    <td>${mzbean.magazine_date.getYear()+1900 }/${mzbean.magazine_date.getMonth()+1 }/${mzbean.magazine_date.getDate() }</td>
+                    <td><a href="${pageContext.request.contextPath}/admin/magazine/${mzbean.magazine_idx }">${mzbean.magazine_idx }</a></td>
+                    <td><a href="${pageContext.request.contextPath}/admin/magazine/${mzbean.magazine_idx }">${mzbean.magazine_subject }</a></td>
+                    <td><a href="${pageContext.request.contextPath}/admin/magazine/${mzbean.magazine_idx }">${mzbean.magazine_viewcnt }</a></td>
+                    <td><a href="${pageContext.request.contextPath}/admin/magazine/${mzbean.magazine_idx }">${mzbean.magazine_thumb.substring(mzbean.magazine_thumb.indexOf("_")+1) }</a></td>
+                    <td><a href="${pageContext.request.contextPath}/admin/magazine/${mzbean.magazine_idx }">${mzbean.magazine_date.getYear()+1900 }/${mzbean.magazine_date.getMonth()+1 }/${mzbean.magazine_date.getDate() }</a></td>
                 </tr>
             </c:forEach>
             </tbody>
