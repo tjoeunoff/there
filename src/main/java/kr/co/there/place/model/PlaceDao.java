@@ -13,5 +13,5 @@ public interface PlaceDao {
 	int updateOne(PlaceVo bean) throws SQLException;
 	int updateViewcnt(int place_idx) throws SQLException;
 	int deleteOne(int place_idx) throws SQLException;
-	
+
 }

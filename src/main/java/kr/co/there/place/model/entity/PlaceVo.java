@@ -2,6 +2,12 @@ package kr.co.there.place.model.entity;
 
 import java.util.Objects;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 
 //@Getter
 //@Setter
@@ -13,9 +19,9 @@ public class PlaceVo{
 	private String place_name, place_category, place_addr,
 		place_opentime, place_endtime, place_tel, place_content, place_thumb, place_hashtag;
 	private float place_latitude, place_longitude;
-	
-	
-	
+
+
+
 public PlaceVo() {
 	// TODO Auto-generated constructor stub
 }
@@ -211,9 +217,7 @@ public int hashCode() {
 public boolean equals(Object obj) {
 	if (this == obj)
 		return true;
-	if (obj == null)
-		return false;
-	if (getClass() != obj.getClass())
+	if ((obj == null) || (getClass() != obj.getClass()))
 		return false;
 	PlaceVo other = (PlaceVo) obj;
 	return Objects.equals(place_addr, other.place_addr) && Objects.equals(place_category, other.place_category)
@@ -240,10 +244,10 @@ public String toString() {
 
 
 
-	
-	
-	
-	
+
+
+
+
 }
 
 

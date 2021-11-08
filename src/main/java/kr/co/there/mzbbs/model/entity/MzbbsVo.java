@@ -22,7 +22,7 @@ public class MzbbsVo {
 	private String magazine_content;
 	private String magazine_thumb;
 	private String magazine_hashtag;
-	
+
 	public MzbbsVo() {}
 
 	public MzbbsVo(int magazine_idx, String magazine_subject, Date magazine_date, int magazine_viewcnt,
@@ -110,9 +110,7 @@ public class MzbbsVo {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		MzbbsVo other = (MzbbsVo) obj;
 		return Objects.equals(magazine_content, other.magazine_content)
@@ -121,6 +119,6 @@ public class MzbbsVo {
 				&& Objects.equals(magazine_subject, other.magazine_subject)
 				&& Objects.equals(magazine_thumb, other.magazine_thumb) && magazine_viewcnt == other.magazine_viewcnt;
 	}
-	
-	
+
+
 }
