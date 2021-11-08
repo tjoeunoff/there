@@ -20,7 +20,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<MemberVo> list() throws SQLException {
 		try(
-				SqlSession sqlSession = sqlSessionFactory.openSession(); 
+				SqlSession sqlSession = sqlSessionFactory.openSession();
 				){
 				MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
 				return memberDao.selectAll();

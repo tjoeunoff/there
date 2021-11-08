@@ -23,9 +23,9 @@ public class PlaceServiceImpl implements PlaceService {
 				SqlSession sqlSession = sqlSessionFactory.openSession();
 					){
 			PlaceDao placeDao = sqlSession.getMapper(PlaceDao.class);
-				return placeDao.selectAll();	
+				return placeDao.selectAll();
 			}
-	}	
+	}
 
 
 	@Override
@@ -46,38 +46,38 @@ public class PlaceServiceImpl implements PlaceService {
 					PlaceDao placeDao=sqlSession.getMapper(PlaceDao.class);
 					return placeDao.selectOne(param);
 			}
-		}	
-		
+		}
+
 	}
 
-	
-	
-	
+
+
+
 	@Override
 	public boolean add(PlaceVo bean) throws SQLException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	
-	
-	
+
+
+
 	@Override
 	public boolean edit(PlaceVo bean) throws SQLException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	
-	
-	
+
+
+
 	@Override
 	public boolean remove(int param) throws SQLException {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
-	
-	
+
+
+
 
 }

@@ -14,25 +14,25 @@ import kr.co.there.place.service.PlaceService;
 @Controller
 @RequestMapping("/admin/place")
 public class PlaceController {
-	
+
 	@Autowired
 	PlaceService placeservice;
-	
-	
+
+
 	@GetMapping("")
 	public String list(Model model) throws Exception {
 		model.addAttribute("list",placeservice.list());
-		return "/admin/place/admin_place_list";	
+		return "/admin/place/admin_place_list";
 	}
-	
+
 	@GetMapping("/{place_idx}")
 	public String detail(@PathVariable("place_idx") int place_idx, Model model) throws SQLException {
 			model.addAttribute("plbean",placeservice.One(place_idx, false));
 		return "/admin/place/admin_place_detail";
-	}	
-	
-	
-	
+	}
 
-	
+
+
+
+
 }

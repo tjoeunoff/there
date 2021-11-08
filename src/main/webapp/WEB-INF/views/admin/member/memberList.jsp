@@ -19,7 +19,7 @@
             <select class="form-control searchSelect"></select>
             <input type="text" class="form-control searchInput" placeholder="Search for ..."/>
             <button type="button" class="btn btn-default searchButton">검색</button>
-            <a class="btn btn-default" href="customList.html" role="button">전체보기</a>
+            <a class="btn btn-default" href="${pageContext.request.contextPath}/admin/member" role="button">전체보기</a>
         </div>
 
         <p></p>
@@ -39,6 +39,7 @@
                     <th>회원 대체 비밀번호</th>
                     <th>회원 이메일</th>
                     <th>회원 휴대폰 번호</th>
+                    <th>회원 상태</th>
                     <th>가입일</th>
                 </tr>
             </thead>
@@ -52,7 +53,8 @@
                     <td>${mbrbean.member_pwans }</td>
                     <td>${mbrbean.member_email }</td>
                     <td>${mbrbean.member_tel }</td>
-                    <td>${mbrbean.member_registdate }</td>
+                    <td>${mbrbean.member_state }</td>
+                    <td>${mbrbean.member_registdate.getYear()+1900}-${mbrbean.member_registdate.getMonth()+1}-${mbrbean.member_registdate.getDate()}</td>
                 </tr>
 	            </c:forEach>
             </tbody>

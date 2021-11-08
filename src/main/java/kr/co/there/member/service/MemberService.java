@@ -10,5 +10,5 @@ public interface MemberService {
 	MemberVo One(int param) throws SQLException;
 	boolean add(MemberVo bean) throws SQLException;
 	boolean edit(MemberVo bean) throws SQLException;
-	boolean remove(int param) throws SQLException;	
+	boolean remove(int param) throws SQLException;
 }

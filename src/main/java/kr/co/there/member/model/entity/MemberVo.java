@@ -3,6 +3,17 @@ package kr.co.there.member.model.entity;
 import java.util.Date;
 import java.util.Objects;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+//@Getter
+//@Setter
+//@Data
+//@NoArgsConstructor
+//@AllArgsConstructor
 public class MemberVo {
 	private String member_id;
 	private String member_pw;
@@ -14,7 +25,7 @@ public class MemberVo {
 	private Date member_registdate;
 	private int member_state; //회원 상태(0:정상, 1:탈퇴)
 	private int member_idx;
-	
+
 	public MemberVo() {}
 
 	public MemberVo(String member_id, String member_pw, String member_name, int member_authid, String member_pwans,
@@ -130,9 +141,7 @@ public class MemberVo {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		MemberVo other = (MemberVo) obj;
 		return member_authid == other.member_authid && Objects.equals(member_email, other.member_email)
@@ -142,7 +151,7 @@ public class MemberVo {
 				&& Objects.equals(member_registdate, other.member_registdate) && member_state == other.member_state
 				&& Objects.equals(member_tel, other.member_tel);
 	}
-	
-	
+
+
 }
 

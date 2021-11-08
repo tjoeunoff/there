@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import kr.co.there.mzbbs.model.MzbbsDao;
 import kr.co.there.mzbbs.model.entity.MzbbsVo;
-import kr.co.there.place.model.PlaceDao;
 
 @Service
 public class MzbbsServiceImpl implements MzbbsService {
@@ -23,7 +22,7 @@ public class MzbbsServiceImpl implements MzbbsService {
 				SqlSession sqlSession = sqlSessionFactory.openSession();
 					){
 				MzbbsDao mzbbsDao = sqlSession.getMapper(MzbbsDao.class);
-				return mzbbsDao.selectAll();	
+				return mzbbsDao.selectAll();
 			}
 	}
 

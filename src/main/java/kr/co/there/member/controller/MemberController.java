@@ -13,7 +13,7 @@ import kr.co.there.member.service.MemberService;
 public class MemberController {
 	@Autowired
 	MemberService memberService;
-	
+
 	@GetMapping(value = "")
 	public String list(Model model) throws Exception {
 		model.addAttribute("list", memberService.list());
