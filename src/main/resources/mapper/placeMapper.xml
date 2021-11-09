@@ -17,18 +17,14 @@
 
 	 
 	<update id="insertOne" parameterType="plbean">
-	insert into place (place_name, place_addr, place_opentime, place_endtime, 
-	place_tel, place_content,place_category, place_longitude, place_latitude) 
-	values (#{place_name}, #{place_addr}, #{place_opentime}, #{place_endtime},
-	 #{place_tel}, #{place_content}, #{place_category}, #{place_longitude}, #{place_latitude})
+	insert into place (place_name, place_addr, place_opentime, place_endtime, place_tel, place_content,place_category, place_longitude, place_latitude) 
+	values (#{place_name}, #{place_addr}, #{place_opentime}, #{place_endtime}, #{place_tel}, #{place_content}, #{place_category}, #{place_longitude}, #{place_latitude})
 	</update>
 
 
 	<update id="updateOne" parameterType="plbean">
-	update place set place_name=#{place_name}, place_addr=#{place_addr}, 
-	place_opentime=#{place_opentime}, place_endtime=#{place_endtime}, 
-	place_tel=#{place_tel}, place_content=#{place_content},place_category=#{place_category},
-	place_longitude=#{place_longitude}, place_latitude=#{place_latitude}
+	update place set place_name=#{place_name}, place_addr=#{place_addr}, place_opentime=#{place_opentime}, place_endtime=#{place_endtime}, 
+	place_tel=#{place_tel}, place_content=#{place_content},place_category=#{place_category}, place_longitude=#{place_longitude}, place_latitude=#{place_latitude}
 	where place_idx=#{place_idx}
 	</update>
 

@@ -6,7 +6,7 @@
         <ul class="logo" id="nomargin">
             <!--로고 및 알림 영역 -->
             <li>
-                <a href="admin_index.html">
+                <a href="${pageContext.servletContext.contextPath }/admin">
                     <div>
                         <img src="${imgPath }/logo_basic.PNG" alt="header_logo.png" />
                     </div>
@@ -14,7 +14,7 @@
             </li>
         </ul>
         <ul class="lnb_login" id="nomargin">
-            <li><a href="#none">000 관리자님 환영합니다.</a></li>
+            <li>000 관리자님 환영합니다.</li>
         </ul>
 </div>
 
@@ -27,7 +27,7 @@
     <div class="left_wrap">
         <ul class="sub_nav" data-href="#form_link01">
             <li>
-                <a href="#none">
+                <a href="${pageContext.servletContext.contextPath }/admin">
                     <p class="sub_nav_title">메인</p>
                 </a>
             </li>
@@ -36,44 +36,44 @@
         
         <ul class="sub_nav" data-href="#form_link02" id="nomargin">
             <li>
-                <a href="#none">
+                <a href="${pageContext.servletContext.contextPath }/admin/magazine">
                     <p class="sub_nav_title">게시판 관리</p>
                 </a>
             </li>
         </ul>
         <div class="sub_nav_box">
             <ul class="sub_nav_list">
-                <li><a href="${pageContext.request.contextPath}/admin/magazine">&#12596; 매거진 게시판</a></li>
-                <li><a href="${pageContext.request.contextPath}/admin/magazine/form">&#12596; 매거진 등록</a></li>
+                <li><a href="${pageContext.servletContext.contextPath }/admin/magazine">&#12596; 매거진 게시판</a></li>
+                <li><a href="${pageContext.servletContext.contextPath }/admin/magazine/form">&#12596; 매거진 등록</a></li>
             </ul>
         </div>
         
         
         <ul class="sub_nav" data-href="#form_link04" id="nomargin">
             <li>
-                <a href="#">
+                <a href="${pageContext.servletContext.contextPath }/admin/place">
                     <p class="sub_nav_title">장소 관리</p>
                 </a>
             </li>
         </ul>
         <div class="sub_nav_box">
             <ul class="sub_nav_list">
-                <li class="on"><a href="#">&#12596; 장소 등록</a></li>
-                <li><a href="${pageContext.request.contextPath}/admin/place">&#12596; 장소 목록</a></li>
+                <li><a href="${pageContext.servletContext.contextPath }/admin/place">&#12596; 장소 목록</a></li>
+                <li><a href="${pageContext.servletContext.contextPath }/admin/place/form">&#12596; 장소 등록</a></li>
             </ul>
         </div>
         
         
         <ul class="sub_nav" data-href="#form_link06" id="nomargin">
             <li>
-                <a href="#">
+                <a href="${pageContext.servletContext.contextPath }/admin/member">
                     <p class="sub_nav_title">회원 관리</p>
                 </a>
             </li>
         </ul>
         <div class="sub_nav_box">
             <ul class="sub_nav_list" id="nomargin">
-                <li class="on"><a href="${pageContext.request.contextPath}/admin/member">&#12596; 회원 목록</a></li>
+                <li class="on"><a href="${pageContext.servletContext.contextPath }/admin/member">&#12596; 회원 목록</a></li>
             </ul>
         </div>
     </div>

@@ -13,33 +13,41 @@
 <section class="admin_contents" id="form_link05">
     <div class="container col-md-12">
         <div class="page-header">
-            <h2>장소 목록 <SMALL>Place List</SMALL></h2>
+            <h2>플레이스 목록 <SMALL>Place List</SMALL></h2>
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
-                현재 기준으로 등록된 장소만을 관리할 수 있습니다.
+                현재 기준으로 등록된 플레이스들을 관리할 수 있습니다.
             </div>
         </div>            
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
-                    <th class="col-md-1">장소 번호</th>
-                     <th class="col-md-9">장소 이름</th> 
-                     <th>전화번호</th>
+                    <th class="col-md-1">번호</th>
+                    <th>카테고리</th>
+                    <th class="col-md-2">플레이스명</th>
+                    <th class="col-md-3">주소</th>
+                    <th>전화번호</th>
+                    <th>개점시각</th>
+                    <th>폐점시각</th>
                 </tr>
             </thead>
             <tbody>
             	<c:forEach items="${list }" var="plbean">
             	<c:url value="${plbean.place_idx }" var="row"></c:url>
                 <tr>
-                    <td><a href="${pageContext.request.contextPath}/admin/place/${plbean.place_idx }">${plbean.place_idx }</a></td> 
+                    <td><a href="${pageContext.request.contextPath}/admin/place/${plbean.place_idx }">${plbean.place_idx }</a></td>
+                    <td><a href="${pageContext.request.contextPath}/admin/place/${plbean.place_idx }">${plbean.place_category }</a></td>
                     <td><a href="${pageContext.request.contextPath}/admin/place/${plbean.place_idx }">${plbean.place_name }</a></td> 
+                    <td><a href="${pageContext.request.contextPath}/admin/place/${plbean.place_idx }">${plbean.place_addr }</a></td>
                     <td><a href="${pageContext.request.contextPath}/admin/place/${plbean.place_idx }">${plbean.place_tel }</a></td>
+                    <td><a href="${pageContext.request.contextPath}/admin/place/${plbean.place_idx }">${plbean.place_opentime }</a></td>
+                    <td><a href="${pageContext.request.contextPath}/admin/place/${plbean.place_idx }">${plbean.place_endtime }</a></td>
                 </tr>
                 </c:forEach>
             </tbody>
         </table>
-        <button type="submit" class="btn btn-primary pull-right btn-margin">입력</button>
+        <a class="btn btn-primary pull-right btn-margin" href="${pageContext.request.contextPath}/admin/place/form">입력</a>
     </div> 
 </section>
 </body>

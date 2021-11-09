@@ -32,18 +32,18 @@ public class PlaceServiceImpl implements PlaceService {
 	public PlaceVo One(int param, boolean addViewCnt) throws SQLException {
 		if(addViewCnt) {
 			try(
-					SqlSession sqlSession=sqlSessionFactory.openSession();
+					SqlSession sqlSession = sqlSessionFactory.openSession();
 					){
-					PlaceDao placeDao=sqlSession.getMapper(PlaceDao.class);
+					PlaceDao placeDao = sqlSession.getMapper(PlaceDao.class);
 					placeDao.updateViewcnt(param);
 					return placeDao.selectOne(param);
 			}
 		}
 		else {
 			try(
-					SqlSession sqlSession=sqlSessionFactory.openSession();
+					SqlSession sqlSession = sqlSessionFactory.openSession();
 					){
-					PlaceDao placeDao=sqlSession.getMapper(PlaceDao.class);
+					PlaceDao placeDao = sqlSession.getMapper(PlaceDao.class);
 					return placeDao.selectOne(param);
 			}
 		}
@@ -51,14 +51,16 @@ public class PlaceServiceImpl implements PlaceService {
 	}
 
 
-
-
 	@Override
 	public boolean add(PlaceVo bean) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+		try(
+				SqlSession sqlSession = sqlSessionFactory.openSession();
+				){
+				PlaceDao placeDao = sqlSession.getMapper(PlaceDao.class);
+				placeDao.insertOne(bean);
+				return true;
+		}
 	}
-
 
 
 
