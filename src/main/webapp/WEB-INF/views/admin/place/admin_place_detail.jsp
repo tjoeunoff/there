@@ -19,7 +19,7 @@ $(function(){
     };
 
 	var map = new kakao.maps.Map(mapContainer, mapOption);
-	var markerPosition  = new kakao.maps.LatLng(lat, lng);	// 저장된 lat lng값 불러와서 넣기
+	var markerPosition  = new kakao.maps.LatLng(lat, lng);
 	var marker = new kakao.maps.Marker({
 	    position: markerPosition
 	});
@@ -27,7 +27,7 @@ $(function(){
 	marker.setMap(map);
 	
 	var iwContent = '<div style="padding:10px;">${plbean.place_name}</div>',
-	    iwPosition = new kakao.maps.LatLng(lat, lng);	// 저장된 lat lng값 불러와서 넣기
+	    iwPosition = new kakao.maps.LatLng(lat, lng);
 
 	var infowindow = new kakao.maps.InfoWindow({
 	    position : iwPosition, 
@@ -54,6 +54,10 @@ $(function(){
             </div>
         </div>
         <div class="place-detail-table">
+        	<div>
+        		<strong>조회수 👁️‍🗨️ ${plbean.place_viewcnt}</strong>
+        		<strong>좋아요수 ❤️ 0</strong>
+        	</div>
        		<div>
        			<span>카테고리</span>
        			<p>${plbean.place_category}</p>
@@ -72,6 +76,10 @@ $(function(){
        			<p>${plbean.place_tel}</p>
        		</div>
        		<div>
+       			<span>대표 사이트</span>
+       			<p>${plbean.place_url}</p>
+       		</div>
+       		<div>
        			<span>영업시간</span>
        			<p>${plbean.place_opentime} - ${plbean.place_endtime}</p>
        		</div>
@@ -80,18 +88,47 @@ $(function(){
        			<p>${plbean.place_content}</p>
        		</div>
        		<div>
+       			<span>관련태그</span>
+       			<p>${plbean.place_hashtag}</p>
+       		</div>
+       		<div>
        			<span>썸네일</span>
        			<p>${plbean.place_thumb}</p>
        		</div>
         </div>
 
 		<div class="btn-box">
-	        <a class="btn btn-primary btn-margin" href="">수정</a>
-	        <a class="btn btn-danger btn-margin" href="">삭제</a>
+	        <a class="btn btn-primary btn-margin" href="${pageContext.request.contextPath}/admin/place/form/${plbean.place_idx }">수정</a>
+	        <button type="button" class="btn btn-danger btn-margin" data-toggle="modal" data-target="#confirmDelete">삭제</button>
 	        <a class="btn btn-default btn-margin" href="${pageContext.request.contextPath}/admin/place">목록</a>
 		</div>
+		
   
 	</div> 
 </section>
+
+<!-- 삭제확인 모달 -->
+<div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">플레이스 삭제</h4>
+      </div>
+      <div class="modal-body">
+        <p>'<strong>${plbean.place_name}</strong>'을(를) 플레이스 목록에서 삭제하시겠습니까?</p>
+      </div>
+      <form method="post" action="">
+      <input type="hidden" name="_method" value="delete">
+      <input type="hidden" name="place_idx" value="${plbean.place_idx }" />
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+        <button type="submit" class="btn btn-danger">삭제</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

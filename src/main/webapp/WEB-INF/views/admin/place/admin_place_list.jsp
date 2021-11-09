@@ -28,8 +28,8 @@
                     <th class="col-md-2">플레이스명</th>
                     <th class="col-md-3">주소</th>
                     <th>전화번호</th>
-                    <th>개점시각</th>
-                    <th>폐점시각</th>
+                    <th>영업시간</th>
+                    <th>조회수</th>    <!-- 좋아수도 리스트에서 보여지면 좋을 듯 -->
                 </tr>
             </thead>
             <tbody>
@@ -41,8 +41,8 @@
                     <td><a href="${pageContext.request.contextPath}/admin/place/${plbean.place_idx }">${plbean.place_name }</a></td> 
                     <td><a href="${pageContext.request.contextPath}/admin/place/${plbean.place_idx }">${plbean.place_addr }</a></td>
                     <td><a href="${pageContext.request.contextPath}/admin/place/${plbean.place_idx }">${plbean.place_tel }</a></td>
-                    <td><a href="${pageContext.request.contextPath}/admin/place/${plbean.place_idx }">${plbean.place_opentime }</a></td>
-                    <td><a href="${pageContext.request.contextPath}/admin/place/${plbean.place_idx }">${plbean.place_endtime }</a></td>
+                    <td><a href="${pageContext.request.contextPath}/admin/place/${plbean.place_idx }">${plbean.place_opentime } - ${plbean.place_endtime }</a></td>
+                    <td><a href="${pageContext.request.contextPath}/admin/place/${plbean.place_idx }">${plbean.place_viewcnt }</a></td>
                 </tr>
                 </c:forEach>
             </tbody>

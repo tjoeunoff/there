@@ -16,6 +16,8 @@
 	border-top: 1px solid #eee;
 	border-bottom: 1px solid #eee;
 	}
+.place-detail-table > div:nth-child(1) {display: flex; justify-content: center;}
+.place-detail-table > div > strong {margin: 10px 0 10px 20px;}
 .place-detail-table > div > span {
 	width: 200px; 
 	padding: 15px; 

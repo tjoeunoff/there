@@ -53,12 +53,18 @@ $(function(){
 	
 	$('#placeAdd').submit(function(e){
         //e.preventDefault();
-        var latLngValue = {		// 위도, 경도, 장소명 json파일로 저장하기
+        var latLngValue = {		// json파일에 있는 장소명 찾아서 위도,경도 변경사항 갱신하기
             lat: lat,
             lng: lng
         }
         console.log(lat, lng);
-
+	});
+	
+	// 현재 플레이스의 카테고리 radio 체크하기
+	$.each($('input[name="place_category"]'), function(idx, ele){
+		if($(this).val() == '${plbean.place_category}') {
+			$(this).attr('checked', true);
+		}
 	});
 	
 	
@@ -71,15 +77,16 @@ $(function(){
 <section class="admin_contents" id="form_link04" style="">
 	<div class="container col-md-12">
 		<div class="page-header">
-        	<h2>플레이스 등록 <small>Place Add</small></h2>
+        	<h2>플레이스 수정 <small>Place Edit</small></h2>
         </div>
 
         <div class="panel panel-default">
         	<div class="panel-heading">
-            	새로운 플레이스를 등록할 수 있습니다.
+            	등록된 플레이스의 정보를 수정할 수 있습니다.
             </div>
         </div>
-        <form action="${pageContext.request.contextPath}/admin/place" method="POST" class="form-horizontal" id="placeAdd">
+        <form action="${pageContext.request.contextPath}/admin/place/${place_idx}" method="POST" class="form-horizontal" id="placeAdd">
+            <input type="hidden" name="_method" value="put"/>
         	<input type="hidden" name="place_latitude" id="placeLat" />
         	<input type="hidden" name="place_longitude" id="placeLng" />
             <div class="form-group">
@@ -102,56 +109,56 @@ $(function(){
               <div class="form-group">
                   <label for="placeName" class="col-sm-2 control-label">플레이스명</label>
                   <div class="col-sm-10">
-                      <input type="text" id="placeName" class="form-control" name="place_name" placeholder="플레이스의 이름을 입력해주세요 (50자 이내)" pattern=".{1,50}" required/>
+                      <input type="text" id="placeName" class="form-control" name="place_name" value="${plbean.place_name }" pattern=".{1,50}" required/>
                   </div>
               </div>
               <div class="form-group">
                   <label for="placeAddr" class="col-sm-2 control-label">주소</label>
                   <div class="col-sm-10">
-                  	  <input type="text" id="placeAddr" class="form-control" name="place_addr" placeholder="주소를 입력해주세요 (128자 이내)" pattern="[\w | \W | 가-힣  | / | - |  (  |  ) | , | ]{1,128}" required/>
+                  	  <input type="text" id="placeAddr" class="form-control" name="place_addr" value="${plbean.place_addr }" pattern="[\w | \W | 가-힣  | / | - |  (  |  ) | , | ]{1,128}" required/>
                   	  <div id="map" style="width:100%;height:350px; margin-top: 5px;"></div>
                   </div>
               </div>
               <div class="form-group">
                   <label for="placeOpentime" class="col-sm-2 control-label">영업 시작 시간</label>
                   <div class="col-sm-10">
-                      <input type="text" id="placeOpentime" class="form-control" name="place_opentime" placeholder="영업 시작 시간을 입력해주세요 (ex. 00시OO분)"  pattern="[\d]{1,2}(:|시)\s?[\d]{1,2}분?" required/>
+                      <input type="text" id="placeOpentime" class="form-control" name="place_opentime" value="${plbean.place_opentime }"  pattern="[\d]{1,2}(:|시)\s?[\d]{1,2}분?" required/>
                   </div>
               </div>
               <div class="form-group">
                   <label for="placeEndtime" class="col-sm-2 control-label">영업 종료 시간</label>
                   <div class="col-sm-10">
-                      <input type="text" id="placeEndtime" class="form-control" name="place_endtime" placeholder="영업 종료 시간을 입력해주세요 (ex. 00시OO분)"  pattern="[\d]{1,2}(:|시)\s?[\d]{1,2}분?" required/>
+                      <input type="text" id="placeEndtime" class="form-control" name="place_endtime" value="${plbean.place_endtime }"   pattern="[\d]{1,2}(:|시)\s?[\d]{1,2}분?" required/>
                   </div>
               </div>
               <div class="form-group">
                   <label for="placeTel" class="col-sm-2 control-label">전화 번호</label>
                   <div class="col-sm-10">
-                      <input type="text" id="placeTel" class="form-control" name="place_tel" placeholder="플레이스의 전화번호를 입력해주세요 (16자 이내)" pattern=".{1,16}" required/>
+                      <input type="text" id="placeTel" class="form-control" name="place_tel" value="${plbean.place_tel }" pattern=".{1,16}" required/>
                   </div>
               </div>
               <div class="form-group">
                   <label for="placeUrl" class="col-sm-2 control-label">대표 사이트</label>
                   <div class="col-sm-10">
-                      <input type="text" id="placeUrl" class="form-control" name="place_url" placeholder="대표 사이트를 입력해주세요 (ex. 홈페이지, 인스타그램, 블로그 등)" pattern=".{1,128}" required/>
+                      <input type="text" id="placeUrl" class="form-control" name="place_url" value="${plbean.place_url }" pattern=".{1,128}" required/>
                   </div>
               </div>
               <div class="form-group">
                   <label for="placeContent" class="col-sm-2 control-label">간략설명</label>
                   <div class="col-sm-10">
-                      <textarea id="placeContent" class="form-control" name="place_content" pattern=".{1,65535}" placeholder="이 플레이스에 대한 간단한 설명을 작성해주세요 (1000자 이내)" required></textarea>
+                      <textarea id="placeContent" class="form-control" name="place_content" pattern=".{1,65535}" required>${plbean.place_content }</textarea>
                   </div>
               </div>
               <div class="form-group">
                   <label for="placeHashtag" class="col-sm-2 control-label">관련태그</label>
                   <div class="col-sm-10">
-                      <input type="text" id="placeHashtag" class="form-control" name="place_hashtag" placeholder="이 플레이스와 관련된 태그를 입력해주세요.(최대 5개 / 쉼표(,)로 구분)" required/>
+                      <input type="text" id="placeHashtag" class="form-control" name="place_hashtag" value="${plbean.place_hashtag }" required/>
                   </div>
               </div>
               <div class="form-group">
                   <label for="placeThumb" class="col-sm-2 control-label">썸네일</label>
                   <div class="col-sm-10">
-                      <input type="text" id="placeThumb" class="form-control" name="place_thumb" placeholder="파일첨부양식으로 바꾸기" required/>
+                      <input type="text" id="placeThumb" class="form-control" name="place_thumb" value="${plbean.place_thumb }" required/>
                   </div>
               </div>
 
