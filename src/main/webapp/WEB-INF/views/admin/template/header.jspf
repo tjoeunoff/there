@@ -27,7 +27,7 @@
     <div class="left_wrap">
         <ul class="sub_nav" data-href="#form_link01">
             <li>
-                <a href="#none">
+                <a href="${pageContext.request.contextPath}/admin">
                     <p class="sub_nav_title">메인</p>
                 </a>
             </li>
