@@ -23,14 +23,14 @@ public class MzbbsController {
 	@Autowired
 	MzbbsService mzbbsService;
 							//TODO 파일 경로 설정
-    private String path = "D:\\DockerAWS\\Framework\\upload";
+    private String path = "D:\\DockerAws\\framework\\upload";
 
 	@GetMapping(value = "")
 	public String list(Model model) throws Exception {
-		model.addAttribute("list", mzbbsService.list());
+		model.addAttribute("mzList", mzbbsService.list());
 		return "/admin/magazine/magazineList";
 	}
-
+	
 	@GetMapping("/{magazine_idx}")
 	public String detail(@PathVariable("magazine_idx") int magazine_idx, Model model) throws SQLException {
 		model.addAttribute("mzbean", mzbbsService.one(magazine_idx, false));
