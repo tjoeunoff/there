@@ -117,7 +117,7 @@ function setThumbnail(event) {
               <div class="form-group">
                   <label for="placeAddr" class="col-sm-2 control-label">주소</label>
                   <div class="col-sm-10">
-                  	  <input type="text" id="placeAddr" class="form-control" name="place_addr" placeholder="시, 군, 구를 포함한 주소를 입력해주세요 (128자 이내)" pattern="[\w | \W | 가-힣  | / | - |  (  |  ) | , | ]{1,128}" required/>
+                  	  <input type="text" id="placeAddr" class="form-control" name="place_addr" placeholder="주소를 입력해주세요 (128자 이내)" pattern="[\w | \W | 가-힣  | / | - |  (  |  ) | , | ]{1,128}" required/>
                   	  <div id="map" style="width:100%;height:350px; margin-top: 5px;"></div>
                   </div>
               </div>

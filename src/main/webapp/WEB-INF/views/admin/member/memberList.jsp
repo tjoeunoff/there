@@ -25,9 +25,7 @@
         <p></p>
         <div class="panel panel-default">
             <div class="panel-heading">
-                회원자료 삭제 시 다른 회원이 기존 회원아이디를 사용하지 못하도록 회원아이디, 이름은 삭제하지 않고 영구 보관합니다.<br/>
-                - 회원 상태 0 : 가입, 회원 상태 1 : 탈퇴<br/>
-                - 회원 구분 1 : 관리자, 회원 구분 2 : 사용자
+                회원자료 삭제 시 다른 회원이 기존 회원아이디를 사용하지 못하도록 회원아이디, 이름은 삭제하지 않고 영구 보관합니다.
             </div>
         </div>
 
@@ -36,7 +34,6 @@
                 <tr>
                     <th>#</th>
                     <th>회원 아이디</th>
-                    <th>회원 구분</th>
                     <th>회원 이름</th>
                     <th>회원 비밀번호</th>
                     <th>회원 대체 비밀번호</th>
@@ -47,11 +44,10 @@
                 </tr>
             </thead>
             <tbody>
-	            <c:forEach items="${mbrList }" var="mbrbean">
+	            <c:forEach items="${list }" var="mbrbean">
                 <tr>
                     <td>${mbrbean.member_idx }</td>
                     <td>${mbrbean.member_id }</td>
-                    <td>${mbrbean.member_authid }</td>
                     <td>${mbrbean.member_name }</td>
                     <td>${mbrbean.member_pw }</td>
                     <td>${mbrbean.member_pwans }</td>

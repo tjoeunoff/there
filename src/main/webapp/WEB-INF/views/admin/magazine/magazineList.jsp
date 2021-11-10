@@ -18,6 +18,7 @@
    	table a:hover{
    		text-decoration: none;
    	}
+   	
    	</style>
 </head>
 <body>
@@ -38,7 +39,7 @@
         <p></p>
         <div class="panel panel-default">
             <div class="panel-heading">
-                관리자가 작성한 매거진 게시물 목록입니다.
+                회원자료 삭제 시 다른 회원이 기존 회원아이디를 사용하지 못하도록 회원아이디, 이름은 삭제하지 않고 영구 보관합니다.
             </div>
         </div>
 
@@ -53,7 +54,7 @@
                 </tr>
             </thead>
             <tbody>
-            <c:forEach items="${mzList }" var="mzbean">
+            <c:forEach items="${list }" var="mzbean">
                 <tr>
                     <td><a href="${pageContext.request.contextPath}/admin/magazine/${mzbean.magazine_idx }">${mzbean.magazine_idx }</a></td>
                     <td><a href="${pageContext.request.contextPath}/admin/magazine/${mzbean.magazine_idx }">${mzbean.magazine_subject }</a></td>

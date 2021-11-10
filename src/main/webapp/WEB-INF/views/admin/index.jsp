@@ -281,7 +281,7 @@ function centerAlign(){
             <!--장소 목록-->
             <div class="container col-md-6" id="plDiv">
                 <div class="page-header">
-                     <h3><a href="${pageContext.request.contextPath}/admin/place">장소 목록현황</a> <SMALL>현재까지 등록된 장소</SMALL></h3>
+                    <h3>장소 목록현황 <SMALL>현재까지 등록된 장소</SMALL></h3>
                 </div>
 
                 <table class="table table-bordered table-hover" id="plTable">
@@ -308,16 +308,14 @@ function centerAlign(){
             <!--회원 목록-->
             <div class="container col-md-6" id="mbrDiv">
                 <div class="page-header">
-                    <h3><a href="${pageContext.request.contextPath}/admin/member">회원 현황</a> <SMALL>현재까지 가입한 회원 목록</SMALL></h3>
+                    <h3>회원 현황 <SMALL>현재까지 가입한 회원 목록</SMALL></h3>
                 </div>
 
                 <table class="table table-bordered table-hover" id="mbrTable">
                     <thead>
                         <tr>
                             <th class="col-md-2">회원 번호</th> 
-                            <th>회원 아이디</th>
-                            <th>회원 이름</th>
-                            <th>회원 구분</th>
+                            <th>회원 아이디</th> 
                             <th>가입일</th>
                         </tr>
                     </thead>
@@ -326,8 +324,6 @@ function centerAlign(){
 						<tr>
 						<td>${mbrbean.member_idx }</td>
 						<td>${mbrbean.member_id }</td>
-						<td>${mbrbean.member_name }</td>
-						<td>${mbrbean.member_authid }</td>
 						<td>${mbrbean.member_registdate.getYear()+1900 }/${mbrbean.member_registdate.getMonth()+1 }/${mbrbean.member_registdate.getDate() }</td>
 						</tr>
 					</c:forEach>
@@ -338,7 +334,7 @@ function centerAlign(){
             <!--매거진 글목록 -->
             <div class="container clear col-md-12 margin-b" id="mzDiv">
                 <div class="page-header">
-                    <h3><a href="${pageContext.request.contextPath}/admin/magazine">매거진 글 현황</a> <SMALL>현재까지 등록된 매거진 게시글</SMALL></h3>
+                    <h3>매거진 글 현황 <SMALL>현재까지 등록된 매거진 게시글</SMALL></h3>
                 </div>
 
                 <table class="table table-bordered table-hover" id="mzTable">
@@ -346,18 +342,14 @@ function centerAlign(){
                         <tr>
                             <th class="col-md-1">글 번호</th> 
                             <th>매거진 제목</th>
-                            <th>매거진 조회수</th>
-                            <th>매거진 작성일</th>
                         </tr>
                     </thead>
 
                     <tbody>
                     <c:forEach items="${mzList }" var="mzbean" begin="0" end="3">
                     	<tr>
-                    	<td><a href="${pageContext.request.contextPath}/admin/magazine/${mzbean.magazine_idx }">${mzbean.magazine_idx }</a></td>
-                    	<td><a href="${pageContext.request.contextPath}/admin/magazine/${mzbean.magazine_idx }">${mzbean.magazine_subject }</a></td>
-                    	<td><a href="${pageContext.request.contextPath }/admin/magazine/${mzbean.magazine_idx }">${mzbean.magazine_viewcnt }</a></td>
-                    	<td><a href="${pageContext.request.contextPath }/admin/magazine/${mzbean.magazine_idx }">${mzbean.magazine_date.getYear()+1900 }/${mzbean.magazine_date.getMonth()+1 }/${mzbean.magazine_date.getDate() }</a></td>
+                    	<td><a href="${pageContext.request.contextPath }/admin/magazine/${mzbean.magazine_idx }">${mzbean.magazine_idx }</a></td>
+                    	<td><a href="${pageContext.request.contextPath }/admin/magazine/${mzbean.magazine_idx }">${mzbean.magazine_subject }</a></td>
                     	</tr>
 					</c:forEach>
                     </tbody>
