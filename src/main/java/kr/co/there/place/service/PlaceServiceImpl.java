@@ -30,24 +30,15 @@ public class PlaceServiceImpl implements PlaceService {
 
 	@Override
 	public PlaceVo One(int param, boolean addViewCnt) throws SQLException {
-		if(addViewCnt) {
-			try(
-					SqlSession sqlSession = sqlSessionFactory.openSession();
-					){
-					PlaceDao placeDao = sqlSession.getMapper(PlaceDao.class);
-					placeDao.updateViewcnt(param);
-					return placeDao.selectOne(param);
-			}
+		
+		try(
+				SqlSession sqlSession = sqlSessionFactory.openSession();
+				){
+				PlaceDao placeDao = sqlSession.getMapper(PlaceDao.class);
+				if(addViewCnt) placeDao.updateViewcnt(param);
+				
+				return placeDao.selectOne(param);
 		}
-		else {
-			try(
-					SqlSession sqlSession = sqlSessionFactory.openSession();
-					){
-					PlaceDao placeDao = sqlSession.getMapper(PlaceDao.class);
-					return placeDao.selectOne(param);
-			}
-		}
-
 	}
 
 
@@ -63,11 +54,15 @@ public class PlaceServiceImpl implements PlaceService {
 	}
 
 
-
 	@Override
 	public boolean edit(PlaceVo bean) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+		try(
+				SqlSession sqlSession = sqlSessionFactory.openSession();
+				){
+				PlaceDao placeDao = sqlSession.getMapper(PlaceDao.class);
+				placeDao.updateOne(bean);
+				return true;
+		}
 	}
 
 
@@ -75,8 +70,13 @@ public class PlaceServiceImpl implements PlaceService {
 
 	@Override
 	public boolean remove(int param) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+		try(
+				SqlSession sqlSession = sqlSessionFactory.openSession();
+				){
+				PlaceDao placeDao = sqlSession.getMapper(PlaceDao.class);
+				placeDao.deleteOne(param);
+				return true;
+		}
 	}
 
 
