@@ -46,9 +46,6 @@ $(function(){
 	            //console.log($('#placeLat').val(), $('#placeLng').val());
 	        } 
 	    });
-
-        
-
 	});
 	
 	$('#placeAdd').submit(function(e){
@@ -58,11 +55,23 @@ $(function(){
             lng: lng
         }
         console.log(lat, lng);
-
-	});
-	
-	
+	});	
 });
+
+function setThumbnail(event) { 
+	for (var image of event.target.files) { 
+		var reader = new FileReader(); 
+
+		reader.onload = function(event) {
+			var img = document.createElement("img"); 
+			img.setAttribute("src", event.target.result); 
+			document.querySelector("div#thumb_container").appendChild(img); 
+		}; 
+			
+		console.log(image); reader.readAsDataURL(image); 
+	} 
+}
+
 </script>
 </head>
 <body>
@@ -151,7 +160,8 @@ $(function(){
               <div class="form-group">
                   <label for="placeThumb" class="col-sm-2 control-label">썸네일</label>
                   <div class="col-sm-10">
-                      <input type="text" id="placeThumb" class="form-control" name="place_thumb" placeholder="파일첨부양식으로 바꾸기" required/>
+                      <input type="file" id="place_thumb" name="place_thumb" accept="image/gif, image/jepg, image/png" onchange="setThumbnail(event);"/><br />
+                      <div id="thumb_container"></div>
                   </div>
               </div>
 
