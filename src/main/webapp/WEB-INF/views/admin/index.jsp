@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <%@ include file="template/include.jspf" %>
 <script type="text/javascript">
-						//페이지네이션.
+						//페이지네이션
 													//(sianke1991)
 //본 스크립트는 해당 페이지에 사용되는 것을 가정하고 작성되었으므로 다른 페이지에 적용하기 위해서는 별도의 수정이 필요함
 /*
