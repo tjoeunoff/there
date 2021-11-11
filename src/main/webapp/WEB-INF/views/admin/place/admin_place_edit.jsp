@@ -9,16 +9,41 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e5f5bb9115d812a34ed32b190bd82edf&libraries=services"></script>
 <script>
 $(function(){
-	var addrName, lat, lng;
+	var addrName = '${plbean.place_name}',
+	lat = ${plbean.place_latitude},
+	lng = ${plbean.place_longitude};
+	
+    $('#placeLat').val(lat);
+    $('#placeLng').val(lng);
 	
 	var mapContainer = document.getElementById('map'), 
     mapOption = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667),
+        center: new kakao.maps.LatLng(lat, lng),
         level: 3
     }; 
 	var map = new kakao.maps.Map(mapContainer, mapOption); 
 	var geocoder = new kakao.maps.services.Geocoder();
 	
+	
+	// 기존 등록된 플레이스 정보 지도에 표현
+	var marker = new kakao.maps.Marker({
+	    position: new kakao.maps.LatLng(lat, lng)
+	});
+	
+	marker.setMap(map);
+	
+	var iwContent = '<div style="padding:10px;">'+ addrName +'</div>',
+    iwPosition = new kakao.maps.LatLng(lat, lng);
+
+	var infowindow = new kakao.maps.InfoWindow({
+	    position : iwPosition, 
+	    content : iwContent 
+	});
+	
+	infowindow.open(map, marker); 
+	
+	
+	// 주소 새로 입력시
 	$('#placeAddr').change(function(){
         addrName = $('#placeAddr').val();
         console.log(addrName);
@@ -43,7 +68,7 @@ $(function(){
 	            
 	            $('#placeLat').val(lat);
 	            $('#placeLng').val(lng);
-	            //console.log($('#placeLat').val(), $('#placeLng').val());
+	            console.log($('#placeLat').val(), $('#placeLng').val());
 	        } 
 	    });
 	});
@@ -54,7 +79,7 @@ $(function(){
             lat: lat,
             lng: lng
         }
-        console.log(lat, lng);
+        //console.log(lat, lng);
 	});
 	
 	// 현재 플레이스의 카테고리 radio 체크하기

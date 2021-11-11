@@ -27,13 +27,13 @@ public class PlaceController {
 	// ===== admin page =====
 	@GetMapping("/admin/place")
 	public String list(Model model) throws Exception {
-		model.addAttribute("list",placeService.list());
+		model.addAttribute("list", placeService.list());
 		return "/admin/place/admin_place_list";
 	}
 
 	@GetMapping("/admin/place/{place_idx}")
 	public String detail(@PathVariable("place_idx") int place_idx, Model model) throws SQLException {
-		model.addAttribute("plbean",placeService.One(place_idx, false));
+		model.addAttribute("plbean", placeService.One(place_idx, false));
 		return "/admin/place/admin_place_detail";
 	}
 	
@@ -65,12 +65,19 @@ public class PlaceController {
 		placeService.remove(param);
 		return "redirect:/admin/place";
 	}
+	
+	@GetMapping("/admin/place/review")
+	public String ReviewList(Model model) throws SQLException {
+		model.addAttribute("list", placeService.reviewList());
+		return "/admin/place/admin_place_review";
+	}
 
 	
 	
 	// ===== home page =====
 	@GetMapping("/categroy")
-	public String moveCategoryPage() {
+	public String showCategoryPage(Model model) throws SQLException {
+		model.addAttribute("list",placeService.list());
 		return "/home/place/place-by-category";
 	}
 	
@@ -79,9 +86,9 @@ public class PlaceController {
 		return "/home/place/place-by-location";
 	}
 	
-//	@GetMapping("/place/{place_idx}")
-	@GetMapping("/place/detail")
-	public String movePlaceDetailPage() {
+	@GetMapping("/place/{place_idx}")
+	public String showPlaceDetailPage(@PathVariable("place_idx") int place_idx, Model model) throws SQLException {
+		model.addAttribute("plbean", placeService.One(place_idx, true));
 		return "/home/place/place-detail";
 	}
 	

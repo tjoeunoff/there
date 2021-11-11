@@ -7,6 +7,7 @@
 
 <mapper namespace="kr.co.there.place.model.PlaceDao">
 
+	<!-- PALCE CRUD -->
 	<select id="selectAll" resultType="plbean">
 	select * from place order by place_idx desc
 	</select>
@@ -15,13 +16,11 @@
 	select * from place where place_idx=#{val}
 	</select>
 
-	 
 	<update id="insertOne" parameterType="plbean">
 	insert into place (place_name, place_addr, place_opentime, place_endtime, place_tel, place_url, place_content, place_category, place_longitude, place_latitude, place_thumb, place_hashtag, place_viewcnt) 
 	values (#{place_name}, #{place_addr}, #{place_opentime}, #{place_endtime}, #{place_tel}, #{place_url}, #{place_content}, #{place_category}, #{place_longitude}, #{place_latitude}, #{place_thumb}, #{place_hashtag}, 0)
 	</update>
-
-
+	
 	<update id="updateOne" parameterType="plbean">
 	update place set place_name=#{place_name}, place_addr=#{place_addr}, place_opentime=#{place_opentime}, place_endtime=#{place_endtime}, 
 	place_tel=#{place_tel}, place_url=#{place_url}, place_content=#{place_content},place_category=#{place_category}, place_longitude=#{place_longitude}, place_latitude=#{place_latitude}, place_thumb=#{place_thumb}, place_hashtag=#{place_hashtag}
@@ -32,11 +31,45 @@
 	update place set place_viewcnt=place_viewcnt+1 where place_idx=#{val}
 	</update>
 
-
 	<delete id="deleteOne" parameterType="int">
 	delete from place where place_idx=#{val}
 	</delete>
+	
+	
+	<!-- REVIEW CRUD -->
+	<select id="selectReviewAll" resultType="rvbean">
+	select * from review order by review_date desc
+	<!-- select rv.*, pl.place_name from review as rv, place as pl order by review_date desc 플레이스명 조인 필요-->
+	</select>
+	
+	<select id="selectReviewbyPlace" resultType="rvbean">
+	select * from review where review_placeidx=#{val}
+	</select>
+	
+	<update id="insertReview" parameterType="rvbean">
+	insert into review (review_memberid, review_placeidx, review_score, review_content) 
+	values (#{review_memberid}, #{review_placeidx}, #{review_score}, #{review_content})
+	</update>
+	
+	<update id="updateReview" parameterType="rvbean">
+	update review set review_score=#{review_score}, review_content=#{review_content}
+	where review_memberid=#{review_memberid} and review_placeidx=#{review_placeidx}
+	</update>
 
+	<delete id="deleteReview" parameterType="rvbean">
+	delete from review where review_memberid=#{review_memberid} and review_placeidx=#{review_placeidx}
+	</delete>
+	
+	
+	<!-- LIKE CD -->
+	<update id="insertLike" parameterType="rvbean">
+	insert into placelikes (placelikes_memberid, placelikes_placeidx) values (#{placelikes_memberid},#{placelikes_placeidx})
+	</update>
+	
+	<delete id="deleteLike" parameterType="rvbean">
+	delete from placelikes where placelikes_placeidx=#{placelikes_placeidx} and placelikes_memberid=#{placelikes_memberid}
+	</delete>
+	
 
 </mapper>
 

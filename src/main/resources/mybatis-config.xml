@@ -9,6 +9,7 @@
 		<typeAlias type="kr.co.there.place.model.entity.PlaceVo" alias="plbean"/>
 		<typeAlias type="kr.co.there.mzbbs.model.entity.MzbbsVo" alias="mzbean"/>
 		<typeAlias type="kr.co.there.member.model.entity.MemberVo" alias="mbrbean"/>
+		<typeAlias type="kr.co.there.review.model.entity.ReviewVo" alias="rvbean"/>
 	</typeAliases>
 	
 	<mappers>

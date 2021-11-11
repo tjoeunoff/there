@@ -35,28 +35,33 @@
                         <p class="tac mb10 bold">카테고리 선택</p>
                         <ul class="cate-filter-btns mb60">
                             <li><button data-filter="all">All</button></li>
-                            <li><button data-filter="food">맛집</button></li>
-                            <li><button data-filter="cafe">카페</button></li>
-                            <li><button data-filter="entertainment">놀거리</button></li>
-                            <li><button data-filter="alcohol">술집</button></li>
+                            <li><button data-filter="맛집">맛집</button></li>
+                            <li><button data-filter="카페">카페</button></li>
+                            <li><button data-filter="놀거리">놀거리</button></li>
+                            <li><button data-filter="술집">술집</button></li>
                         </ul>
                     </div>
                     <div class="row">
-                        <div class="list-item col-sm-6 col-md-4" data-cate="cafe">
-                            <a href="${pageContext.servletContext.contextPath }/place/detail">
+                    	<c:forEach items="${list }" var="plbean">
+                        <div class="list-item col-sm-6 col-md-4" data-cate="${plbean.place_category }">
+                            <a href="${pageContext.servletContext.contextPath }/place/${plbean.place_idx }">
                                 <div class="thumb">
-                                    <div class="thumb-img" style="background-image: url(${imgPath }/place/palce_thumb01.jpg);"></div>
+                                    <div class="thumb-img" style="background-image: url(${imgPath }/place/${plbean.place_thumb });"></div>
                                 </div>
                                 <div class="caption">
-                                    <h4>성수 OO카페 👫</h4>
-                                    <p><span>#성수 카페</span><span>#야간명소</span></p>
+                                    <h4>${plbean.place_name }</h4>
+                                    <p><span>${plbean.place_hashtag }</span></p>
                                 </div>
                                 <ul>
-                                    <li class="util-show">👁️‍🗨️ <span>256</span></li>
+                                    <li class="util-show">👁️‍🗨️ <span>${plbean.place_viewcnt }</span></li>
                                     <li class="util-like">❤️ <span>84</span></li>
                                 </ul>
                             </a>
                         </div>
+                        </c:forEach>
+                        
+                        
+                        <!-- 샘플 -->
                         <div class="list-item col-sm-6 col-md-4" data-cate="cafe">
                             <a href="">
                                 <div class="thumb">
@@ -72,51 +77,7 @@
                                 </ul>
                             </a>
                         </div>
-                        <div class="list-item col-sm-6 col-md-4" data-cate="food">
-                            <a href="">
-                                <div class="thumb">
-                                    <div class="thumb-img" style="background-image: url(${imgPath }/place/palce_thumb03.jpg);"></div>
-                                </div>
-                                <div class="caption">
-                                    <h4>OO오션 식당💙</h4>
-                                    <p><span>#서울근교</span><span>#맛집</span></p>
-                                </div>
-                                <ul>
-                                    <li class="util-show">👁️‍🗨️ <span>256</span></li>
-                                    <li class="util-like">❤️ <span>84</span></li>
-                                </ul>
-                            </a>
-                        </div>
-                        <div class="list-item col-sm-6 col-md-4" data-cate="alcohol">
-                            <a href="">
-                                <div class="thumb">
-                                    <div class="thumb-img" style="background-image: url(${imgPath }/place/palce_thumb04.jpg);"></div>
-                                </div>
-                                <div class="caption">
-                                    <h4>잠실 노천 영화상영장 🎬</h4>
-                                    <p><span>#가을밤 노천 영화상영제</span><span>#무비</span></p>
-                                </div>
-                                <ul>
-                                    <li class="util-show">👁️‍🗨️ <span>256</span></li>
-                                    <li class="util-like">❤️ <span>84</span></li>
-                                </ul>
-                            </a>
-                        </div>
-                        <div class="list-item col-sm-6 col-md-4" data-cate="entertainment">
-                            <a href="">
-                                <div class="thumb">
-                                    <div class="thumb-img" style="background-image: url(${imgPath }/place/palce_thumb05.jpg);"></div>
-                                </div>
-                                <div class="caption">
-                                    <h4>야외 스케이트장 🎬</h4>
-                                    <p><span>#야외 스케이트장</span><span>#겨울</span></p>
-                                </div>
-                                <ul>
-                                    <li class="util-show">👁️‍🗨️ <span>256</span></li>
-                                    <li class="util-like">❤️ <span>84</span></li>
-                                </ul>
-                            </a>
-                        </div>
+                        <!-- // 샘플 -->
                     </div>
 
                 </div>

@@ -35,7 +35,7 @@
                         <div class="view-util">
                             <p class="tags"><span>#성수 카페</span><span>#야간명소</span><span>#대형스크린</span><span>#성수핫플</span></p>  <!-- 장소 관련태그 -->
                             <ul>
-                                <li class="util-show">👁️‍🗨️ <span>256</span></li> <!-- span안에 조회수 넣기 -->
+                                <li class="util-show">👁️‍🗨️ <span>${plbean.place_viewcnt }</span></li> <!-- span안에 조회수 넣기 -->
                                 <li class="util-like">❤️ <span>84</span></li> <!-- span안에 좋아요 수 넣기 / 클릭 시 바로 숫자 올라가야함  -->
                                 <li class="util-star">⭐ <span>4.6</span></li> <!-- span안에 평점 넣기 -->
                                 <li class="util-reivew">📝 <span>102</span></li> <!-- span안에 리뷰갯수 넣기 -->
@@ -44,20 +44,17 @@
                         </div>
                         <div class="place-info">
                             <div class="thumb">
-                                <img src="../img/place/palce_thumb01_480x480.jpg" alt=""> <!-- 업로드하는 이미지 사이즈 고정 480x480 -->
+                                <img src="${imgPath }/place/palce_thumb01_480x480.jpg" alt=""> <!-- 업로드하는 이미지 사이즈 고정 480x480 -->
                             </div>
-                            <strong>카페</strong>  <!-- 해당 장소의 카테고리명 -->
-                            <h3>성수 OO카페 👫</h3>  <!-- 장소명 -->
-                            <p>하프 성수 플래그쉽 스토어인 '하프 언더바(halff underbar)'는 <br>
-                                하프커피 아래의 바(bar), 공백을 채우는 기호 '_'언더바 두개의 중의적 의미를 내포하는 공간으로 
-                                커피와 베이커리, 와인과 간단한 푸드까지 다양한 음식과 문화를 즐길 수 있는 공간입니다.
-                            </p> <!-- 간단소개 -->
+                            <strong>${plbean.place_category }</strong>  <!-- 해당 장소의 카테고리명 -->
+                            <h3>${plbean.place_name }</h3>  <!-- 장소명 -->
+                            <p>${plbean.place_content }</p> <!-- 간단소개 -->
                             <div class="desc">
                                 <ul>
-                                    <li>📌<span>서울 성동구 서울숲4길 12 1층</span></li> <!-- 주소 -->
-                                    <li>📞<span>070-7704-4877</span></li> <!-- 전화번호 -->
-                                    <li>⏰<span>매일 11:00 - 22:00 L.O 21시 00분</span></li> <!-- 영업시간 -->
-                                    <li>🏠<span>http://www.instagram.com/halff_coffeeroasters</span></li> <!-- 대표링크 -->
+                                    <li>📌<span>${plbean.place_addr }</span></li> <!-- 주소 -->
+                                    <li>📞<span>${plbean.place_tel }</span></li> <!-- 전화번호 -->
+                                    <li>⏰<span>${plbean.place_opentime } - ${plbean.place_endtime }</span></li> <!-- 영업시간 -->
+                                    <li>🏠<span><a href="${plbean.place_url }" target="_blank">${plbean.place_url }</a></span></li> <!-- 대표링크 -->
                                 </ul>
                             </div>
                         </div>
@@ -109,9 +106,12 @@
                             <div id="map" style="width:100%;height:300px;"></div>
                             <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e5f5bb9115d812a34ed32b190bd82edf"></script>
                             <script>
+                            var lat = ${plbean.place_latitude},
+                            	lng = ${plbean.place_longitude};
+                            
                             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                                 mapOption = { 
-                                    center: new kakao.maps.LatLng(37.54699, 127.09598), // 지도의 중심좌표
+                                    center: new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
                                     level: 4 // 지도의 확대 레벨
                                 };
 
@@ -123,7 +123,7 @@
                                 
                             // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
                             var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
-                                markerPosition = new kakao.maps.LatLng(37.54699, 127.09598); // 마커가 표시될 위치입니다
+                                markerPosition = new kakao.maps.LatLng(lat, lng); // 마커가 표시될 위치입니다
 
                             // 마커를 생성합니다
                             var marker = new kakao.maps.Marker({

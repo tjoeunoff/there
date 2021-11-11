@@ -60,6 +60,7 @@
             <ul class="sub_nav_list">
                 <li><a href="${pageContext.servletContext.contextPath }/admin/place">&#12596; 장소 목록</a></li>
                 <li><a href="${pageContext.servletContext.contextPath }/admin/place/form">&#12596; 장소 등록</a></li>
+                <li><a href="${pageContext.servletContext.contextPath }/admin/place/review">&#12596; 리뷰관리</a></li>
             </ul>
         </div>
         
