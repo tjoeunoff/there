@@ -69,39 +69,33 @@
                             <p>이 PLACE에 다녀온 사람들은 <strong>⭐<span>4.6</span></strong>만큼 만족했어요!</p> <!-- span안에 평점 넣기 -->
                             <div class="review-list">
                                 <ul>
-                                    <li>  <!-- 리뷰 불러오기 리뷰 1개마다 li로 생성 페이징처리할지 스크롤 처리할지 정하기 / 스크롤이 간단하긴함.. -->                         
-                                        <span>⭐⭐⭐⭐</span>    <!-- 평점-->
-                                        <p>아주 좋았어요 :D</p>     <!-- 리뷰내용 -->
-                                        <p>2021-10-31</p>          <!-- 방문날짜 -->
+                                	<c:forEach items="${rvlist }" var="rvbean">
+                                	<li>                   
+                                        <div class="rv-score">
+	                                        <c:forEach begin="1" end="${rvbean.review_score }">
+	                                        	<span>⭐</span>
+	                                        </c:forEach>
+                                        </div>
+                                        <p>${rvbean.review_content }</p>
+                                        <p>${rvbean.review_date }</p>
                                     </li>
-                                    <li>                   
-                                        <span>⭐⭐⭐⭐</span>
-                                        <p>아주 좋았어요 :D</p>
-                                        <p>2021-10-31</p>
+                                	</c:forEach>
+                                	
+                                	<!-- 샘플 -->     
+                                    <li>                      
+                                        <span>⭐⭐⭐⭐</span> 
+                                        <p>아주 좋았어요 :D</p> 
+                                        <p>2021-10-31</p> 
                                     </li>
-                                    <li>
-                                        <span>⭐⭐⭐⭐⭐</span>
-                                        <p>아주아주아주아주아주 좋았어요 :D</p>
-                                        <p>2021-10-31</p>
-                                    </li>
-                                    <li>
-                                        <span>⭐⭐⭐⭐⭐</span>
-                                        <p>아주아주아주아주아주 좋았어요 :D</p>
-                                        <p>2021-10-31</p>
-                                    </li>
-                                    <li>
-                                        <span>⭐⭐⭐⭐⭐</span>
-                                        <p>아주아주아주아주아주 좋았어요 :D</p>
-                                        <p>2021-10-31</p>
-                                    </li>
+                                    <!-- //샘플 -->
+                                    
                                 </ul>
                             </div>
                             <div class="review-btns"> <!-- 리뷰버튼은 로그인O 일때만 노출됨 -->
                                 <button type="button" class="abtn abtn-mint" data-toggle="modal" data-target="#reviewWriteModal">리뷰 작성하기</button>
                             </div>
                         </div>
-
-                        <!-- 아래 지도 스크립트 수정 필요 => 장소등록시 설정한 좌표로 지도표현 -->
+                        
                         <div class="place-map mb40">
                             <div id="map" style="width:100%;height:300px;"></div>
                             <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e5f5bb9115d812a34ed32b190bd82edf"></script>
@@ -109,38 +103,36 @@
                             var lat = ${plbean.place_latitude},
                             	lng = ${plbean.place_longitude};
                             
-                            var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                            var mapContainer = document.getElementById('map'),
                                 mapOption = { 
-                                    center: new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
-                                    level: 4 // 지도의 확대 레벨
+                                    center: new kakao.maps.LatLng(lat, lng),
+                                    level: 4
                                 };
 
-                            var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+                            var map = new kakao.maps.Map(mapContainer, mapOption);
 
-                            var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
-                                imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
-                                imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+                            var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png',
+                                imageSize = new kakao.maps.Size(64, 69),
+                                imageOption = {offset: new kakao.maps.Point(27, 69)};
                                 
-                            // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
                             var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
-                                markerPosition = new kakao.maps.LatLng(lat, lng); // 마커가 표시될 위치입니다
+                                markerPosition = new kakao.maps.LatLng(lat, lng);
 
-                            // 마커를 생성합니다
                             var marker = new kakao.maps.Marker({
                                 position: markerPosition, 
-                                image: markerImage // 마커이미지 설정 
+                                image: markerImage
                             });
 
-                            // 마커가 지도 위에 표시되도록 설정합니다
                             marker.setMap(map);  
                             </script>
                         </div>
     
                         <div class="view-foot">
                             <ul class="list-nav-btns">
-                                <li><a href="">이전글</a></li>
-                                <li><a href="">목록</a></li>
-                                <li><a href="">다음글</a></li>
+                            	<!-- 맨첫글, 맨 마지막글에서 버튼 비활성화 기능 추가필요 -->
+                                <li><a href="${pageContext.servletContext.contextPath }/place/${plbean.place_idx-1 }">이전글</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath }/categroy">목록</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath }/place/${plbean.place_idx+1 }">다음글</a></li>
                             </ul>
                         </div>
                     </div>
@@ -213,14 +205,17 @@
                     <h4 class="modal-title" id="myModalLabel">✏️ 리뷰 작성하기</h4>
                 </div>
                 <form action="" method="post">
-                    <div class="modal-body">
+                	<input type="hidden" name="review_placeidx" value="${plbean.place_idx }">
+                	<input type="hidden" name="review_memberid" value="user01" >  <!-- 현재 더미에넣은 사용자 아이디 -->
+                    <div class="modal-body"> 
                         <div class="form-group">
                             <span>방문 장소</span>
-                            <p>성수 OO 카페</p> <!-- 해당페이지의 플레이스명 -->
+                            <p>${plbean.place_name }</p> <!-- 해당페이지의 플레이스명 -->
                         </div>
+                        <!-- 
                         <div class="form-group">
                             <label for="visitDate">방문 날짜</label>
-                            <input type="text" id="visitDate" name="visitDate"> <!-- datepicker로 날짜 선택 -->
+                            <input type="text" id="visitDate" name="visitDate">  datepicker로 날짜 선택
                             <span class="date-icon">📅 날짜선택</span>
                             <script>
                                 $(function(){ 
@@ -237,37 +232,37 @@
                                 });
                             </script>
                         </div>
+                        -->
                         <div class="form-group">
                             <span>평점</span>
                             <div class="select-star">
                                 <label class="radio-star" for="star1">
-                                    <input type="radio" name="star" id="star1" value="1">
+                                    <input type="radio" name="review_score" id="star1" value="1">
                                     <span></span>
                                 </label>
                                 <label class="radio-star" for="star2">
-                                    <input type="radio" name="star" id="star2" value="2">
+                                    <input type="radio" name="review_score" id="star2" value="2">
                                     <span></span>
                                 </label>
                                 <label class="radio-star" for="star3">
-                                    <input type="radio" name="star" id="star3" value="3">
+                                    <input type="radio" name="review_score" id="star3" value="3">
                                     <span></span>
                                 </label>
                                 <label class="radio-star" for="star4">
-                                    <input type="radio" name="star" id="star4" value="4">
+                                    <input type="radio" name="review_score" id="star4" value="4">
                                     <span></span>
                                 </label>
                                 <label class="radio-star" for="star5">
-                                    <input type="radio" name="star" id="star5" value="5">
+                                    <input type="radio" name="review_score" id="star5" value="5">
                                     <span></span>
                                 </label>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="reviewCnt">리뷰</label>
-                            <textarea name="reviewCnt" id="reviewCnt"></textarea>
+                            <textarea name="review_content" id="reviewCnt"></textarea>
                         </div>
 
-       
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="abtn abtn-gray" data-dismiss="modal">취소</button>
