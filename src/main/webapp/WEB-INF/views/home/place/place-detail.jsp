@@ -111,6 +111,7 @@
 
                             var map = new kakao.maps.Map(mapContainer, mapOption);
 
+                            // 마커이미지 변경필요
                             var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png',
                                 imageSize = new kakao.maps.Size(64, 69),
                                 imageOption = {offset: new kakao.maps.Point(27, 69)};
