@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.there.place.model.PlaceDao;
 import kr.co.there.place.model.entity.PlaceVo;
+import kr.co.there.review.model.entity.ReviewVo;
 
 @Service
 public class PlaceServiceImpl implements PlaceService {
@@ -35,7 +36,7 @@ public class PlaceServiceImpl implements PlaceService {
 				SqlSession sqlSession = sqlSessionFactory.openSession();
 				){
 				PlaceDao placeDao = sqlSession.getMapper(PlaceDao.class);
-				if(addViewCnt) placeDao.updateViewcnt(param);
+				if(addViewCnt) placeDao.updateViewCnt(param);
 				
 				return placeDao.selectOne(param);
 		}
@@ -77,6 +78,17 @@ public class PlaceServiceImpl implements PlaceService {
 				placeDao.deleteOne(param);
 				return true;
 		}
+	}
+
+
+	@Override
+	public List<ReviewVo> reviewList() throws SQLException {
+		try(
+				SqlSession sqlSession = sqlSessionFactory.openSession();
+					){
+			PlaceDao placeDao = sqlSession.getMapper(PlaceDao.class);
+				return placeDao.selectReviewAll();
+			}
 	}
 
 

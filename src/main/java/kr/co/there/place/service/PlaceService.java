@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import kr.co.there.place.model.entity.PlaceVo;
+import kr.co.there.review.model.entity.ReviewVo;
 
 public interface PlaceService {
 
@@ -13,5 +14,7 @@ public interface PlaceService {
 	boolean edit(PlaceVo bean) throws SQLException;
 	boolean remove(int param) throws SQLException;
 
+	List<ReviewVo> reviewList() throws SQLException;
+	
 }
 
