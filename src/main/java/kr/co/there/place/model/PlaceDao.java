@@ -16,6 +16,10 @@ public interface PlaceDao {
 	int deleteOne(int place_idx) throws SQLException;
 	
 	List<ReviewVo> selectReviewAll() throws SQLException;
-	ReviewVo selectReviewbyPlace(int place_idx) throws SQLException;
+	List<ReviewVo> selectReviewbyPlace(int place_idx) throws SQLException;
+	int insertReview(ReviewVo bean) throws SQLException;
+	int countReveiw(int place_idx) throws SQLException;
+	
+	int countLikes(int place_idx) throws SQLException;
 
 }

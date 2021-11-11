@@ -7,6 +7,21 @@
 
 <mapper namespace="kr.co.there.place.model.PlaceDao">
 
+<!-- 구현 중 
+	<resultMap type="PlaceLikesVo" id="PlaceLikesVo">
+		<result column="placelikes_placeidx" property="placelikes_placeidx" />
+	</resultMap>
+
+	<resultMap type="PlaceVo" id="PlaceVo">
+		<result column="place_idx" property="place_idx" />
+		<result column="place_name" property="place_name" />
+		<result column="place_hashtag" property="place_hashtag" />
+		<result column="place_thumb" property="place_thumb" />
+		<result column="place_viewcnt" property="place_viewcnt" />
+		<collection property="adminInfoVO" resultMap="AdminInfoVO" />
+	</resultMap>
+-->
+
 	<!-- PALCE CRUD -->
 	<select id="selectAll" resultType="plbean">
 	select * from place order by place_idx desc
@@ -36,14 +51,23 @@
 	</delete>
 	
 	
-	<!-- REVIEW CRUD -->
+	<select id="selectHomePlaceList" resultType="plbean">
+	select pl.place_idx, pl.place_name, pl.place_hashtag, pl.place_thumb, pl.place_viewcnt, count(bb.placelikes_placeidx) as likes 
+	from place as pl left join placelikes as bb on pl.place_idx = bb.placelikes_placeidx group by pl.place_idx order by place_idx desc
+	</select>
+	
+	
+	
+	
+	
+	<!-- REVIEW -->
 	<select id="selectReviewAll" resultType="rvbean">
 	select * from review order by review_date desc
 	<!-- select rv.*, pl.place_name from review as rv, place as pl order by review_date desc 플레이스명 조인 필요-->
 	</select>
 	
 	<select id="selectReviewbyPlace" resultType="rvbean">
-	select * from review where review_placeidx=#{val}
+	select * from review where review_placeidx=#{val} order by review_date desc
 	</select>
 	
 	<update id="insertReview" parameterType="rvbean">
@@ -60,8 +84,12 @@
 	delete from review where review_memberid=#{review_memberid} and review_placeidx=#{review_placeidx}
 	</delete>
 	
+	<select id="countReview" resultType="int">
+	select count(*) from review where review_placeidx=#{val} 
+	</select>
 	
-	<!-- LIKE CD -->
+	
+	<!-- LIKE -->
 	<update id="insertLike" parameterType="rvbean">
 	insert into placelikes (placelikes_memberid, placelikes_placeidx) values (#{placelikes_memberid},#{placelikes_placeidx})
 	</update>
@@ -69,6 +97,10 @@
 	<delete id="deleteLike" parameterType="rvbean">
 	delete from placelikes where placelikes_placeidx=#{placelikes_placeidx} and placelikes_memberid=#{placelikes_memberid}
 	</delete>
+	
+	<select id="countLike" resultType="int">
+	select count(*) from placelikes where placelikes_placeidx=#{val} 
+	</select>
 	
 
 </mapper>
