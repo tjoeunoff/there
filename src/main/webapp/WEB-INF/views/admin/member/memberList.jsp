@@ -6,7 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
     <%@ include file="../template/include.jspf" %>
+    
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/search.js"></script>
+    
 </head>
 <body>
     <%@ include file="../template/header.jspf" %>
