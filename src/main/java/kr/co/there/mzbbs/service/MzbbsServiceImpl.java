@@ -47,6 +47,16 @@ public class MzbbsServiceImpl implements MzbbsService {
 			}
 		} //조회수를 증가시키지 않고 반환
 	}
+	
+	@Override
+	public int numLikes(int param) throws SQLException {
+		try(
+				SqlSession sqlSession=sqlSessionFactory.openSession();
+				){
+				MzbbsDao mzbbsDao=sqlSession.getMapper(MzbbsDao.class);
+				return mzbbsDao.numLikes(param);
+		}
+	}
 
 	@Override
 	public boolean add(MzbbsVo mzbean) throws SQLException {

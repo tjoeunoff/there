@@ -11,6 +11,10 @@
 	<select id="selectOne" resultType="mzbean">
 	select * from magazine where magazine_idx=#{val}
 	</select>
+	
+	<select id="numLikes" resultType="int">
+	select count(*) from mzlikes where mzlikes_magazineidx=#{val}
+	</select>
 
 	<update id="insertOne" parameterType="mzbean">
 	insert into magazine (magazine_subject,magazine_date,magazine_viewcnt,magazine_content,magazine_thumb,magazine_hashtag) values (#{magazine_subject},now(),0,#{magazine_content},#{magazine_thumb},#{magazine_hashtag})

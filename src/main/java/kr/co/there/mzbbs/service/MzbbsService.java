@@ -8,6 +8,7 @@ import kr.co.there.mzbbs.model.entity.MzbbsVo;
 public interface MzbbsService {
 	List<MzbbsVo> list() throws SQLException;
 	MzbbsVo one(int param, boolean addViewCnt) throws SQLException;
+	int numLikes(int param) throws SQLException;
 	boolean add(MzbbsVo mzbean) throws SQLException;
 	boolean edit(MzbbsVo mzbean,boolean doesThumbChange) throws SQLException;
 	boolean remove(int param) throws SQLException;

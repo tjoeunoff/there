@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,34 @@
 $(document).ready(function() {
   $('#summernote').summernote();
 });
+
+function setThumbnail(event) {  //썸네일 이미지를 업로드하는 <input> 의 값이 변할 시 해당 함수 호출
+	for (var image of event.target.files) { 
+		var reader = new FileReader(); 
+
+		reader.onload = function(event) {
+			var doesImgtagAlreadyExist=true; //기존에 지정해 둔 썸네일이 있는지 여부를 기록해 둠
+			var thumbImage=$('#thumbImage');
+			if(thumbImage.length==0){
+				thumbImage=$('<img id="thumbImage" />');
+				doesImgtagAlreadyExist=false;
+			}
+			thumbImage.attr("src", event.target.result);
+			if(!doesImgtagAlreadyExist){
+				$('#imageContainer').append(thumbImage);
+			}
+		}; 
+			
+		//console.log(image); 
+		reader.readAsDataURL(image); 
+	} 
+}
 </script>
+<style>
+	#thumbImage{
+		width: 100%;
+	}
+</style>
 </head>
 <body>
 	<%@ include file="../template/header.jspf" %>
@@ -31,6 +59,12 @@ $(document).ready(function() {
             <form action="${pageContext.request.contextPath }/admin/magazine/${mzbean.magazine_idx}/update" method="POST" class="form-horizontal col-md-12" enctype="multipart/form-data">
                 <!-- <input type="hidden" name="_method" value="PUT"/> -->
                 <input type="hidden" name="magazine_idx" value="${mzbean.magazine_idx}" />
+                <div class="form-group">
+                	<div class="col-sm-4"></div>
+                	<div class="col-sm-2"><strong>조회수 👁️‍🗨️ ${mzbean.magazine_viewcnt}</strong></div>
+                	<div class="col-sm-2"><strong>좋아요수 ❤️ ${numLikes }</strong></div>
+        			<div class="col-sm-4"></div>
+                </div>
                 <div class="form-group">
                     <label for="magazine_subject" class="col-sm-2 control-label">매거진 제목</label>
                     <div class="col-sm-10">
@@ -78,8 +112,23 @@ $(document).ready(function() {
 					</script>
                 </div>
                 <div class="form-group">
-                    <label for="magazine_thumb" class="col-sm-2 control-label">썸네일 업로드</label>
-                    <input type="file" id="magazine_thumb" name="magazine_thumb" value="${mzbean.magazine_thumb }">
+                	<div>
+	                    <label for="magazine_thumb" class="col-sm-2 control-label">썸네일 업로드</label>
+	                    <input type="file" id="magazine_thumb" name="magazine_thumb" accept="image/gif, image/jepg, image/png" onchange="setThumbnail(event);" />
+                    </div>
+                    <div>
+                    	<div class="col-sm-1"></div>
+                		<div class="col-sm-11">(썸네일 업로드 항목이 '선택된 파일 없음' 인 경우 썸네일 변경 없이 기존의 썸네일을 유지합니다.)</div>
+                	</div>
+                    <div>
+                    	<div class="col-sm-4"></div>
+                    	<div class="col-sm-4"  id="imageContainer">
+                    		<c:if test="${mzbean.magazine_thumb ne '' }">
+                    		<img src="${imgPath }/magazine/${mzbean.magazine_thumb}" id="thumbImage"/>
+                    		</c:if>
+                    	</div>
+                    	<div class="col-sm-4"></div>
+                    </div>
                 </div>                   
 
                 <div class="form-group">
