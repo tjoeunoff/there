@@ -10,13 +10,15 @@ import kr.co.there.review.model.entity.ReviewVo;
 public interface PlaceService {
 
 	List<PlaceVo> list() throws SQLException;
-	PlaceVo One(int param, boolean addViewCnt) throws SQLException;
+	HashMap<String, Object> One(int param, boolean addViewCnt, boolean showReview) throws SQLException;
 	boolean add(PlaceVo bean) throws SQLException;
 	boolean edit(PlaceVo bean) throws SQLException;
 	boolean remove(int param) throws SQLException;
 
 	List<ReviewVo> reviewList() throws SQLException;
 	boolean addReveiw(ReviewVo bean) throws SQLException;
-	List<HashMap> OneIncludeReview(int param, boolean addViewCnt) throws SQLException;
+	
+	List<PlaceVo> listHome() throws SQLException;
+	
 }
 

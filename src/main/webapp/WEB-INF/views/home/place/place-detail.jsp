@@ -36,9 +36,9 @@
                             <p class="tags"><span>#성수 카페</span><span>#야간명소</span><span>#대형스크린</span><span>#성수핫플</span></p>  <!-- 장소 관련태그 -->
                             <ul>
                                 <li class="util-show">👁️‍🗨️ <span>${plbean.place_viewcnt }</span></li> <!-- span안에 조회수 넣기 -->
-                                <li class="util-like">❤️ <span>84</span></li> <!-- span안에 좋아요 수 넣기 / 클릭 시 바로 숫자 올라가야함  -->
-                                <li class="util-star">⭐ <span>4.6</span></li> <!-- span안에 평점 넣기 -->
-                                <li class="util-reivew">📝 <span>102</span></li> <!-- span안에 리뷰갯수 넣기 -->
+                                <li class="util-like">❤️ <span>${likeCnt }</span></li> <!-- span안에 좋아요 수 넣기 / 클릭 시 바로 숫자 올라가야함  -->
+                                <li class="util-star">⭐ <span>${scoreAvg }</span></li> <!-- span안에 평점 넣기 -->
+                                <li class="util-reivew">📝 <span>${reviewCnt }</span></li> <!-- span안에 리뷰갯수 넣기 -->
                                 <li><a href="">🔗</a></li> <!-- 공유하기 => 이부분은 시간여유 있으면 진행 -->
                             </ul>
                         </div>
@@ -65,8 +65,8 @@
                         </div>
 
                         <div class="place-review mb60">
-                            <h4>📝 다녀온 회원 리뷰 <span>102</span>개</h4>  <!-- span안에 리뷰갯수 넣기 -->
-                            <p>이 PLACE에 다녀온 사람들은 <strong>⭐<span>4.6</span></strong>만큼 만족했어요!</p> <!-- span안에 평점 넣기 -->
+                            <h4>📝 다녀온 회원 리뷰 <span>${reviewCnt }</span>개</h4>  <!-- span안에 리뷰갯수 넣기 -->
+                            <p>이 PLACE에 다녀온 사람들은 <strong>⭐<span>${scoreAvg }</span></strong>만큼 만족했어요!</p> <!-- span안에 평점 넣기 -->
                             <div class="review-list">
                                 <ul>
                                 	<c:forEach items="${rvlist }" var="rvbean">

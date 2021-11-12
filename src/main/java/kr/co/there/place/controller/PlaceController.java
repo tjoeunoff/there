@@ -37,7 +37,13 @@ public class PlaceController {
 
 	@GetMapping("/admin/place/{place_idx}")
 	public String detail(@PathVariable("place_idx") int place_idx, Model model) throws SQLException {
-		model.addAttribute("plbean", placeService.One(place_idx, false));
+		HashMap<String, Object> map = new HashMap<>();
+		map = placeService.One(place_idx, false, false);
+		model.addAttribute("likeCnt", map.get("likeCnt"));
+		model.addAttribute("reviewCnt", map.get("reviewCnt"));
+		model.addAttribute("plbean", map.get("placeInfo"));
+		model.addAttribute("scoreAvg", map.get("scoreAvg"));
+		
 		return "/admin/place/admin_place_detail";
 	}
 	
@@ -54,7 +60,7 @@ public class PlaceController {
 	
 	@GetMapping("/admin/place/form/{place_idx}")
 	public String moveEditPage(@PathVariable("place_idx") int place_idx, Model model) throws SQLException {
-		model.addAttribute("plbean", placeService.One(place_idx, false));
+		model.addAttribute("plbean", placeService.One(place_idx, false, false));
 		return "/admin/place/admin_place_edit";
 	}
 	
@@ -81,7 +87,7 @@ public class PlaceController {
 	// ===== home page =====
 	@GetMapping("/categroy")
 	public String showCategoryPage(Model model) throws SQLException {
-		model.addAttribute("list",placeService.list());
+		model.addAttribute("list", placeService.listHome());
 		return "/home/place/place-by-category";
 	}
 	
@@ -92,12 +98,16 @@ public class PlaceController {
 	
 	@GetMapping("/place/{place_idx}")
 	public String showPlaceDetailPage(@PathVariable("place_idx") int place_idx, Model model) throws SQLException {
-		List<HashMap> list = new ArrayList<>();
-		list = placeService.OneIncludeReview(place_idx, true);
+		HashMap<String, Object> map = new HashMap<>();
+		map = placeService.One(place_idx, false, true);
+		model.addAttribute("plbean", map.get("placeInfo"));
+		model.addAttribute("rvlist", map.get("reviewList"));
+		model.addAttribute("likeCnt", map.get("likeCnt"));
+		model.addAttribute("reviewCnt", map.get("reviewCnt"));
+		model.addAttribute("scoreAvg", map.get("scoreAvg"));
 		
-		model.addAttribute("plbean", list.get(0).get(place_idx));
-		model.addAttribute("rvlist", list.get(1).get(place_idx));		
-
+		System.out.println(map.get("placeInfo"));
+		
 		return "/home/place/place-detail";
 	}
 	

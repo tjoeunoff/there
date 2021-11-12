@@ -54,7 +54,7 @@
                                 </div>
                                 <ul>
                                     <li class="util-show">👁️‍🗨️ <span>${plbean.place_viewcnt }</span></li>
-                                    <li class="util-like">❤️ <span>84</span></li>
+                                    <li class="util-like">❤️ <span>${plbean.placeLikeCnt }</span></li>
                                 </ul>
                             </a>
                         </div>
