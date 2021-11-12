@@ -5,22 +5,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="kr.co.there.place.model.PlaceDao">
-
-<!-- 구현 중 
-	<resultMap type="PlaceLikesVo" id="PlaceLikesVo">
-		<result column="placelikes_placeidx" property="placelikes_placeidx" />
-	</resultMap>
-
-	<resultMap type="PlaceVo" id="PlaceVo">
-		<result column="place_idx" property="place_idx" />
-		<result column="place_name" property="place_name" />
-		<result column="place_hashtag" property="place_hashtag" />
-		<result column="place_thumb" property="place_thumb" />
-		<result column="place_viewcnt" property="place_viewcnt" />
-		<collection property="adminInfoVO" resultMap="AdminInfoVO" />
-	</resultMap>
--->
+<mapper namespace="kr.co.there.place.model.PlaceDao">	
 
 	<!-- PALCE CRUD -->
 	<select id="selectAll" resultType="plbean">
@@ -50,15 +35,11 @@
 	delete from place where place_idx=#{val}
 	</delete>
 	
-	
-	<select id="selectHomePlaceList" resultType="plbean">
-	select pl.place_idx, pl.place_name, pl.place_hashtag, pl.place_thumb, pl.place_viewcnt, count(bb.placelikes_placeidx) as likes 
-	from place as pl left join placelikes as bb on pl.place_idx = bb.placelikes_placeidx group by pl.place_idx order by place_idx desc
+	<select id="selectAllHome" resultType="plbean">
+	select pl.place_idx as place_idx, pl.place_name as place_name, pl.place_hashtag as place_hashtag, pl.place_viewcnt as place_viewcnt, pl.place_thumb as place_thumb, pl.place_category as place_category, count(bb.placelikes_placeidx) as placeLikeCnt 
+	from place as pl left join placelikes as bb on pl.place_idx = bb.placelikes_placeidx group by pl.place_idx order by pl.place_idx desc;
 	</select>
-	
-	
-	
-	
+		
 	
 	<!-- REVIEW -->
 	<select id="selectReviewAll" resultType="rvbean">
@@ -88,6 +69,10 @@
 	select count(*) from review where review_placeidx=#{val} 
 	</select>
 	
+	<select id="avgScore" resultType="double">
+	select ifnull(avg(review_score), 0) from review where review_placeidx=#{val}
+	</select>
+	
 	
 	<!-- LIKE -->
 	<update id="insertLike" parameterType="rvbean">
@@ -101,6 +86,7 @@
 	<select id="countLike" resultType="int">
 	select count(*) from placelikes where placelikes_placeidx=#{val} 
 	</select>
+
 	
 
 </mapper>

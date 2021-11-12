@@ -56,7 +56,9 @@ $(function(){
         <div class="place-detail-table">
         	<div>
         		<strong>조회수 👁️‍🗨️ ${plbean.place_viewcnt}</strong>
-        		<strong>좋아요수 ❤️ 0</strong>
+        		<strong>좋아요수 ❤️ ${likeCnt }</strong>
+        		<strong>리뷰수 📝 ${reviewCnt }</strong>
+        		<strong>평점 ⭐ ${scoreAvg }</strong>
         	</div>
        		<div>
        			<span>카테고리</span>

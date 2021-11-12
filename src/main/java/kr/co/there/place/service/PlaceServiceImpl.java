@@ -31,14 +31,21 @@ public class PlaceServiceImpl implements PlaceService {
 	}
 
 	@Override
-	public PlaceVo One(int param, boolean addViewCnt) throws SQLException {
+	public HashMap<String, Object> One(int param, boolean addViewCnt, boolean showReview) throws SQLException {
 		try(
 				SqlSession sqlSession = sqlSessionFactory.openSession();
 			){
 				PlaceDao placeDao = sqlSession.getMapper(PlaceDao.class);
 				if(addViewCnt) placeDao.updateViewCnt(param);
+	
+				HashMap<String, Object> map = new HashMap<>();
+				map.put("likeCnt", placeDao.countLike(param));
+				map.put("reviewCnt", placeDao.countReview(param));
+				map.put("placeInfo", placeDao.selectOne(param));
+				map.put("scoreAvg", placeDao.avgScore(param));
+				if(showReview) map.put("reviewList", placeDao.selectReviewbyPlace(param));
 				
-				return placeDao.selectOne(param);
+				return map;
 		}
 	}
 
@@ -96,26 +103,34 @@ public class PlaceServiceImpl implements PlaceService {
 		}
 	}
 
-	@Override
-	public List<HashMap> OneIncludeReview(int param, boolean addViewCnt) throws SQLException {
+
+	public HashMap<String, Object> OneIncludeReview(int param, boolean addViewCnt) throws SQLException {
 		try(
 				SqlSession sqlSession = sqlSessionFactory.openSession();
 			){
 				PlaceDao placeDao = sqlSession.getMapper(PlaceDao.class);
-				if(addViewCnt) placeDao.updateViewCnt(param);	
+				if(addViewCnt) placeDao.updateViewCnt(param);
 				
-				HashMap<Integer, PlaceVo> placeVo = new HashMap<>();
-				HashMap<Integer, List<ReviewVo>> listReviewVo = new HashMap<>();
-				List<HashMap> list = new ArrayList<>();
+				HashMap<String, Object> map = new HashMap<>();
+				map.put("likeCnt", placeDao.countLike(param));
+				map.put("reviewCnt", placeDao.countReview(param));
+				map.put("placeInfo", placeDao.selectOne(param));
+				map.put("reviewList", placeDao.selectReviewbyPlace(param));
+				map.put("scoreAvg", placeDao.avgScore(param));
 				
-				placeVo.put(param, placeDao.selectOne(param));
-				list.add(placeVo);
-				
-				listReviewVo.put(param, placeDao.selectReviewbyPlace(param));	
-				list.add(listReviewVo);
-				
-				return list;
+				return map;
 		}
+	}
+
+
+	@Override
+	public List<PlaceVo> listHome() throws SQLException {
+		try(
+				SqlSession sqlSession = sqlSessionFactory.openSession();
+			){
+				PlaceDao placeDao = sqlSession.getMapper(PlaceDao.class);
+				return placeDao.selectAllHome();
+			}
 	}
 
 
