@@ -33,7 +33,7 @@ var setting = {
         }
      };
     $('#summernote').summernote(setting);
-    });
+//    });
     
     function uploadSummernoteImageFile(file, el) {
 		data = new FormData();
@@ -50,7 +50,35 @@ var setting = {
 			}
 		});
 	}
+
+    function setThumbnail(event) {  //썸네일 이미지를 업로드하는 <input> 의 값이 변할 시 해당 함수 호출
+    	for (var image of event.target.files) { 
+    		var reader = new FileReader(); 
+
+    		reader.onload = function(event) {
+    			var doesImgtagAlreadyExist=true; //기존에 지정해 둔 썸네일이 있는지 여부를 기록해 둠
+    			var thumbImage=$('#thumbImage');
+    			if(thumbImage.length==0){
+    				thumbImage=$('<img id="thumbImage" />');
+    				doesImgtagAlreadyExist=false;
+    			}
+    			thumbImage.attr("src", event.target.result);
+    			if(!doesImgtagAlreadyExist){
+    				console.log(4);
+    				$('#imageContainer').append(thumbImage);
+    			}
+    		}; 
+    			
+    		//console.log(image); 
+    		reader.readAsDataURL(image); 
+    	} 
+    }
 </script>
+<style>
+	#thumbImage{
+		width: 100%;
+	}
+</style>
 </head>
 <body>
 	<%@ include file="../template/header.jspf" %>
@@ -116,8 +144,13 @@ var setting = {
                 </div>
                 <div class="form-group">
                     <label for="magazine_thumb" class="col-sm-2 control-label">썸네일 업로드</label>
-                    <input type="file" id="magazine_thumb" name="magazine_thumb">
-                </div>                   
+                    <input type="file" id="magazine_thumb" name="magazine_thumb" accept="image/gif, image/jepg, image/png" onchange="setThumbnail(event);" />
+                </div>
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4"  id="imageContainer"></div>
+                    <div class="col-sm-4"></div>
+                </div>
 
                 <div class="form-group">
                     <label for="magazine_hashtag" class="col-sm-2 control-label">해시태그</label>

@@ -3,6 +3,8 @@ package kr.co.there.mzbbs.controller;
 import java.io.File;
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.there.mzbbs.model.entity.MzbbsVo;
@@ -22,8 +26,6 @@ import kr.co.there.mzbbs.service.MzbbsService;
 public class MzbbsController {
 	@Autowired
 	MzbbsService mzbbsService;
-							//TODO 파일 경로 설정
-    private String path = "D:\\DockerAws\\framework\\upload";
 
 	@GetMapping(value = "")
 	public String list(Model model) throws Exception {
@@ -34,12 +36,14 @@ public class MzbbsController {
 	@GetMapping("/{magazine_idx}")
 	public String detail(@PathVariable("magazine_idx") int magazine_idx, Model model) throws SQLException {
 		model.addAttribute("mzbean", mzbbsService.one(magazine_idx, false));
+		model.addAttribute("numLikes",mzbbsService.numLikes(magazine_idx));
 		return "/admin/magazine/magazineDetail";
 	}
 
 	//PUT 방법으로는 파일을 입력할 수 없다.
 	@PostMapping("/{magazine_idx}/update")
-	public String edit(MultipartFile magazine_thumb,@PathVariable int magazine_idx, String magazine_subject,String magazine_content,String magazine_hashtag) throws Exception {
+	public String edit(MultipartFile magazine_thumb,@PathVariable int magazine_idx, String magazine_subject,String magazine_content,String magazine_hashtag, HttpServletRequest req) throws Exception {
+		String path=req.getRealPath("")+"resources\\img\\magazine\\";
 		String origin=magazine_thumb.getOriginalFilename();
 		MzbbsVo mzbean=new MzbbsVo();
 		mzbean.setMagazine_idx(magazine_idx);
@@ -73,7 +77,8 @@ public class MzbbsController {
 	}
 
 	@PostMapping(value = "")
-	public String magazineInsert(MultipartFile magazine_thumb,String magazine_subject,String magazine_content,String magazine_hashtag) throws Exception {
+	public String magazineInsert(MultipartFile magazine_thumb,String magazine_subject,String magazine_content,String magazine_hashtag,HttpServletRequest req) throws Exception {
+		String path=req.getRealPath("")+"resources\\img\\magazine\\";
 		String origin=magazine_thumb.getOriginalFilename();
 		String rename=origin;
 		if( !("".equals(origin)) ) { //입력한 섬네일 파일이 존재한다면-
