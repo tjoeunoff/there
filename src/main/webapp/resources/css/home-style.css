@@ -174,8 +174,8 @@
 .bbs-view-wrap .view-foot {border-top: 1px solid #eaeaea; padding: 20px 0;}
 .bbs-view-wrap .list-nav-btns {display: flex; justify-content: space-between; font-size: 18px;}
 .bbs-view-wrap .list-nav-btns li a {position: relative; display: block; background: #f7f7f7; padding: 10px 20px; border-radius: 10px;}
-.bbs-view-wrap .list-nav-btns li:first-child a:before {content: '�윉�'; display: inline-block; margin-right: 10px; transform: translate(0,-4px);}
-.bbs-view-wrap .list-nav-btns li:last-child a:after {content: ' �윉�'; display: inline-block; margin-left: 10px; transform: translate(0,-4px);}
+.bbs-view-wrap .list-nav-btns li:first-child a:before {content: '👈'; display: inline-block; margin-right: 10px; transform: translate(0,-4px);}
+.bbs-view-wrap .list-nav-btns li:last-child a:after {content: '👉'; display: inline-block; margin-left: 10px; transform: translate(0,-4px);}
 
 
 

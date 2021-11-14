@@ -64,18 +64,18 @@
                     </div>
                 </div>
            <!-- 회원가입 입력 -->
-           <form class="form-horizontal">
+    <form class="form-horizontal" method="post">
         <div class="form-group">
             <label for="inputId3" class="col-sm-2 control-label">아이디</label>
             <div class="col-sm-5">
-                <input type="text" class="form-control" id="inputId3" placeholder="중복확인필수">
+                <input type="text" name="member_id" pattern=".{1,16}" class="form-control" id="inputId3" placeholder="중복확인필수">
             </div>
             <button type="button" class="btn btn-primary col-sm-1" id="inputIdConfirm3">확인</button>
         </div>
         <div class="form-group">
             <label for="inputPassword3" class="col-sm-2 control-label">비밀번호</label>
             <div class="col-sm-5">
-                <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                <input type="password" name="member_pw" pattern=".{1,16}" class="form-control" id="inputPassword3" placeholder="Password">
             </div>
         </div>
         <div class="form-group">
@@ -91,30 +91,25 @@
         <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label">이메일</label>
             <div class="col-sm-2">
-                <input type="text" class="form-control" id="inputEmail3" placeholder="주소만 입력">
-            </div> @
-            <select name="address" id="address-select">
-                <option value="naver">naver.com</option>
-                <option value="daum">daum.net</option>
-                <option value="googel">gmail.com</option>
-            </select>
+                <input type="text" name="member_email" pattern=".{1,32}" class="form-control" id="inputEmail3" placeholder="주소만 입력">
+            </div>
         </div>
         <div class="form-group">
             <label for="inputName3" class="col-sm-2 control-label">이름</label>
             <div class="col-sm-5">
-                <input type="text" class="form-control" id="inputName3" placeholder="이름">
+                <input type="text" name="member_name" pattern=".{1,16}" class="form-control" id="inputName3" placeholder="이름">
             </div>
         </div>
         <div class="form-group">
             <label for="inputCellNum3" class="col-sm-2 control-label">전화번호</label>
             <div class="col-sm-5">
-                <input type="text" class="form-control" id="inputCellNum3" placeholder="전화번호">
+                <input type="text" class="form-control" pattern=".{1,16}" id="inputCellNum3" placeholder="전화번호" name="member_tel" />
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button type="submit" class="btn btn-primary" id="completionBtn">완료</button>
-                <button type="submit" class="btn btn-defalut"><a href="/member/login.html">돌아가기</a></button>
+                <button type="button" class="btn btn-defalut" onclick="history.back();">돌아가기</button>
             </div>
         </div>
 

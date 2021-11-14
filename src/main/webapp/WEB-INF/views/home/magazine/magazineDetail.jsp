@@ -10,8 +10,10 @@
 <%@ include file="../template/include.jspf" %>
 <script type="text/javascript">
 $(document).ready(function(){
-	var contextPath=window.location.href.split('/')[window.location.href.split('/').length-3];
-	var magazine_idx=window.location.href.split('/')[window.location.href.split('/').length-1];
+	//var contextPath=window.location.href.split('/')[window.location.href.split('/').length-3];
+	//var magazine_idx=window.location.href.split('/')[window.location.href.split('/').length-1];
+	var magazine_idx=${mzbean.magazine_idx};
+	var member_id='${mbrbean.member_id}';
 	$('#likeButton').click(function(){
 		$.post("./likes/"+magazine_idx,{
 			magazine_idx: magazine_idx,
@@ -27,11 +29,8 @@ $(document).ready(function(){
 				var numLikes=parseInt($('#numLikes').text());
 				$('#numLikes').text(numLikes-1);
 			}
-			
 		})
-		
 	});
-	
 });
 </script>
 <style>
@@ -61,7 +60,6 @@ $(document).ready(function(){
                 </div>
             </div>
             <!-- // top-banr-sect -->
-
 
             <div class="bbs-view-wrap">
                 <div class="container">
@@ -156,8 +154,10 @@ $(document).ready(function(){
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <!-- 로그인O 시 -->
+                    
                     <h4 class="modal-title" id="myModalLabel">❤️ + 1</h4>
                     <p>이 게시글을 좋아합니다.</p>
+                    
                     <!-- // 로그인O 시 -->
 
                     <!-- 로그인X 시 -->

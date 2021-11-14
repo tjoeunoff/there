@@ -11,4 +11,25 @@
 	select * from member order by member_idx desc
 	</select>
 	
+	<select id="selectOne" resultType="mbrbean">
+	select * from member where member_id=#{val}
+	</select>
+	
+	<update id="insertOne" parameterType="mbrbean">
+	insert into member (member_id, member_pw, member_name, member_pwans, member_tel, member_email) 
+	values (#{member_id}, #{member_pw}, #{member_name}, #{member_pwans}, #{member_tel}, #{member_email})
+	</update>
+	
+	<update id="updateOne" parameterType="mbrbean">
+	update member set member_pw=#{member_pw},member_name=#{member_name},member_tel=#{member_tel},member_email=#{member_email} where member_id=#{member_id}
+	</update>
+	
+	<update id="deleteOne" parameterType="mbrbean">
+	update member set member_state=1 where member_id=#{val}
+	</update>
+	
+	<select id="myMzList" resultType="mzbean">
+	select * from magazine where magazine_idx IN (select * from (select mzlikes_magazine_idx AS magazine_idx from mzlikes where mzlikes_memberid=#{val} order by malikes_date desc) AS orgin)
+	</select>
+	
 </mapper>
