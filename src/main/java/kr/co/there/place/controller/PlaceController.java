@@ -60,7 +60,10 @@ public class PlaceController {
 	
 	@GetMapping("/admin/place/form/{place_idx}")
 	public String moveEditPage(@PathVariable("place_idx") int place_idx, Model model) throws SQLException {
-		model.addAttribute("plbean", placeService.One(place_idx, false, false));
+		HashMap<String, Object> map = new HashMap<>();
+		map = placeService.One(place_idx, false, false);
+		model.addAttribute("plbean", map.get("placeInfo"));
+		
 		return "/admin/place/admin_place_edit";
 	}
 	

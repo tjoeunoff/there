@@ -174,8 +174,8 @@
 .bbs-view-wrap .view-foot {border-top: 1px solid #eaeaea; padding: 20px 0;}
 .bbs-view-wrap .list-nav-btns {display: flex; justify-content: space-between; font-size: 18px;}
 .bbs-view-wrap .list-nav-btns li a {position: relative; display: block; background: #f7f7f7; padding: 10px 20px; border-radius: 10px;}
-.bbs-view-wrap .list-nav-btns li:first-child a:before {content: '👈'; display: inline-block; margin-right: 10px; transform: translate(0,-4px);}
-.bbs-view-wrap .list-nav-btns li:last-child a:after {content: ' 👉'; display: inline-block; margin-left: 10px; transform: translate(0,-4px);}
+.bbs-view-wrap .list-nav-btns li:first-child a:before {content: '�윉�'; display: inline-block; margin-right: 10px; transform: translate(0,-4px);}
+.bbs-view-wrap .list-nav-btns li:last-child a:after {content: ' �윉�'; display: inline-block; margin-left: 10px; transform: translate(0,-4px);}
 
 
 
@@ -355,8 +355,8 @@
 .place-view-wrap .view-foot {border-top: 1px solid #eaeaea; padding: 20px 0;}
 .place-view-wrap .list-nav-btns {display: flex; justify-content: space-between; font-size: 18px;}
 .place-view-wrap .list-nav-btns li a {position: relative; display: block; background: #f7f7f7; padding: 10px 20px; border-radius: 10px;}
-.place-view-wrap .list-nav-btns li:first-child a:before {content: '👈'; display: inline-block; margin-right: 10px; transform: translate(0,-4px);}
-.place-view-wrap .list-nav-btns li:last-child a:after {content: ' 👉'; display: inline-block; margin-left: 10px; transform: translate(0,-4px);}
+.place-view-wrap .list-nav-btns li:first-child a:before {content: '�윉�'; display: inline-block; margin-right: 10px; transform: translate(0,-4px);}
+.place-view-wrap .list-nav-btns li:last-child a:after {content: ' �윉�'; display: inline-block; margin-left: 10px; transform: translate(0,-4px);}
 
 #reviewWriteModal .select-star {position: relative; display: flex;overflow: hidden; width: 150px; height: 36px;}
 #reviewWriteModal .select-star:after {
@@ -401,7 +401,8 @@
 
 
 /* PAGE : mypage */
-.mypage-page .tit-sect {padding: 100px 0 60px;}
+.mypage-page .tit-sect,
+.login-page .tit-sect {padding: 100px 0 60px;}
 
 .my-info-sect {background: #e7ebf1; padding: 60px 0;}
 .my-info-sect .container > div {display: flex; justify-content: center;}
@@ -450,6 +451,29 @@
 .my-reviews .review-list ul li {padding: 20px 10px; font-size: 16px;}
 .my-reviews .review-list ul li + li {border-top: 1px solid #eaeaea;}
 .my-reviews .review-list ul li p {margin-top: 20px;}
+
+
+
+/* PAGE : login */
+.login-box {
+	width: 86%;
+	max-width: 600px; 
+	margin: 0 auto; 
+	border: 1px solid  #c6c6c6; 
+	border-radius: 10px;
+	padding: 40px;
+	font-size: 16px;
+}
+#loginForm > div {display: flex; border: 1px solid #eee; border-radius: 5px; padding: 15px 20px;}
+#loginForm > div + div {margin-top: 10px;}
+#loginForm > div:last-child {border: 0; padding: 0; margin-top: 30px;}
+#loginForm > div:last-child .abtn.abtn-mint {display: block; width: 100%; font-size: 16px; padding: 15px; margin: 0;}
+#loginForm > div label {margin-right: 10px;}
+#loginForm input {font-size: 16px; border: 0; box-shadow: none;}
+#loginForm input:focus {outline: none;}
+
+
+
 
 
 
