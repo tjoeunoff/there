@@ -51,7 +51,7 @@ public class MzbbsController {
 		mzbean.setMagazine_content(magazine_content);
 		mzbean.setMagazine_hashtag(magazine_hashtag);
 		if("".equals(origin)) mzbbsService.edit(mzbean, false); //입력한 섬네일 파일이 없다면 (섬네일을 유지하는 경우)
-		else {
+		else { //입력한 섬네일 파일이 있다면 (섬네일을 갱신하는 경우)
 			String rename=System.currentTimeMillis()+"_"+origin;
 			mzbean.setMagazine_thumb(rename);
 			mzbbsService.edit(mzbean, true);
@@ -61,7 +61,7 @@ public class MzbbsController {
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
-		} //입력한 섬네일 파일이 있다면 (섬네일을 갱신하는 경우)
+		}
 		return "redirect:/admin/magazine";
 	}
 
