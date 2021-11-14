@@ -27,6 +27,18 @@
 	<update id="insertOne" parameterType="mzbean">
 	insert into magazine (magazine_subject,magazine_date,magazine_viewcnt,magazine_content,magazine_thumb,magazine_hashtag) values (#{magazine_subject},now(),0,#{magazine_content},#{magazine_thumb},#{magazine_hashtag})
 	</update>
+	
+	<select id="hasLiked" resultType="int">
+	SELECT COUNT(*) FROM mzlikes WHERE mzlikes_memberid=#{member_id} AND mzlikes_magazineidx=#{magazine_idx}
+	</select>
+	
+	<update id="likeAdd">
+	INSERT INTO mzlikes (mzlikes_memberid,mzlikes_magazineidx,mzlikes_date) VALUES (#{member_id},#{magazine_idx},now())
+	</update>
+	
+	<delete id="likeSub">
+	DELETE FROM mzlikes WHERE mzlikes_memberid=#{member_id} AND mzlikes_magazineidx=#{magazine_idx}
+	</delete>
 
 	<update id="updateOne" parameterType="mzbean">
 	update magazine set magazine_subject=#{magazine_subject}, magazine_content=#{magazine_content}, magazine_thumb=#{magazine_thumb}, magazine_hashtag=#{magazine_hashtag} where magazine_idx=#{magazine_idx}

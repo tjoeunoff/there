@@ -37,7 +37,7 @@
                         <div class="list-item col-sm-6 col-md-4">
                             <a href="${pageContext.request.contextPath }/magazine/${mzbean.magazine_idx }">
                                 <div class="thumb">
-                                    <div class="thumb-img" style="background-image: url(${imgPath }/magazine/${mzbean.magazine_thumb});"></div>  <!-- 게시글 썸네일 -->
+                                    <div class="thumb-img" style="background-image: url(${pageContext.request.contextPath }/resources/img/magazine/${mzbean.magazine_thumb});"></div>  <!-- 게시글 썸네일 -->
                                     <span>VIEW MORE</span>
                                 </div>
                                 <div class="caption">

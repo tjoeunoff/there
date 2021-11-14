@@ -129,6 +129,34 @@ public class MzbbsServiceImpl implements MzbbsService {
 		}
 		return idxList.get(0);
 	}
+	
+	@Override
+	public boolean hasLiked(String member_id, int magazine_idx) throws SQLException { //해당 회원이 해당 매거진에 좋아요를 눌렀는지 확인하는 메서드
+		try(
+				SqlSession sqlSession=sqlSessionFactory.openSession();
+				){
+				MzbbsDao mzbbsDao=sqlSession.getMapper(MzbbsDao.class);
+				return mzbbsDao.hasLiked(member_id, magazine_idx)!=0;
+		}
+	}
+	
+	@Override
+	public boolean clickLike(String member_id, int magazine_idx) throws SQLException {
+		boolean hasLiked=hasLiked(member_id,magazine_idx); //지금 좋아요를 누른 상태인지 점검
+		try(
+				SqlSession sqlSession=sqlSessionFactory.openSession();
+				){
+				MzbbsDao mzbbsDao=sqlSession.getMapper(MzbbsDao.class);
+				if(hasLiked) {
+					mzbbsDao.likeSub(member_id, magazine_idx);
+					return false; //좋아요를 취소하는 경우 false 반환
+				}
+				else {
+					mzbbsDao.likeAdd(member_id, magazine_idx);
+					return true; //좋아요를 추가하는 경우 true 반환
+				}	
+		}
+	}
 
 	@Override
 	public boolean add(MzbbsVo mzbean) throws SQLException {

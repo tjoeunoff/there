@@ -9,50 +9,43 @@
     <title>Document</title>
 <%@ include file="../template/include.jspf" %>
 <script type="text/javascript">
-var bbsidx = ${bbsidx};
-var useridx = ${useridx};
- 
-var btn_like = document.getElementById("btn_like");
- btn_like.onclick = function(){ changeHeart(); }
- 
-/* 좋아요 버튼 눌렀을떄 */
- function changeHeart(){ 
-     $.ajax({
-            type : "POST",  
-            url : "/clickLike",       
-            dataType : "json",   
-            data : "bbsidx="+bbsidx+"&useridx="+useridx,
-            error : function(){
-                Rnd.alert("통신 에러","error","확인",function(){});
-            },
-            success : function(jdata) {
-                if(jdata.resultCode == -1){
-                    Rnd.alert("좋아요 오류","error","확인",function(){});
-                }
-                else{
-                    if(jdata.likecheck == 1){
-                        $("#btn_like").attr("src","/home/img/ico_like_after.png");
-                        $("#likecnt").empty();
-                        $("#likecnt").append(jdata.likecnt);
-                    }
-                    else if (jdata.likecheck == 0){
-                        $("#btn_like").attr("src","/home/img/ico_like_before.png");
-                        $("#likecnt").empty();
-                        $("#likecnt").append(jdata.likecnt);
-                        
-                    }
-                }
-            }
-        });
- }
+$(document).ready(function(){
+	var contextPath=window.location.href.split('/')[window.location.href.split('/').length-3];
+	var magazine_idx=window.location.href.split('/')[window.location.href.split('/').length-1];
+	$('#likeButton').click(function(){
+		$.post("./likes/"+magazine_idx,{
+			magazine_idx: magazine_idx,
+			member_id: "user01"	
+		},function(data){
+			if(data){
+				$('#likeButton').text("이 포스팅 좋아요 ❤️");
+				var numLikes=parseInt($('#numLikes').text());
+				$('#numLikes').text(numLikes+1);
+			}
+			else{
+				$('#likeButton').text("이 포스팅 좋아요 🤍");
+				var numLikes=parseInt($('#numLikes').text());
+				$('#numLikes').text(numLikes-1);
+			}
+			
+		})
+		
+	});
+	
+});
 </script>
+<style>
+#clear{
+	clear:both;
+}
+</style>
 </head>
 <body>
 <%@ include file="../template/header.jspf" %>
 
     <main class="magazine-page magazine-view-page">
         <div class="content-wrap">
-            <div class="top-banr-sect" style="background-image: url(../img/magazine/wm_img01.jpg);"> <!-- 각 view페이지는 게시글작성 시 등록한 썸네일이 배경이미지로 들어감 -->
+            <div class="top-banr-sect" style="background-image: url(${pageContext.request.contextPath }/resources/img/magazine/${mzbean.magazine_thumb});"> <!-- 각 view페이지는 게시글작성 시 등록한 썸네일이 배경이미지로 들어감 -->
                 <div class="container">
                     <ol class="breadcrumb">
                         <li><a href="#">Home</a></li>
@@ -76,26 +69,14 @@ var btn_like = document.getElementById("btn_like");
                         <h3>${mzbean.magazine_subject }</h3>  <!-- 게시글 제목 -->
                         <p><span>${mzbean.magazine_hashtag }</span></p>  <!-- 게시글 관련태그 -->
                         <div class="view-util">
-                            <p>작성일&nbsp;&nbsp;&nbsp;<span class="date">${mzbean.magazine_date.getYear()+1900}.${mzbean.magazine_date.getMonth()+1 }.${mzbean.magazine_date.getDate() }</span></p>  <!-- 게시글 작성일 -->
                             <ul>
                                 <li class="util-show">👁️‍🗨️ <span>${mzbean.magazine_viewcnt }</span></li> <!-- span안에 조회수 넣기 -->
                                 <li class="util-like">
-                                	<!-- 
-	                                <c:choose>
-	                                <c:when test="${mzlikes_check eq '0' or empty mzlikes_check }">
-	                                	<img src="${pageContext.request.contextPath }/resources/img/magazine/empty_heart.png"
-	                                		id="btn_like" align="left" style="cursor:pointer; width: 20px;"/>
-									</c:when>
-									<c:otherwise>
-										<img src="${pageContext.request.contextPath }/resources/img/magazine/full_heart.png"
-											id="btn_like" align="left" style="cursor:pointer; width: 20px;"/>
-									</c:otherwise>
-									</c:choose>
-									 --> 
-									❤️<span>${mzNumlikes }</span>
+									❤️<span id="numLikes">${mzNumlikes }</span>
                                 </li> <!-- span안에 좋아요 수 넣기 / 클릭 시 바로 숫자 올라가야함  -->
                                 <li class="share"><a href="">🔗</a></li> <!-- 공유하기 => 이부분은 시간여유 있으면 진행 -->
                             </ul>
+                            <p>작성일&nbsp;&nbsp;&nbsp;<span class="date">${mzbean.magazine_date.getYear()+1900}.${mzbean.magazine_date.getMonth()+1 }.${mzbean.magazine_date.getDate() }</span></p>  <!-- 게시글 작성일 -->
                         </div>
                     </div>
 
@@ -105,8 +86,17 @@ var btn_like = document.getElementById("btn_like");
                         <!-- // 게시글 등록시 입력한 내용 -->
                     </div>
 
-                    <div class="bbs-action mb40">
-                        <button type="button" class="" data-toggle="modal" data-target="#likeModal">이 포스팅 좋아요 🤍</button>
+                    <div class="bbs-action mb40" id="clear">
+                        <button type="button" class="" data-toggle="modal" data-target="#likeModal" id="likeButton">
+                        	<c:choose>
+                        		<c:when test="${mzHasliked }">
+                        			이 포스팅 좋아요 ❤️
+                        		</c:when>
+                        		<c:otherwise>
+                        			이 포스팅 좋아요 🤍
+                        		</c:otherwise>
+                        	</c:choose>      
+                        </button>
                         <button>공유하기🔗</button>
                     </div>
 
