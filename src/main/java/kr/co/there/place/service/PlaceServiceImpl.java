@@ -42,7 +42,11 @@ public class PlaceServiceImpl implements PlaceService {
 				map.put("likeCnt", placeDao.countLike(param));
 				map.put("reviewCnt", placeDao.countReview(param));
 				map.put("placeInfo", placeDao.selectOne(param));
-				map.put("scoreAvg", placeDao.avgScore(param));
+				
+				double scoreAvg = placeDao.avgScore(param);
+				scoreAvg = Math.round(scoreAvg*10) / 10.0;
+				map.put("scoreAvg", scoreAvg);
+				
 				if(showReview) map.put("reviewList", placeDao.selectReviewbyPlace(param));
 				
 				return map;

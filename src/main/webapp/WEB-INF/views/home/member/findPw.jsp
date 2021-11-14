@@ -5,32 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%@ include file="../template/include.jspf" %>
 </head>
 <body>
-    <header id="header">
-        <div class="head-inner">
-            <h1 class="logo"><a href="../index.html"></a></h1>
-            <div class="util-box">
-                <ul>
-                    <li><a class="abtn abtn-gray" href="../member/join.html">회원가입</a></li>
-                    <li><a class="abtn abtn-mint" href="../member/login.html">로그인</a></li>
-                </ul>
-            </div>
-        </div>
-    </header>
-    <!-- // header -->
-    
-    <nav id="gnb">
-        <ul>
-            <li><a href="../magazine/magazine_list.html">매거진</a></li>
-            <li><a href="../places/place-by-loc.html">지역별</a></li>
-            <li><a href="../places/palce-by-cate.html">카테고리별</a></li>
-        </ul>
-    </nav>
-    <!-- // nav -->
+<%@ include file="../template/header.jspf" %>
 
 
-    <main class="mypage-page">
+    <main class="login-util-page">
         <div class="content-wrap">
                 <div class="tit-sect tac">
                     <div class="container">
@@ -104,5 +85,7 @@
             } 
         });
 </script>
+
+<%@ include file="../template/footer.jspf" %>
 </body>
 </html>

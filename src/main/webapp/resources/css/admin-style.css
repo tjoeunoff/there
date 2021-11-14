@@ -7,7 +7,7 @@
 #nomargin{margin:0px;}
 
 
-/* place ÆäÀÌÁöµé ½ºÅ¸ÀÏ */
+/* place ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ */
 .place-detail-table {margin-top: 40px;}
 .place-detail-table > div {
 	display: flex; 
@@ -36,4 +36,5 @@
 	margin: 30px 0 80px;
 }
 
-
+.thumb-box {max-width: 300px; margin-top: 20px; text-align: right; border: 0 !important;}
+.thumb-box img {max-width: 100%;}

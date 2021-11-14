@@ -33,3 +33,12 @@
 
 /*컨텐츠영역*/
 .admin_contents{width:83.5%; padding-left:1.5%; max-width:100%; float:left;}
+
+
+/* button style */
+.abtn {display: inline-block; padding: 7px 10px; border-radius: 4px; font-size: 14px; font-weight: 500; margin: 0 6px; transition: all .3s;}
+.abtn.big {padding: 8px 30px; font-size: 15px; margin: 0 auto;}
+.abtn.abtn-mint {background: #06b2bb; color: #fff; border: 2px solid #06b2bb;}
+.abtn.abtn-gray {background: #fff; color: #06b2bb; border: 2px solid #06b2bb;}
+.abtn.abtn-mint:hover {background: #999; border-color: #999;}
+.abtn.abtn-gray:hover {background: #999; border-color: #999; color: #fff;}

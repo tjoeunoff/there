@@ -1,18 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="../template/include.jspf" %>
+<script>
+$(function(){
+	const tag = '${plbean.place_hashtag}';
+	const hashArr = tag.split(';');
+	
+	hashArr.forEach(function(ele, idx){
+		$('.view-util p.tags').append('<span>#' + ele + '</span>');
+	});
+});
+</script>
 </head>
 <body>
 <%@ include file="../template/header.jspf" %>
 
    <main class="place-detail-page">
         <div class="content-wrap">
-            <div class="top-banr-sect" style="background-image: url(${imgPath }/place/palce_thumb01.jpg);"> <!-- 장소detail 페이지는 장소등록 시 등록한 썸네일이 배경이미지로 들어감 -->
+            <div class="top-banr-sect" style="background-image: url(${imgPath }/place/${plbean.place_thumb });"> <!-- 장소detail 페이지는 장소등록 시 등록한 썸네일이 배경이미지로 들어감 -->
                 <div class="container">
                     <ol class="breadcrumb">
                         <li><a href="#">Home</a></li>
@@ -33,7 +44,7 @@
                 <div class="place-view-wrap">
                     <div class="container">
                         <div class="view-util">
-                            <p class="tags"><span>#성수 카페</span><span>#야간명소</span><span>#대형스크린</span><span>#성수핫플</span></p>  <!-- 장소 관련태그 -->
+                            <p class="tags"></p>  <!-- 장소 관련태그 -->
                             <ul>
                                 <li class="util-show">👁️‍🗨️ <span>${plbean.place_viewcnt }</span></li> <!-- span안에 조회수 넣기 -->
                                 <li class="util-like">❤️ <span>${likeCnt }</span></li> <!-- span안에 좋아요 수 넣기 / 클릭 시 바로 숫자 올라가야함  -->
@@ -44,7 +55,7 @@
                         </div>
                         <div class="place-info">
                             <div class="thumb">
-                                <img src="${imgPath }/place/palce_thumb01_480x480.jpg" alt=""> <!-- 업로드하는 이미지 사이즈 고정 480x480 -->
+                                <img src="${imgPath }/place/${plbean.place_thumb }" alt=""> <!-- 업로드하는 이미지 사이즈 고정 480x480 -->
                             </div>
                             <strong>${plbean.place_category }</strong>  <!-- 해당 장소의 카테고리명 -->
                             <h3>${plbean.place_name }</h3>  <!-- 장소명 -->
@@ -69,27 +80,27 @@
                             <p>이 PLACE에 다녀온 사람들은 <strong>⭐<span>${scoreAvg }</span></strong>만큼 만족했어요!</p> <!-- span안에 평점 넣기 -->
                             <div class="review-list">
                                 <ul>
-                                	<c:forEach items="${rvlist }" var="rvbean">
-                                	<li>                   
-                                        <div class="rv-score">
-	                                        <c:forEach begin="1" end="${rvbean.review_score }">
-	                                        	<span>⭐</span>
-	                                        </c:forEach>
-                                        </div>
-                                        <p>${rvbean.review_content }</p>
-                                        <p>${rvbean.review_date }</p>
-                                    </li>
-                                	</c:forEach>
-                                	
-                                	<!-- 샘플 -->     
-                                    <li>                      
-                                        <span>⭐⭐⭐⭐</span> 
-                                        <p>아주 좋았어요 :D</p> 
-                                        <p>2021-10-31</p> 
-                                    </li>
-                                    <!-- //샘플 -->
-                                    
-                                </ul>
+                                <c:choose> 
+                                	<c:when test="${fn:length(rvlist) eq 0}">
+	                					<li style="padding: 30px; color: #aaa; text-align: center;">
+	                						등록된 리뷰가 없습니다.
+	                					</li>
+                                	</c:when>
+                                	<c:otherwise>
+                                		<c:forEach items="${rvlist }" var="rvbean">
+		                                	<li>                   
+		                                        <div class="rv-score">
+			                                        <c:forEach begin="1" end="${rvbean.review_score }">
+			                                        	<span>⭐</span>
+			                                        </c:forEach>
+		                                        </div>
+		                                        <p>${rvbean.review_content }</p>
+		                                        <p>${rvbean.review_date }</p>
+		                                    </li>
+		                                </c:forEach>
+                                	</c:otherwise>
+                                </c:choose>
+                              </ul>
                             </div>
                             <div class="review-btns"> <!-- 리뷰버튼은 로그인O 일때만 노출됨 -->
                                 <button type="button" class="abtn abtn-mint" data-toggle="modal" data-target="#reviewWriteModal">리뷰 작성하기</button>
@@ -150,17 +161,6 @@
 
     </main>
     <!-- // main -->
-
-
-    <footer id="footer">
-    <div class="container">
-        <div class="foot-info-link">
-            <p>&copy; 2021 OFFLineTeam All Rights Reserved.</p>
-        </div>
-
-    </div>
-    </footer>
-    <!-- // footer -->
 
 
     <!-- 좋아요 클릭 시 알림창

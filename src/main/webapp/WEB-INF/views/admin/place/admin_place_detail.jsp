@@ -71,7 +71,7 @@ $(function(){
        		<div>
        			<span>주소</span>
        			<p>${plbean.place_addr}</p>
-       			<div id="map" style="width:100%;height:350px;"></div>
+       			<div id="map" style="width:100%;height:350px; margin-top: 5px;"></div>
        		</div>
        		<div>
        			<span>전화번호</span>
@@ -96,6 +96,9 @@ $(function(){
        		<div>
        			<span>썸네일</span>
        			<p>${plbean.place_thumb}</p>
+       		</div>
+       		<div class="thumb-box">
+       			<img src="${pageContext.request.contextPath }/resources/img/place/${plbean.place_thumb}">
        		</div>
         </div>
 

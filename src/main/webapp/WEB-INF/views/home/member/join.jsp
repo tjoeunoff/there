@@ -5,26 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-  <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
-    <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/style.css">
-
-    <!-- JS -->
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-    <script src="../js/script.js"></script>
+<%@ include file="../template/include.jspf" %>
 </head>
 <body>
+<%@ include file="../template/header.jspf" %>
    <!-- email select style -->
     <style type="text/css">
         form>div>select {
@@ -33,28 +17,6 @@
             height: 32px;
         }
     </style>
-    <header id="header">
-        <div class="head-inner">
-            <h1 class="logo"><a href="../index.html"></a></h1>
-            <div class="util-box">
-                <ul>
-                    <li><a class="abtn abtn-gray" href="../member/join.html">회원가입</a></li>
-                    <li><a class="abtn abtn-mint" href="../member/login.html">로그인</a></li>
-                </ul>
-            </div>
-        </div>
-    </header>
-    <!-- // header -->
-    
-    <nav id="gnb">
-        <ul>
-            <li><a href="../magazine/magazine_list.html">매거진</a></li>
-            <li><a href="../places/place-by-loc.html">지역별</a></li>
-            <li><a href="../places/palce-by-cate.html">카테고리별</a></li>
-        </ul>
-    </nav>
-    <!-- // nav -->
-
 
     <main class="mypage-page">
         <div class="content-wrap">
@@ -132,11 +94,9 @@
                  $("#submit").attr("disabled", "disabled");
         
              }
-
          } 
      });
  });   
-
         $(function() {
             $('#completionBtn').attr('disabled', true);
             $('input').keyup(function() {
@@ -167,16 +127,7 @@
     <!-- // main -->
 
 
-    <footer id="footer">
-    <div class="container">
-        <div class="foot-info-link">
-            <p>&copy; 2021 OFFLineTeam All Rights Reserved.</p>
-        </div>
 
-    </div>
-    </footer>
-    <!-- // footer -->
-
-
+<%@ include file="../template/footer.jspf" %>
 </body>
 </html>

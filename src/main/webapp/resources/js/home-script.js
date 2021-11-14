@@ -15,80 +15,87 @@ $(function(){
 
 
     // slider
-    var magazineSlider = new Swiper(".magazine-slider", {
-        slidesPerView: 1.2,
-        spaceBetween: 20,
-        centeredSlides: true,
-        loop: true,
-        navigation: {
-            nextEl: ".slide-next",
-            prevEl: ".slide-prev",
-        },
-        breakpoints: {
-            // when window width is >= 480px
-            480: {
-                slidesPerView: 1.4,
-                spaceBetween: 20,
-                centeredSlides: true
-            },
-            // when window width is >= 640px
-            640: {
-                slidesPerView: 1.8,
-                spaceBetween: 20,
-                centeredSlides: true
-            },
-            // when window width is >= 992px
-            992: {
-                slidesPerView: 1.8,
-                spaceBetween: 20,
-                centeredSlides: true
-            },
-            // when window width is >= 1320px
-            1200: {
-                slidesPerView: 2.8,
-                spaceBetween: 20,
-                centeredSlides: false
-            },
-        }
+    if($('.magazine-slider')) {
+        var magazineSlider = new Swiper(".magazine-slider", {
+	        slidesPerView: 1.2,
+	        spaceBetween: 20,
+	        centeredSlides: true,
+	        loop: true,
+	        navigation: {
+	            nextEl: ".slide-next",
+	            prevEl: ".slide-prev",
+	        },
+	        breakpoints: {
+	            // when window width is >= 480px
+	            480: {
+	                slidesPerView: 1.4,
+	                spaceBetween: 20,
+	                centeredSlides: true
+	            },
+	            // when window width is >= 640px
+	            640: {
+	                slidesPerView: 1.8,
+	                spaceBetween: 20,
+	                centeredSlides: true
+	            },
+	            // when window width is >= 992px
+	            992: {
+	                slidesPerView: 1.8,
+	                spaceBetween: 20,
+	                centeredSlides: true
+	            },
+	            // when window width is >= 1320px
+	            1200: {
+	                slidesPerView: 2.8,
+	                spaceBetween: 20,
+	                centeredSlides: false
+	            },
+	        }
+	
+	    });
+    }
 
-    });
-
-    var placeSlider = new Swiper(".place-slider", {
-        slidesPerView: 2.4,
-        spaceBetween: 20,
-        loop: true,
-        navigation: {
-            nextEl: ".slide-next",
-            prevEl: ".slide-prev",
-        },
-        breakpoints: {
-            // when window width is >= 480px
-            480: {
-                slidesPerView: 1.4,
-                spaceBetween: 20,
-                centeredSlides: true
-            },
-            // when window width is >= 640px
-            640: {
-                slidesPerView: 1.8,
-                spaceBetween: 20,
-                centeredSlides: true
-            },
-            // when window width is >= 992px
-            992: {
-                slidesPerView: 1.8,
-                spaceBetween: 20,
-                centeredSlides: true
-            },
-            // when window width is >= 1320px
-            1200: {
-                slidesPerView: 2.8,
-                spaceBetween: 20,
-                centeredSlides: false
-            },
-        }
-
-    });
+	
+	
+	if($('.place-slider')) {
+		 var placeSlider = new Swiper(".place-slider", {
+	        slidesPerView: 2.4,
+	        spaceBetween: 20,
+	        loop: true,
+	        navigation: {
+	            nextEl: ".slide-next",
+	            prevEl: ".slide-prev",
+	        },
+	        breakpoints: {
+	            // when window width is >= 480px
+	            480: {
+	                slidesPerView: 1.4,
+	                spaceBetween: 20,
+	                centeredSlides: true
+	            },
+	            // when window width is >= 640px
+	            640: {
+	                slidesPerView: 1.8,
+	                spaceBetween: 20,
+	                centeredSlides: true
+	            },
+	            // when window width is >= 992px
+	            992: {
+	                slidesPerView: 1.8,
+	                spaceBetween: 20,
+	                centeredSlides: true
+	            },
+	            // when window width is >= 1320px
+	            1200: {
+	                slidesPerView: 2.8,
+	                spaceBetween: 20,
+	                centeredSlides: false
+	            },
+	        }
+	
+	    });
+	}
+   
 
 
 

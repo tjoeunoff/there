@@ -6,6 +6,28 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="../template/include.jspf" %>
+<script>
+$(function(){
+	var tagsArr = new Array();
+	$.each($('.hidden-tags'), function(idx, ele){
+		tagsArr[idx] = $(this).text();
+	});
+	$('.hidden-tags').hide();
+	//console.log(tagsArr);
+	
+	const hashArr = new Array();
+	tagsArr.forEach(function(ele, idx){
+		hashArr[idx] = ele.split(';');
+		console.log(hashArr[idx]);
+		console.log('==========' + idx);
+		
+		hashArr[idx].forEach(function(ele2, idx2){
+			$('.list-item').eq(idx).find('p.tags').append('<span>#' + ele2 + '</span>');
+		});
+	});
+
+});
+</script>
 </head>
 <body>
 <%@ include file="../template/header.jspf" %>
@@ -50,7 +72,8 @@
                                 </div>
                                 <div class="caption">
                                     <h4>${plbean.place_name }</h4>
-                                    <p><span>${plbean.place_hashtag }</span></p>
+                                    <p class="tags"></p>
+                                    <p class="hidden-tags">${plbean.place_hashtag }</p>
                                 </div>
                                 <ul>
                                     <li class="util-show">👁️‍🗨️ <span>${plbean.place_viewcnt }</span></li>
@@ -59,25 +82,6 @@
                             </a>
                         </div>
                         </c:forEach>
-                        
-                        
-                        <!-- 샘플 -->
-                        <div class="list-item col-sm-6 col-md-4" data-cate="cafe">
-                            <a href="">
-                                <div class="thumb">
-                                    <div class="thumb-img" style="background-image: url(${imgPath }/place/palce_thumb02.jpg);"></div>
-                                </div>
-                                <div class="caption">
-                                    <h4>🌄OO 마운틴 카페</h4>
-                                    <p><span>#마운틴뷰 카페</span><span>#힐링카페</span></p>
-                                </div>
-                                <ul>
-                                    <li class="util-show">👁️‍🗨️ <span>256</span></li>
-                                    <li class="util-like">❤️ <span>84</span></li>
-                                </ul>
-                            </a>
-                        </div>
-                        <!-- // 샘플 -->
                     </div>
 
                 </div>
