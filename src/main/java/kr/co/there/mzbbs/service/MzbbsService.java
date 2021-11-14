@@ -15,6 +15,8 @@ public interface MzbbsService {
 	int nextIdx(int param) throws SQLException; //이후 게시물 번호를 반환하는 메서드
 	int oldestIdx(int param) throws SQLException; //가장 오래된 게시물 번호를 반환하는 메서드
 	int newestIdx(int param) throws SQLException; //가장 새로운 게시물 번호를 반환하는 메서드
+	boolean hasLiked(String member_id,int magazine_idx) throws SQLException; //해당 회원이 해당 매거진에 좋아요를 눌렀는지 확인하는 메서드
+	boolean clickLike(String member_id,int magazine_idx) throws SQLException; //해당 회원이 해당 매거진에 좋아요를 누를 때 호출하는 메서드
 	boolean add(MzbbsVo mzbean) throws SQLException;
 	boolean edit(MzbbsVo mzbean,boolean doesThumbChange) throws SQLException;
 	boolean remove(int param) throws SQLException;
