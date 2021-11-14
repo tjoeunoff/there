@@ -38,9 +38,19 @@ public class MemberController {
 		return "/home/index";
 	}
 	
-	@GetMapping("/login")
+	@GetMapping("/member/login")
 	public String loginPage() throws Exception {
 		return "/home/member/login";
+	}
+	
+	@GetMapping("/member/findId")
+	public String findIdPage() throws Exception {
+		return "/home/member/findId";
+	}
+	
+	@GetMapping("/member/findPw")
+	public String findPwPage() throws Exception {
+		return "/home/member/findPw";
 	}
 	
 	

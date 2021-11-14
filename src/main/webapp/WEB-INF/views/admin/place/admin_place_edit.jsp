@@ -6,15 +6,20 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="../template/include.jspf" %>
+<style>
+#placeThumbFile {display: none;}
+</style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e5f5bb9115d812a34ed32b190bd82edf&libraries=services"></script>
 <script>
 $(function(){
 	var addrName = '${plbean.place_name}',
 	lat = ${plbean.place_latitude},
-	lng = ${plbean.place_longitude};
+	lng = ${plbean.place_longitude},
+	thumbName = '${plbean.place_thumb}';
 	
     $('#placeLat').val(lat);
     $('#placeLng').val(lng);
+    $('#placeThumbName').val(thumbName);
 	
 	var mapContainer = document.getElementById('map'), 
     mapOption = {
@@ -88,20 +93,23 @@ $(function(){
 			$(this).attr('checked', true);
 		}
 	});
+	
 });
 
-function setThumbnail(event) { 
-	for (var image of event.target.files) { 
-		var reader = new FileReader(); 
 
-		reader.onload = function(event) {
-			var img = document.createElement("img"); 
-			img.setAttribute("src", event.target.result); 
-			document.querySelector("div#thumb_container").appendChild(img); 
-		}; 
-			
-		console.log(image); reader.readAsDataURL(image); 
-	} 
+function previewThumb() {
+	  var preview = document.querySelector('#thumb_privew');
+	  var file    = document.querySelector('input[type=file]').files[0];
+	  var reader  = new FileReader();
+
+	  reader.addEventListener("load", function () {
+	    preview.src = reader.result;
+	    $('#placeThumbName').val(file.name);	// place_thumb값 설정 - 컨트롤러에서 밀리초붙여서 리네임
+	    $('.show-filename').text(file.name);	// 파일첨부 시 미리보기에 보여지는 파일이름    
+	  }, false);
+
+	  if (file) reader.readAsDataURL(file);
+	  
 }
 </script>
 </head>
@@ -119,10 +127,10 @@ function setThumbnail(event) {
             	등록된 플레이스의 정보를 수정할 수 있습니다.
             </div>
         </div>
-        <form action="${pageContext.request.contextPath}/admin/place/${place_idx}" method="POST" class="form-horizontal" id="placeAdd">
-            <input type="hidden" name="_method" value="put"/>
+        <form action="${pageContext.request.contextPath}/admin/place/${place_idx}" method="POST" class="form-horizontal" id="placeAdd" enctype="multipart/form-data">
         	<input type="hidden" name="place_latitude" id="placeLat" />
         	<input type="hidden" name="place_longitude" id="placeLng" />
+        	<input type="hidden" name="place_thumb" id="placeThumbName" />
             <div class="form-group">
                   <label class="col-sm-2 control-label">카테고리</label>
                   <div class="radio col-sm-10">
@@ -190,10 +198,14 @@ function setThumbnail(event) {
                   </div>
               </div>
               <div class="form-group">
-                  <label for="placeThumb" class="col-sm-2 control-label">썸네일</label>
+                  <span class="col-sm-2 control-label">썸네일</span>
                   <div class="col-sm-10">
-                      <input type="file" id="place_thumb" name="place_thumb" accept="image/gif, image/jepg, image/png" onchange="setThumbnail(event);"/><br />
-                      <div id="thumb_container"></div>
+					<input type="file" name="file" id="placeThumbFile" accept="image/png, image/jpg, image/jpeg, image/gif" onchange="previewThumb();"/>
+                  	<span class="show-filename">${plbean.place_thumb }</span>
+                  	<label for="placeThumbFile" class="fileUpload-btn abtn abtn-mint">파일 선택</label>
+					<div class="thumb-box">
+						<img id="thumb_privew" src="${pageContext.request.contextPath }/resources/img/place/${plbean.place_thumb}">
+					</div>
                   </div>
               </div>
 

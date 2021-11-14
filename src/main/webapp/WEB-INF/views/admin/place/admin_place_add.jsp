@@ -58,18 +58,18 @@ $(function(){
 	});	
 });
 
-function setThumbnail(event) { 
-	for (var image of event.target.files) { 
-		var reader = new FileReader(); 
+function previewThumb() {
+	  var preview = document.querySelector('#thumb_privew');
+	  var file    = document.querySelector('input[type=file]').files[0];
+	  var reader  = new FileReader();
 
-		reader.onload = function(event) {
-			var img = document.createElement("img"); 
-			img.setAttribute("src", event.target.result); 
-			document.querySelector("div#thumb_container").appendChild(img); 
-		}; 
-			
-		console.log(image); reader.readAsDataURL(image); 
-	} 
+	  reader.addEventListener("load", function () {
+	    preview.src = reader.result;
+	    $('#placeThumbName').val(file.name);
+	  }, false);
+
+	  if (file) reader.readAsDataURL(file);
+	  
 }
 
 </script>
@@ -88,9 +88,10 @@ function setThumbnail(event) {
             	새로운 플레이스를 등록할 수 있습니다.
             </div>
         </div>
-        <form action="${pageContext.request.contextPath}/admin/place" method="POST" class="form-horizontal" id="placeAdd">
+        <form action="${pageContext.request.contextPath}/admin/place" method="POST" class="form-horizontal" id="placeAdd" enctype="multipart/form-data">
         	<input type="hidden" name="place_latitude" id="placeLat" />
         	<input type="hidden" name="place_longitude" id="placeLng" />
+        	<input type="hidden" name="place_thumb" id="placeThumbName" />
             <div class="form-group">
                   <label class="col-sm-2 control-label">카테고리</label>
                   <div class="radio col-sm-10">
@@ -154,14 +155,16 @@ function setThumbnail(event) {
               <div class="form-group">
                   <label for="placeHashtag" class="col-sm-2 control-label">관련태그</label>
                   <div class="col-sm-10">
-                      <input type="text" id="placeHashtag" class="form-control" name="place_hashtag" placeholder="이 플레이스와 관련된 태그를 입력해주세요.(최대 5개 / 쉼표(,)로 구분)" required/>
+                      <input type="text" id="placeHashtag" class="form-control" name="place_hashtag" placeholder="이 플레이스와 관련된 태그를 입력해주세요.(최대 5개 / 세미콜론(;)로 구분)" required/>
                   </div>
               </div>
               <div class="form-group">
-                  <label for="placeThumb" class="col-sm-2 control-label">썸네일</label>
+                  <label for="placeThumbFile" class="col-sm-2 control-label">썸네일</label>
                   <div class="col-sm-10">
-                      <input type="file" id="place_thumb" name="place_thumb" accept="image/gif, image/jepg, image/png" onchange="setThumbnail(event);"/><br />
-                      <div id="thumb_container"></div>
+                      <input type="file" name="file" id="placeThumbFile" accept="image/png, image/jpg, image/jpeg, image/gif" onchange="previewThumb();"/><br />
+                      <div class="thumb-box" style="max-width: 360px;">
+                      	<img id="thumb_privew" src="" style="max-width: 100%;">
+                      </div>
                   </div>
               </div>
 
