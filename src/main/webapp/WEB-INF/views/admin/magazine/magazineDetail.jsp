@@ -124,7 +124,7 @@ function setThumbnail(event) {  //썸네일 이미지를 업로드하는 <input>
                     	<div class="col-sm-4"></div>
                     	<div class="col-sm-4"  id="imageContainer">
                     		<c:if test="${mzbean.magazine_thumb ne '' }">
-                    		<img src="${imgPath }/magazine/${mzbean.magazine_thumb}" id="thumbImage"/>
+                    		<img src="${pageContext.request.contextPath }/resources/img/magazine/${mzbean.magazine_thumb}" id="thumbImage"/>
                     		</c:if>
                     	</div>
                     	<div class="col-sm-4"></div>

@@ -15,6 +15,14 @@
 	<select id="numLikes" resultType="int">
 	select count(*) from mzlikes where mzlikes_magazineidx=#{val}
 	</select>
+	
+	<select id="numLikesList" resultType="kr.co.there.mzbbs.model.entity.MzlikesStatVo">
+	SELECT mzlikes_magazineidx AS magazine_idx, COUNT(*) AS numlikes FROM mzlikes GROUP BY magazine_idx ORDER BY magazine_idx DESC
+	</select>
+	
+	<select id="selectIdx" resultType="int">
+	SELECT magazine_idx FROM magazine ORDER BY magazine_idx DESC
+	</select>
 
 	<update id="insertOne" parameterType="mzbean">
 	insert into magazine (magazine_subject,magazine_date,magazine_viewcnt,magazine_content,magazine_thumb,magazine_hashtag) values (#{magazine_subject},now(),0,#{magazine_content},#{magazine_thumb},#{magazine_hashtag})
@@ -28,8 +36,8 @@
 	update magazine set magazine_subject=#{magazine_subject}, magazine_content=#{magazine_content}, magazine_hashtag=#{magazine_hashtag} where magazine_idx=#{magazine_idx}
 	</update>
 
-	<update id="updateViewCnt" parameterType="int">
-	update magazine set magazine_viewcnt=magazine_viewcnt+1 where magazine_idx=#{val}
+	<update id="updateViewcnt" parameterType="int">
+	UPDATE magazine SET magazine_viewcnt=magazine_viewcnt+1 WHERE magazine_idx=#{val}
 	</update>
 
 	<delete id="deleteOne" parameterType="int">
