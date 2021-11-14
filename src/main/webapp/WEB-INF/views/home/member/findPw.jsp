@@ -1,0 +1,108 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <header id="header">
+        <div class="head-inner">
+            <h1 class="logo"><a href="../index.html"></a></h1>
+            <div class="util-box">
+                <ul>
+                    <li><a class="abtn abtn-gray" href="../member/join.html">회원가입</a></li>
+                    <li><a class="abtn abtn-mint" href="../member/login.html">로그인</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <!-- // header -->
+    
+    <nav id="gnb">
+        <ul>
+            <li><a href="../magazine/magazine_list.html">매거진</a></li>
+            <li><a href="../places/place-by-loc.html">지역별</a></li>
+            <li><a href="../places/palce-by-cate.html">카테고리별</a></li>
+        </ul>
+    </nav>
+    <!-- // nav -->
+
+
+    <main class="mypage-page">
+        <div class="content-wrap">
+                <div class="tit-sect tac">
+                    <div class="container">
+                        <h2 class="sect-tit mb30">비밀번호 찾기 🤔</h2>
+                    </div>
+                </div>
+
+  <form class="form-horizontal">
+  <div class="form-group">
+    <label for="inputId3" class="col-sm-2 control-label">아이디</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputId3" placeholder="ID">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputCellNum3" class="col-sm-2 control-label">전화번호</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="inputCellNum3" placeholder="전화번호">
+    </div>
+  </div>
+    <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="button" class="btn btn-primary" id="ConfirmBtn">확인</button>
+      <button type="submit" class="btn btn-default">취소</button>
+        <button type="submit" class="btn btn-defalut"><a href="/dept/login.html">돌아가기</a></button>
+    </div>
+  </div>
+</form>  
+
+ <!-- -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">아이디 찾기</h4>
+      </div>
+      <div class="modal-body">
+        회원님의 비밀번호는 ... 입니다.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+        확인
+          </button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<script>
+    $('#ConfirmBtn').click(function() {
+            if($('#inputId3').val() && $('#inputCellNum3').val()){
+                $('#myModal').modal('show');
+            } 
+              else {
+
+                $('#inputId3').each(function() {
+                        if (!$(this).val()) {
+                            is_empty = true;
+                            alert('아이디을 입력하세요');
+                        }
+                    
+                        $('#inputCellNum3').each(function() {
+                            if (!$(this).val()) {
+                                is_empty = true;
+                                alert('전화번호를 입력하세요');
+                            }
+                        });
+
+                });
+            } 
+        });
+</script>
+</body>
+</html>

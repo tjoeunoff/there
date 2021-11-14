@@ -9,14 +9,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.co.there.member.service.MemberService;
 
 @Controller
-@RequestMapping("/admin")
+//@RequestMapping("/admin")
 public class MemberController {
 	@Autowired
 	MemberService memberService;
 
-	@GetMapping(value = "/member")
+	@GetMapping(value = "admin/member")
 	public String list(Model model) throws Exception {
 		model.addAttribute("mbrList", memberService.list());
 		return "/admin/member/memberList";
 	}
+	
+	
+	@GetMapping("/login")
+	public String moveloginPage() throws Exception {
+		return "/home/member/login";
+	}
+	
 }

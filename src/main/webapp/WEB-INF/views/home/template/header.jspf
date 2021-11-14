@@ -6,8 +6,8 @@
         <h1 class="logo"><a href="${pageContext.servletContext.contextPath }"></a></h1>
         <div class="util-box">
             <ul>
-                <li><a class="abtn abtn-gray" href="${pageContext.servletContext.contextPath }/member/join">회원가입</a></li>
-                <li><a class="abtn abtn-mint" href="${pageContext.servletContext.contextPath }/member/login">로그인</a></li>
+                <li><a class="abtn abtn-gray" href="${pageContext.servletContext.contextPath }/join">회원가입</a></li>
+                <li><a class="abtn abtn-mint" href="${pageContext.servletContext.contextPath }/login">로그인</a></li>
             </ul>
         </div>
     </div>
