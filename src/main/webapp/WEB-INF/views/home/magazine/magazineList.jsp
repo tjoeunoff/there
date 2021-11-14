@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="caption">
                                     <h4>${mzbean.magazine_subject }</h4>   <!-- 게시글 제목 -->
-                                    <p><span>${mzbean.magazine_hashtag }</span></p>   <!-- 게시글 관련태그 -->
+                                    <p><span>${mzbean.magazine_hashtag }</span></p>   <!-- 게시글 관련태그. -->
                                 </div>
                                 <ul>
                                     <li class="util-show">👁️‍🗨️ <span>${mzbean.magazine_viewcnt }</span></li>
