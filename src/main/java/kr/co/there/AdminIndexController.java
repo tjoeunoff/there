@@ -2,6 +2,8 @@ package kr.co.there;
 
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
@@ -22,7 +24,10 @@ public class AdminIndexController {
 	MzbbsService mzbbsService;
 
 	@RequestMapping(value = "/admin")
-	public String index(Model model) throws SQLException {
+	public String index(Model model,HttpServletRequest req) throws SQLException {
+		if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+			return "redirect:/";
+		}
 		ClassPathResource resource = new ClassPathResource("");
 		System.out.println(resource.getPath());
 		model.addAttribute("mbrList", memberService.list());
@@ -30,5 +35,6 @@ public class AdminIndexController {
 		model.addAttribute("plList", placeService.list());
 		return "admin/index";
 	}
+
 
 }
