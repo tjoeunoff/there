@@ -46,6 +46,10 @@
 	left join placelikes as bb on pl.place_idx = bb.placelikes_placeidx 
 	group by pl.place_idx order by placeLikeCnt desc;
 	</select>
+	
+	<select id="selectMaxIdx" resultType="int">
+	select max(place_idx) from place;
+	</select>
 		
 	
 	<!-- REVIEW -->

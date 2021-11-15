@@ -9,7 +9,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e5f5bb9115d812a34ed32b190bd82edf&libraries=services"></script>
 <script>
 $(function(){
-	var addrName, lat, lng;
+	var addrName, lat, lng, placeName;
 	
 	var mapContainer = document.getElementById('map'), 
     mapOption = {
@@ -19,9 +19,12 @@ $(function(){
 	var map = new kakao.maps.Map(mapContainer, mapOption); 
 	var geocoder = new kakao.maps.services.Geocoder();
 	
+	$('#placeName').change(function(){
+		placeName = $('#placeName').val();
+	});
+	
 	$('#placeAddr').change(function(){
         addrName = $('#placeAddr').val();
-        console.log(addrName);
 
         geocoder.addressSearch(addrName, function(result, status) {
 	        if (status === kakao.maps.services.Status.OK) {
@@ -43,19 +46,11 @@ $(function(){
 	            
 	            $('#placeLat').val(lat);
 	            $('#placeLng').val(lng);
-	            //console.log($('#placeLat').val(), $('#placeLng').val());
 	        } 
 	    });
 	});
 	
-	$('#placeAdd').submit(function(e){
-        //e.preventDefault();
-        var latLngValue = {		// 위도, 경도, 장소명 json파일로 저장하기
-            lat: lat,
-            lng: lng
-        }
-        console.log(lat, lng);
-	});	
+
 });
 
 function previewThumb() {
