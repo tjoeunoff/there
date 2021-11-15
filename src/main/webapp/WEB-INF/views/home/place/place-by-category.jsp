@@ -8,23 +8,68 @@
 <%@ include file="../template/include.jspf" %>
 <script>
 $(function(){
+	
+	// show hashtag
 	var tagsArr = new Array();
 	$.each($('.hidden-tags'), function(idx, ele){
 		tagsArr[idx] = $(this).text();
 	});
 	$('.hidden-tags').hide();
-	//console.log(tagsArr);
 	
 	const hashArr = new Array();
 	tagsArr.forEach(function(ele, idx){
 		hashArr[idx] = ele.split(';');
-		console.log(hashArr[idx]);
-		console.log('==========' + idx);
 		
 		hashArr[idx].forEach(function(ele2, idx2){
 			$('.list-item').eq(idx).find('p.tags').append('<span>#' + ele2 + '</span>');
 		});
 	});
+	
+	
+    // place category filter
+    var cate = window.location.hash.split('#')[1];								
+	var cateBtnLi = $('.cate-filter-btns').children('li');
+	var btnIdx = 0;
+    
+    filterSelection("all", btnIdx);
+
+    $('.cate-filter-btns li button').on('click', function(){  					// 카테고리 페이지에서 버튼 클릭시
+    	var filterName = $(this).data('filter');
+    	btnIdx = $(this).parent('li').index();
+        filterSelection(filterName, btnIdx);
+    });
+	
+	
+	if(typeof cate != "undefined") {											// 메인페이지에서 각 카테고리 클릭하여 접근 시
+		switch(cate) {
+		case "food"	: cate = "맛집"; btnIdx = 1;
+			break;
+		case "cafe"	: cate = "카페"; btnIdx = 2;
+			break;
+		case "play"	: cate = "놀거리"; btnIdx = 3;
+			break;
+		case "bar"	: cate = "술집"; btnIdx = 4;
+			break;
+		}
+		filterSelection(cate, btnIdx);
+	}
+		
+    function filterSelection(cate, btnIdx) {
+        var item = document.getElementsByClassName("list-item");
+              
+        for (var i = 0; i < item.length; i++) {
+            if (cate == "all") {
+                item[i].style.display = "block";
+            } else if (item[i].dataset.cate == cate) {
+                item[i].style.display = "block";
+            } else {
+                item[i].style.display = "none";
+            }
+        }
+        
+        cateBtnLi.eq(btnIdx).addClass('on').siblings('li').removeClass('on');
+        
+    }
 
 });
 </script>

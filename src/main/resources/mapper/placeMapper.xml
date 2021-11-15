@@ -39,6 +39,13 @@
 	select pl.place_idx as place_idx, pl.place_name as place_name, pl.place_hashtag as place_hashtag, pl.place_viewcnt as place_viewcnt, pl.place_thumb as place_thumb, pl.place_category as place_category, count(bb.placelikes_placeidx) as placeLikeCnt 
 	from place as pl left join placelikes as bb on pl.place_idx = bb.placelikes_placeidx group by pl.place_idx order by pl.place_idx desc;
 	</select>
+	
+	<select id="orderBylikes" resultType="plbean">
+	select pl.place_idx as place_idx, pl.place_name as place_name, pl.place_hashtag as place_hashtag, pl.place_thumb as place_thumb, 
+	count(bb.placelikes_placeidx) as placeLikeCnt from place as pl 
+	left join placelikes as bb on pl.place_idx = bb.placelikes_placeidx 
+	group by pl.place_idx order by placeLikeCnt desc;
+	</select>
 		
 	
 	<!-- REVIEW -->

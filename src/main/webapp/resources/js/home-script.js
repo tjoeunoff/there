@@ -95,34 +95,6 @@ $(function(){
 	
 	    });
 	}
-   
-
-
-
-    // place category filter
-    filterSelection("all");    
-
-    $('.cate-filter-btns li button').on('click', function(){
-        var filterName = $(this).data('filter');
-        console.log(filterName);
-        filterSelection(filterName);
-    });
-
-    function filterSelection(cate) {
-        var item = document.getElementsByClassName("list-item");
-              
-        for (var i = 0; i < item.length; i++) {
-            if (cate == "all") {
-                item[i].style.display = "block";
-            } else if (item[i].dataset.cate == cate) {
-                item[i].style.display = "block";
-            } else {
-                item[i].style.display = "none";
-            }
-        }
-    }
-
-
 
 
 
