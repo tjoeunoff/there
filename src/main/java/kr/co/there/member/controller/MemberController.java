@@ -42,7 +42,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("/member/login")
-	public String login(MemberVo bean, HttpServletRequest req) throws Exception {
+	public String loginResult(MemberVo bean, HttpServletRequest req,Model model) throws Exception {
 		if(memberService.isLogin(bean.getMember_id(), bean.getMember_pw())) {
 			req.getSession().setAttribute("success", true);
 			req.getSession().setAttribute("sessionId", bean.getMember_id());
@@ -50,13 +50,14 @@ public class MemberController {
 			return "redirect:/";
 		}
 		else {
+			model.addAttribute("showWarning",true);
 			return "/home/member/login";
 		}
 	}
 	
 	@GetMapping("/member/login")
-	public String loginResult() {
-		
+	public String login(Model model) {
+		model.addAttribute("showWarning",false);
 		return "/home/member/login";
 	}
 	
@@ -100,6 +101,16 @@ public class MemberController {
 		return memberService.isTelUnique(member_tel);
 	}
 	
+	@ResponseBody
+	@PostMapping("member/getid")
+	public String getId(String member_name,String member_tel) throws Exception {
+		return memberService.getId(member_name, member_tel);
+	}
 	
+	@ResponseBody
+	@PostMapping("member/getpwans")
+	public String getPwans(String member_id,String member_tel) throws Exception {
+		return memberService.getPwans(member_id, member_tel);
+	}
 	
 }

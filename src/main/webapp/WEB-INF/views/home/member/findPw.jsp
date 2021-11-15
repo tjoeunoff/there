@@ -6,7 +6,59 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="../template/include.jspf" %>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#ConfirmBtn').click(function() {
+		$('#myModal').modal('show');
+		var member_id=$('#inputId3').val();
+		var member_tel=$('#inputCellNum3').val();
+		if(member_id.length==0){
+			$('#modal-body').text('아이디를 입력해 주십시오.');
+			return;
+		} else if(member_tel.length==0){
+			$('#modal-body').text('전화번호를 입력해 주십시오.');
+			return;
+		}
+		$.post('./getpwans',{
+			member_id: member_id,
+			member_tel: member_tel
+		},function(data){
+			if(data.length==0){
+				$('#modal-body').text('아이디와 전화번호를 정확히 입력해 주십시오.');
+			} else{
+				$('#modal-body').html('다음 비밀번호로 로그인 한 뒤 본 비밀번호를 변경해 주십시오.<br/>'+data);
+			}
+		});
+		/*
+        if($('#inputId3').val() && $('#inputCellNum3').val()){
+            $('#myModal').modal('show');
+        }
+		
+          else {
+
+            $('#inputId3').each(function() {
+                    if (!$(this).val()) {
+                        is_empty = true;
+                        alert('아이디을 입력하세요');
+                    }
+                
+                    $('#inputCellNum3').each(function() {
+                        if (!$(this).val()) {
+                            is_empty = true;
+                            alert('전화번호를 입력하세요');
+                        }
+                    });
+
+            });
+        }
+		*/
+		
+    });
+	
+});
+</script>
 </head>
+
 <body>
 <%@ include file="../template/header.jspf" %>
 
@@ -23,21 +75,21 @@
   <div class="form-group">
     <label for="inputId3" class="col-sm-2 control-label">아이디</label>
     <div class="col-sm-5">
-      <input type="text" class="form-control" id="inputId3" placeholder="ID">
+      <input type="text" class="form-control" id="inputId3" placeholder="ID" />
     </div>
   </div>
   <div class="form-group">
     <label for="inputCellNum3" class="col-sm-2 control-label">전화번호</label>
     <div class="col-sm-5">
-      <input type="text" class="form-control" id="inputCellNum3" placeholder="전화번호">
+      <input type="text" class="form-control" id="inputCellNum3" placeholder="전화번호" />
     </div>
   </div>
     <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="button" class="btn btn-primary" id="ConfirmBtn">확인</button>
-      <button type="submit" class="btn btn-default">취소</button>
-        <button type="submit" class="btn btn-defalut"><a href="/dept/login.html">돌아가기</a></button>
-    </div>
+	<div class="btn-group btn-group-justified" role="group" aria-label="...">
+		<div class="btn-group"><button type="button" class="btn btn-primary" id="ConfirmBtn">입력</button></div>
+	    <div class="btn-group"><button type="reset" class="btn btn-default">취소</button></div>
+	    <div class="btn-group"><button type="button" class="btn btn-default" onclick="history.back();">뒤로</button></div>
+	</div>
   </div>
 </form>  
 
@@ -47,45 +99,18 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">아이디 찾기</h4>
+        <h4 class="modal-title" id="myModalLabel">비밀번호 찾기</h4>
       </div>
-      <div class="modal-body">
-        회원님의 비밀번호는 ... 입니다.
+      <div class="modal-body" id="modal-body">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">
         확인
-          </button>
+        </button>
       </div>
     </div>
   </div>
-</div> 
-
-<script>
-    $('#ConfirmBtn').click(function() {
-            if($('#inputId3').val() && $('#inputCellNum3').val()){
-                $('#myModal').modal('show');
-            } 
-              else {
-
-                $('#inputId3').each(function() {
-                        if (!$(this).val()) {
-                            is_empty = true;
-                            alert('아이디을 입력하세요');
-                        }
-                    
-                        $('#inputCellNum3').each(function() {
-                            if (!$(this).val()) {
-                                is_empty = true;
-                                alert('전화번호를 입력하세요');
-                            }
-                        });
-
-                });
-            } 
-        });
-</script>
-
+</div>
 <%@ include file="../template/footer.jspf" %>
 </body>
 </html>

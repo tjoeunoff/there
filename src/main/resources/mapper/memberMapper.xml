@@ -44,4 +44,12 @@
 	SELECT COUNT(*) FROM member WHERE member_tel=#{val}
 	</select>
 	
+	<select id="getId" resultType="string">
+	SELECT member_id FROM member WHERE member_name=#{member_name} AND member_tel=#{member_tel}
+	</select>
+	
+	<select id="getPwans" resultType="string">
+	SELECT member_pwans FROM member WHERE member_id=#{member_id} AND member_tel=#{member_tel}
+	</select>
+	
 </mapper>

@@ -8,6 +8,7 @@
 <%@ include file="../template/include.jspf" %>
 <script>
 $(function(){
+	console.log(${showWarning});
 	 $('#loginForm').on('submit', function(e) {
 
 		if($('#memberId').val() == '') {
@@ -57,11 +58,13 @@ $(function(){
 							<input type="password" name="member_pw" id="memberPw" placeholder="비밀번호">
 						</div>
 					</div>
+					<c:if test="${showWarning}" >
 			        <div class="form-group">
 			            <div class="alert alert-danger col-sm-5 col-sm-offset-2" id="id-alert-danger">
 			            	아이디 또는 비밀번호를 정확히 입력해 주세요
 			            </div>
 			        </div>
+			        </c:if>
 					<div>
 						<button type="submit" class="abtn abtn-mint" id="loginBtn">로그인</button>
 					</div>
