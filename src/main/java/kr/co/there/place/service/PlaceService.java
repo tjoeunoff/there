@@ -15,6 +15,7 @@ public interface PlaceService {
 	boolean edit(PlaceVo bean) throws SQLException;
 	boolean remove(int param) throws SQLException;
 	List<PlaceVo> listOrderBylikes() throws SQLException;
+	int selectMaxIdx() throws SQLException;
 
 	List<ReviewVo> reviewList() throws SQLException;
 	boolean addReveiw(ReviewVo bean) throws SQLException;
