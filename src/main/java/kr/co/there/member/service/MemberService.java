@@ -14,6 +14,9 @@ public interface MemberService {
 	boolean remove(String param) throws SQLException;
 	List<MzbbsVo> myMzList(String member_id) throws SQLException;
 	
+	//로그인
+	boolean isLogin(String member_id, String member_pw) throws SQLException;
+	
 	//회원가입 시 중복 체크에 호출할 메서드들
 	boolean isIdUnique(String member_id) throws SQLException; //겹쳐지지 않은 아이디일 경우 true 반환
 	boolean isEmailUnique(String member_email) throws SQLException; //겹쳐지지 않은 전화번호일 경우 true 반환

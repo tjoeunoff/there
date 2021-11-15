@@ -1,21 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
- <div class="header">
-        <h1 class="hide">header</h1>
-        <ul class="logo" id="nomargin">
-            <!--로고 및 알림 영역 -->
-            <li>
-                <a href="${pageContext.servletContext.contextPath }/admin">
-                    <div>
-                        <img src="${imgPath }/logo_basic.PNG" alt="header_logo.png" />
-                    </div>
-                </a>
-            </li>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div class="header">
+	<h1 class="hide">header</h1>
+	<ul class="logo" id="nomargin">
+		<!--로고 및 알림 영역 -->
+		<li><a href="${pageContext.servletContext.contextPath }/admin">
+			<div>
+				<img src="${imgPath }/logo_basic.PNG" alt="header_logo.png" />
+			</div>
+		</a></li>
+	</ul>
+    <c:if test="${empty sessionScope.success }" var="v" scope="page">
+        <ul>
+            <li><a class="abtn abtn-gray" href="${pageContext.request.contextPath }/member/join">회원가입</a></li>
+            <li><a class="abtn abtn-mint" href="${pageContext.request.contextPath }/member/login">로그인</a></li>
         </ul>
+    </c:if>
+	<c:if test="${not pageScope.v }">
+		<p>${sessionScope.sessionId } 님 환영합니다.</p>
+		<!-- 
+		<ul class="lnb_login" id="nomargin">
+			<li><a class="abtn abtn-mint" href="${pageContext.request.contextPath }/member/logout">로그아웃</a></li>
+		</ul>
+		-->
+	</c:if>
+	<!-- 
         <ul class="lnb_login" id="nomargin">
             <li>000 관리자님 환영합니다.</li>
         </ul>
+     -->
 </div>
 
 

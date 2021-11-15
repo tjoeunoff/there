@@ -27,15 +27,8 @@ $(function(){
 		$('input').on('focusout', function(){
 			if($('#memberId').val() != '' && $('#memberPw').val() != '') $('.err-msg').empty();
 		});
-		 
           
      });
-	
-
-	
-
-	
-	
 });
 </script>
 </head>
@@ -64,29 +57,28 @@ $(function(){
 							<input type="password" name="member_pw" id="memberPw" placeholder="비밀번호">
 						</div>
 					</div>
-					<div>
-						<span class="err-msg"></span>
-					</div>
+			        <div class="form-group">
+			            <div class="alert alert-danger col-sm-5 col-sm-offset-2" id="id-alert-danger">
+			            	아이디 또는 비밀번호를 정확히 입력해 주세요
+			            </div>
+			        </div>
 					<div>
 						<button type="submit" class="abtn abtn-mint" id="loginBtn">로그인</button>
 					</div>
 				</form>
             </div>
+            
 			<!-- // login-box -->
 			<div class="login-util-wrap">
 				<a href="${pageContext.servletContext.contextPath }/member/join">회원가입</a>
 				<a href="${pageContext.servletContext.contextPath }/member/findId">아이디찾기</a>
 				<a href="${pageContext.servletContext.contextPath }/member/findPw">비밀번호찾기</a>
 			</div>
-
-              
         </div>
         <!-- // content-wrap  -->
 
     </main>
     <!-- // main -->
-
-
 
 <%@ include file="../template/footer.jspf" %>
 </body>

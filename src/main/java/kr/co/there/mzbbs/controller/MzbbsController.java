@@ -28,13 +28,19 @@ public class MzbbsController {
 	MzbbsService mzbbsService;
 
 	@GetMapping(value = "")
-	public String list(Model model) throws Exception {
+	public String list(Model model,HttpServletRequest req) throws Exception {
+		if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+			return "redirect:/";
+		}
 		model.addAttribute("mzList", mzbbsService.list());
 		return "/admin/magazine/magazineList";
 	}
 	
 	@GetMapping("/{magazine_idx}")
-	public String detail(@PathVariable("magazine_idx") int magazine_idx, Model model) throws SQLException {
+	public String detail(@PathVariable("magazine_idx") int magazine_idx, Model model,HttpServletRequest req) throws SQLException {
+		if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+			return "redirect:/";
+		}
 		model.addAttribute("mzbean", mzbbsService.one(magazine_idx, false));
 		model.addAttribute("numLikes",mzbbsService.numLikes(magazine_idx));
 		return "/admin/magazine/magazineDetail";
@@ -72,7 +78,10 @@ public class MzbbsController {
 	}
 
 	@RequestMapping(value = "/form", method = RequestMethod.GET)
-	public String magazineAdd() {
+	public String magazineAdd(HttpServletRequest req) {
+		if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+			return "redirect:/";
+		}
 		return "/admin/magazine/magazineAdd";
 	}
 

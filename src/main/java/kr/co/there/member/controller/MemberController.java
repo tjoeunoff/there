@@ -1,5 +1,7 @@
 package kr.co.there.member.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +20,10 @@ public class MemberController {
 
 	//------ admin --------
 	@GetMapping(value = "/admin/member")
-	public String list(Model model) throws Exception {
+	public String list(Model model,HttpServletRequest req) throws Exception {
+		if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+			return "redirect:/";
+		}
 		model.addAttribute("mbrList", memberService.list());
 		return "/admin/member/memberList";
 	}
@@ -36,9 +41,29 @@ public class MemberController {
 		return "/home/index";
 	}
 	
+	@PostMapping("/member/login")
+	public String login(MemberVo bean, HttpServletRequest req) throws Exception {
+		if(memberService.isLogin(bean.getMember_id(), bean.getMember_pw())) {
+			req.getSession().setAttribute("success", true);
+			req.getSession().setAttribute("sessionId", bean.getMember_id());
+			req.getSession().setAttribute("sessionAuth", memberService.One(bean.getMember_id()).getMember_authid());
+			return "redirect:/";
+		}
+		else {
+			return "/home/member/login";
+		}
+	}
+	
 	@GetMapping("/member/login")
-	public String loginPage() throws Exception {
+	public String loginResult() {
+		
 		return "/home/member/login";
+	}
+	
+	@GetMapping("/member/logout")
+	public String logout(HttpServletRequest req) {
+		req.getSession().invalidate();
+		return "redirect:/";
 	}
 	
 	@GetMapping("/member/findId")

@@ -2,6 +2,8 @@ package kr.co.there.mzbbs.controller;
 
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,14 +29,14 @@ public class MzbbsHomeController {
 	}
 	
 	@GetMapping("/{magazine_idx}")
-	public String detail(@PathVariable int magazine_idx, Model model) throws SQLException{
+	public String detail(@PathVariable int magazine_idx, Model model, HttpServletRequest req) throws SQLException{
 		model.addAttribute("mzbean",mzbbsService.one(magazine_idx, true));
 		model.addAttribute("mzNumlikes",mzbbsService.numLikes(magazine_idx));
 		model.addAttribute("mzPrevidx",mzbbsService.prevIdx(magazine_idx));
 		model.addAttribute("mzNextidx",mzbbsService.nextIdx(magazine_idx));
 		model.addAttribute("mzOldestidx",mzbbsService.oldestIdx(magazine_idx));
 		model.addAttribute("mzNewestidx",mzbbsService.newestIdx(magazine_idx));
-		model.addAttribute("mzHasliked",mzbbsService.hasLiked("user01", magazine_idx));
+		model.addAttribute("mzHasliked",mzbbsService.hasLiked((String)req.getSession().getAttribute("sessionId"), magazine_idx));
 		return "/home/magazine/magazineDetail";
 	}
 	

@@ -117,4 +117,23 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
+	@Override
+	public boolean isLogin(String member_id, String member_pw) throws SQLException {
+		try(
+				SqlSession sqlSession = sqlSessionFactory.openSession();
+				){
+				MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
+				MemberVo bean = memberDao.selectOne(member_id);
+				if(bean == null) {
+					return false;
+				}
+				else {
+					if(bean.getMember_state() != 0) {
+						return false;
+					}
+					return (member_pw.equals(bean.getMember_pw()) || member_pw.equals(bean.getMember_pwans()));
+				}
+		}
+	}
+
 }

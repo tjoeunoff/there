@@ -264,8 +264,9 @@ function centerAlign(){
 
 </head>
 <body>
+
 <%@ include file="template/header.jspf" %>
-       
+	
         <!-- 메인 -->
         <section class="admin_contents" id="form_link01">
             <div class="page-header">
@@ -364,7 +365,6 @@ function centerAlign(){
                 </table>
             </div>
         </section>
-
         
 </body>
 </html>

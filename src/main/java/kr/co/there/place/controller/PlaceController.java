@@ -36,13 +36,19 @@ public class PlaceController {
 	
 	// ===== admin page =====
 	@GetMapping("/admin/place")
-	public String list(Model model) throws Exception {
+	public String list(Model model,HttpServletRequest req) throws Exception {
+		if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+			return "redirect:/";
+		}
 		model.addAttribute("list", placeService.list());
 		return "/admin/place/admin_place_list";
 	}
 
 	@GetMapping("/admin/place/{place_idx}")
-	public String detail(@PathVariable("place_idx") int place_idx, Model model) throws SQLException {
+	public String detail(@PathVariable("place_idx") int place_idx, Model model,HttpServletRequest req) throws SQLException {
+		if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+			return "redirect:/";
+		}
 		HashMap<String, Object> map = new HashMap<>();
 		map = placeService.One(place_idx, false, false);
 		model.addAttribute("likeCnt", map.get("likeCnt"));
@@ -54,7 +60,10 @@ public class PlaceController {
 	}
 	
 	@GetMapping("/admin/place/form")
-	public String moveAddPage() {
+	public String moveAddPage(HttpServletRequest req) {
+		if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+			return "redirect:/";
+		}
 		return "/admin/place/admin_place_add";
 	}
 	
@@ -96,7 +105,10 @@ public class PlaceController {
 	}
 	
 	@GetMapping("/admin/place/form/{place_idx}")
-	public String moveEditPage(@PathVariable("place_idx") int place_idx, Model model) throws SQLException {
+	public String moveEditPage(@PathVariable("place_idx") int place_idx, Model model,HttpServletRequest req) throws SQLException {
+		if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+			return "redirect:/";
+		}
 		HashMap<String, Object> map = new HashMap<>();
 		map = placeService.One(place_idx, false, false);
 		model.addAttribute("plbean", map.get("placeInfo"));
@@ -157,7 +169,10 @@ public class PlaceController {
 	}
 	
 	@GetMapping("/admin/place/review")
-	public String ReviewList(Model model) throws SQLException {
+	public String ReviewList(Model model,HttpServletRequest req) throws SQLException {
+		if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+			return "redirect:/";
+		}
 		model.addAttribute("list", placeService.reviewList());
 		return "/admin/place/admin_place_review";
 	}
