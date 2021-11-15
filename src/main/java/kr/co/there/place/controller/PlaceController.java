@@ -10,7 +10,6 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.there.place.model.entity.PlaceVo;
@@ -102,7 +100,6 @@ public class PlaceController {
 				file.transferTo(new File(savePath + filename));
 				placeService.add(bean);
 				
-				
 				// 번호, 이름, 위도, 경도 json파일로 저장
 				int thisIdx = placeService.selectMaxIdx();
 				String jsonPath = request.getSession().getServletContext().getRealPath("/") + "resources\\json\\place.json";
@@ -117,13 +114,14 @@ public class PlaceController {
 					JSONObject existObj = (JSONObject) parser.parse(reader);
 					
 					// json에 작성되어있던 플레이스 정보
-					HashMap existPlaceMap = (HashMap) existObj.get("positions");
+					JSONObject existPlaceMap = (JSONObject) existObj.get("positions");
 					
 					// 새로 입력하는 플레이스 정보
-					
 					JSONObject placeLatLngName = new JSONObject();
 					
 					placeLatLngName.put("name", place_name);
+					placeLatLngName.put("addr", place_addr);
+					placeLatLngName.put("tel", place_tel);
 					placeLatLngName.put("lat", Float.parseFloat(place_latitude));
 					placeLatLngName.put("lng", Float.parseFloat(place_longitude));
 					
@@ -137,6 +135,8 @@ public class PlaceController {
 					JSONObject placeLatLngName = new JSONObject();
 					
 					placeLatLngName.put("name", place_name);
+					placeLatLngName.put("addr", place_addr);
+					placeLatLngName.put("tel", place_tel);
 					placeLatLngName.put("lat", Float.parseFloat(place_latitude));
 					placeLatLngName.put("lng", Float.parseFloat(place_longitude));
 					placeMap.put(thisIdx, placeLatLngName);
@@ -151,8 +151,7 @@ public class PlaceController {
 					e.printStackTrace();
 				}
 				
-				
-
+			
 				 
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
@@ -183,7 +182,7 @@ public class PlaceController {
 	public String edit(@PathVariable("place_idx") int place_idx, MultipartFile file, Model model, HttpServletRequest request,
 			String place_category, String place_name, String place_addr, String place_opentime, 
 			String place_endtime, String place_tel, String place_url, String place_content, 
-			String place_longitude, String place_latitude, String place_thumb, String place_hashtag) throws SQLException {		
+			String place_longitude, String place_latitude, String place_thumb, String place_hashtag) throws Exception {		
 		
 		PlaceVo bean = new PlaceVo();
 		bean.setPlace_idx(place_idx);
@@ -199,6 +198,40 @@ public class PlaceController {
 		bean.setPlace_latitude(Float.parseFloat(place_latitude));
 		bean.setPlace_longitude(Float.parseFloat(place_longitude));
 		
+		
+		// 번호, 이름, 위도, 경도 json파일로 저장
+		String jsonPath = request.getSession().getServletContext().getRealPath("/") + "resources\\json\\place.json";
+
+		JSONObject obj = new JSONObject();	// 최종으로 json에 입력되는 내용
+		JSONParser parser = new JSONParser();
+		Reader reader = new FileReader(jsonPath);
+		JSONObject existObj = (JSONObject) parser.parse(reader);
+		
+		// json에 작성되어있던 플레이스 정보
+		JSONObject existPlaceMap = (JSONObject) existObj.get("positions");
+		
+		// 새로 입력하는 플레이스 정보
+		JSONObject placeLatLngName = new JSONObject();
+		placeLatLngName.put("name", place_name);
+		placeLatLngName.put("addr", place_addr);
+		placeLatLngName.put("tel", place_tel);
+		placeLatLngName.put("lat", Float.parseFloat(place_latitude));
+		placeLatLngName.put("lng", Float.parseFloat(place_longitude));
+		
+		existPlaceMap.put(place_idx, placeLatLngName);
+
+		obj.put("positions", existPlaceMap);
+		System.out.println(place_idx + "번 수정함 " + obj.get("positions"));	// json수정/삭제 추가작업필요
+		
+		try(
+				FileWriter fileJson = new FileWriter(jsonPath); 
+			) { 
+			fileJson.write(obj.toJSONString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
         if (!file.isEmpty()) {
         	String savePath = request.getSession().getServletContext().getRealPath("/") + "resources\\img\\place\\";
             String filename = System.currentTimeMillis() + "_" + file.getOriginalFilename();
@@ -207,6 +240,7 @@ public class PlaceController {
             try {
 				file.transferTo(new File(savePath + filename));
 				placeService.edit(bean);
+				
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
