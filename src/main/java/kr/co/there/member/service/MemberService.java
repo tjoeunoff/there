@@ -21,4 +21,9 @@ public interface MemberService {
 	boolean isIdUnique(String member_id) throws SQLException; //겹쳐지지 않은 아이디일 경우 true 반환
 	boolean isEmailUnique(String member_email) throws SQLException; //겹쳐지지 않은 전화번호일 경우 true 반환
 	boolean isTelUnique(String member_tel) throws SQLException; //겹쳐지지 않은 이메일일 경우 true 반환
+	
+	//아이디 찾기에 사용할 메서드
+	String getId(String member_name,String member_tel) throws SQLException;
+	//비밀번호 찾기에 호출할 메서드
+	String getPwans(String member_id,String member_tel) throws SQLException;
 }

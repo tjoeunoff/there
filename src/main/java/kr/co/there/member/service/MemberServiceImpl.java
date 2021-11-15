@@ -135,5 +135,25 @@ public class MemberServiceImpl implements MemberService {
 				}
 		}
 	}
+	
+	@Override
+	public String getId(String member_name, String member_tel) throws SQLException {
+		try(
+				SqlSession sqlSession = sqlSessionFactory.openSession();
+				){
+				MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
+				return memberDao.getId(member_name, member_tel);
+		}
+	}
+	
+	@Override
+	public String getPwans(String member_id, String member_tel) throws SQLException {
+		try(
+				SqlSession sqlSession = sqlSessionFactory.openSession();
+				){
+				MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
+				return memberDao.getPwans(member_id, member_tel);
+		}
+	}
 
 }
