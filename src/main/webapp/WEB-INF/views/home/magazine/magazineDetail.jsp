@@ -29,7 +29,7 @@ $(document).ready(function(){
 				var numLikes=parseInt($('#numLikes').text());
 				$('#numLikes').text(numLikes-1);
 			}
-		})
+		});
 	});
 });
 </script>

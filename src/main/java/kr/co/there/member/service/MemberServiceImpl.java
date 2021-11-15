@@ -86,5 +86,35 @@ public class MemberServiceImpl implements MemberService {
 				return memberDao.myMzList(member_id);
 		}
 	}
+	
+	@Override
+	public boolean isIdUnique(String member_id) throws SQLException {
+		try(
+				SqlSession sqlSession = sqlSessionFactory.openSession();
+				){
+				MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
+				return memberDao.isIdDuplicate(member_id)==0;
+		}
+	}
+	
+	@Override
+	public boolean isEmailUnique(String member_email) throws SQLException {
+		try(
+				SqlSession sqlSession = sqlSessionFactory.openSession();
+				){
+				MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
+				return memberDao.isEmailDuplicate(member_email)==0;
+		}
+	}
+	
+	@Override
+	public boolean isTelUnique(String member_tel) throws SQLException {
+		try(
+				SqlSession sqlSession = sqlSessionFactory.openSession();
+				){
+				MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
+				return memberDao.isTelDuplicate(member_tel)==0;
+		}
+	}
 
 }

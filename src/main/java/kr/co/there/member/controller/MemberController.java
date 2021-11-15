@@ -1,13 +1,11 @@
 package kr.co.there.member.controller;
 
-import java.sql.SQLException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.there.member.model.entity.MemberVo;
 import kr.co.there.member.service.MemberService;
@@ -51,6 +49,30 @@ public class MemberController {
 	@GetMapping("/member/findPw")
 	public String findPwPage() throws Exception {
 		return "/home/member/findPw";
+	}
+	
+	
+	
+	
+	
+	
+	//------ AJAX --------
+	@ResponseBody
+	@PostMapping("/member/checkid")
+	public boolean checkId(String member_id) throws Exception {
+		return memberService.isIdUnique(member_id);
+	}
+	
+	@ResponseBody
+	@PostMapping("member/checkemail")
+	public boolean checkEmail(String member_email) throws Exception {
+		return memberService.isEmailUnique(member_email);
+	}
+	
+	@ResponseBody
+	@PostMapping("member/checktel")
+	public boolean checkTel(String member_tel) throws Exception {
+		return memberService.isTelUnique(member_tel);
 	}
 	
 	
