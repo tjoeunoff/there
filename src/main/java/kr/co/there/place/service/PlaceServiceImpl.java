@@ -137,6 +137,16 @@ public class PlaceServiceImpl implements PlaceService {
 			}
 	}
 
+	@Override
+	public List<PlaceVo> listOrderBylikes() throws SQLException {
+		try(
+				SqlSession sqlSession = sqlSessionFactory.openSession();
+			){
+				PlaceDao placeDao = sqlSession.getMapper(PlaceDao.class);
+				return placeDao.orderBylikes();
+			}
+	}
+
 
 
 
