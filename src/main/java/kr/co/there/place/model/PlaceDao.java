@@ -20,6 +20,7 @@ public interface PlaceDao {
 	List<PlaceVo> selectAllHome() throws SQLException;
 	List<PlaceVo> orderBylikes() throws SQLException;
 	int selectMaxIdx() throws SQLException;
+	List<Integer> selectIdx() throws SQLException;
 	
 	List<ReviewVo> selectReviewAll() throws SQLException;
 	List<ReviewVo> selectReviewbyPlace(int place_idx) throws SQLException;

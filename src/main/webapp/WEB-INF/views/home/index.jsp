@@ -139,12 +139,12 @@ $(function(){
                 <div class="tac">
                     <h2 class="sect-tit tac mb80">카테고리별 추천 PLACE 👀</h2>
                     <ul class="cate-btns mb100">
-                        <li><a href="${pageContext.request.contextPath}/categroy#food"><span>맛집</span></a></li>
-                        <li><a href="${pageContext.request.contextPath}/categroy#cafe"><span>카페</span></a></li>
-                        <li><a href="${pageContext.request.contextPath}/categroy#play"><span>놀거리</span></a></li>
-                        <li><a href="${pageContext.request.contextPath}/categroy#bar"><span>술집</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/place/category#food"><span>맛집</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/place/category#cafe"><span>카페</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/place/category#play"><span>놀거리</span></a></li>
+                        <li><a href="${pageContext.request.contextPath}/place/category#bar"><span>술집</span></a></li>
                     </ul>
-                    <a class="abtn abtn-mint big" href="${pageContext.request.contextPath}/categroy">더보기</a>
+                    <a class="abtn abtn-mint big" href="${pageContext.request.contextPath}/place/category">더보기</a>
                 </div>
             </div>
         </div>

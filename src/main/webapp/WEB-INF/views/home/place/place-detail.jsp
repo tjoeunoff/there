@@ -160,8 +160,6 @@ $(function(){
 	                        			<button type="button" class="abtn abtn-mint" data-toggle="modal" data-target="#reviewWriteModal">리뷰 작성하기</button>
 	                        	</c:otherwise>
 							</c:choose>
-                            
-                                
                             </div>
                             </c:if>
                         </div>
@@ -201,18 +199,16 @@ $(function(){
                         <div class="view-foot">
                             <ul class="list-nav-btns">
                             	<!-- 맨첫글, 맨 마지막글에서 버튼 비활성화 기능 추가필요 -->
-                                <li><a href="${pageContext.servletContext.contextPath }/place/${plbean.place_idx-1 }">이전글</a></li>
-                                <li><a href="${pageContext.servletContext.contextPath }/categroy">목록</a></li>
-                                <li><a href="${pageContext.servletContext.contextPath }/place/${plbean.place_idx+1 }">다음글</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath }/place/${idxList.prevIdx }">이전글</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath }/place/category">목록</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath }/place/${idxList.nextIdx }">다음글</a></li>
                             </ul>
                         </div>
                     </div>
                     <!-- container -->
                 </div>
                 <!-- // place-view-wrap -->
-
             </div>
-
 
 
         </div>

@@ -17,6 +17,7 @@ public interface PlaceService {
 	List<PlaceVo> listOrderBylikes() throws SQLException;
 	int selectMaxIdx() throws SQLException;
 	List<PlaceVo> listHome() throws SQLException;
+	HashMap<String, Integer> selectIdx(int param) throws SQLException;
 	
 	List<ReviewVo> reviewList() throws SQLException;
 	boolean addReveiw(ReviewVo bean) throws SQLException;

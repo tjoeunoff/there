@@ -47,8 +47,12 @@
 	group by pl.place_idx order by placeLikeCnt desc;
 	</select>
 	
-	<select id="selectMaxIdx" resultType="int">
+	<select id="selectMaxIdx" resultType="int"> <!-- json 저장시 placeIdx값 추출하기 위해 -->
 	select max(place_idx) from place;
+	</select>
+	
+	<select id="selectIdx" resultType="int">
+	SELECT place_idx FROM place
 	</select>
 		
 	
