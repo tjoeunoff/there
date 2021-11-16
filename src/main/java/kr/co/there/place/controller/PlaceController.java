@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.there.place.model.entity.PlaceVo;
@@ -271,19 +272,19 @@ public class PlaceController {
 	
 	
 	// ===== home page =====
-	@GetMapping("/categroy")
+	@GetMapping("/place/category")
 	public String showCategoryPage(Model model) throws SQLException {
 		model.addAttribute("list", placeService.listHome());
 		return "/home/place/place-by-category";
 	}
 	
-	@GetMapping("/location")
+	@GetMapping("/place/location")
 	public String moveLocationPage() {
 		return "/home/place/place-by-location";
 	}
 	
 	@GetMapping("/place/{place_idx}")
-	public String showPlaceDetailPage(@PathVariable("place_idx") int place_idx, Model model) throws SQLException {
+	public String showPlaceDetailPage(@PathVariable("place_idx") int place_idx, Model model, HttpServletRequest req) throws SQLException {
 		HashMap<String, Object> map = new HashMap<>();
 		map = placeService.One(place_idx, true, true);
 		model.addAttribute("plbean", map.get("placeInfo"));
@@ -291,8 +292,8 @@ public class PlaceController {
 		model.addAttribute("likeCnt", map.get("likeCnt"));
 		model.addAttribute("reviewCnt", map.get("reviewCnt"));
 		model.addAttribute("scoreAvg", map.get("scoreAvg"));
-		
-		//System.out.println(map.get("placeInfo"));
+		model.addAttribute("placeHasliked", placeService.hasLiked((String)req.getSession().getAttribute("sessionId"), place_idx));
+		model.addAttribute("placeHasReview", placeService.hasReview((String)req.getSession().getAttribute("sessionId"), place_idx));
 		
 		return "/home/place/place-detail";
 	}
@@ -303,6 +304,12 @@ public class PlaceController {
 		return "redirect:/place/{place_idx}";
 	}
 	
+
+	@ResponseBody
+	@PostMapping("/place/likes/{place_idx}")
+	public boolean like(@PathVariable int place_idx, String member_id) throws SQLException{
+		return placeService.clickLike(member_id, place_idx);
+	}
 	
 	
 

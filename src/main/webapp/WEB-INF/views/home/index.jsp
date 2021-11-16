@@ -8,6 +8,7 @@
 <%@ include file="template/include.jspf" %>
 <script>
 $(function(){
+	// 해시태그 출력
 	var tagsArr = new Array();
 	$.each($('.hidden-tags'), function(idx, ele){
 		tagsArr[idx] = $(this).text();
@@ -22,6 +23,82 @@ $(function(){
 			$('.top20-place-sect .list-item').eq(idx).find('p.tags').append('<span>#' + ele2 + '</span>');
 		});
 	});
+	
+	// 슬라이드
+    var magazineSlider = new Swiper(".magazine-slider", {
+	     slidesPerView: 1.2,
+	     spaceBetween: 20,
+	     centeredSlides: true,
+	     loop: true,
+	     navigation: {
+	         nextEl: ".slide-next",
+	         prevEl: ".slide-prev",
+	     },
+	     breakpoints: {
+	         // when window width is >= 480px
+	         480: {
+	             slidesPerView: 1.4,
+	             spaceBetween: 20,
+	             centeredSlides: true
+	         },
+	         // when window width is >= 640px
+	         640: {
+	             slidesPerView: 1.8,
+	             spaceBetween: 20,
+	             centeredSlides: true
+	         },
+	         // when window width is >= 992px
+	         992: {
+	             slidesPerView: 1.8,
+	             spaceBetween: 20,
+	             centeredSlides: true
+	         },
+	         // when window width is >= 1320px
+	         1200: {
+	             slidesPerView: 2.8,
+	             spaceBetween: 20,
+	             centeredSlides: false
+	         },
+	     }
+
+ 	});
+
+	 var placeSlider = new Swiper(".place-slider", {
+        slidesPerView: 2.4,
+        spaceBetween: 20,
+        loop: true,
+        navigation: {
+            nextEl: ".slide-next",
+            prevEl: ".slide-prev",
+        },
+        breakpoints: {
+            // when window width is >= 480px
+            480: {
+                slidesPerView: 1.4,
+                spaceBetween: 20,
+                centeredSlides: true
+            },
+            // when window width is >= 640px
+            640: {
+                slidesPerView: 1.8,
+                spaceBetween: 20,
+                centeredSlides: true
+            },
+            // when window width is >= 992px
+            992: {
+                slidesPerView: 1.8,
+                spaceBetween: 20,
+                centeredSlides: true
+            },
+            // when window width is >= 1320px
+            1200: {
+                slidesPerView: 2.8,
+                spaceBetween: 20,
+                centeredSlides: false
+            },
+        }
+
+    });
 
 });
 </script>

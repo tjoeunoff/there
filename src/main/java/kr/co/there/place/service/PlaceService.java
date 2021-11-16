@@ -16,11 +16,15 @@ public interface PlaceService {
 	boolean remove(int param) throws SQLException;
 	List<PlaceVo> listOrderBylikes() throws SQLException;
 	int selectMaxIdx() throws SQLException;
-
+	List<PlaceVo> listHome() throws SQLException;
+	
 	List<ReviewVo> reviewList() throws SQLException;
 	boolean addReveiw(ReviewVo bean) throws SQLException;
+	boolean hasReview(String member_id,int place_idx) throws SQLException;
 	
-	List<PlaceVo> listHome() throws SQLException;
+	boolean hasLiked(String member_id,int place_idx) throws SQLException;
+	boolean clickLike(String member_id,int place_idx) throws SQLException;
+	
 	
 }
 
