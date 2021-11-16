@@ -2,21 +2,26 @@
 /*.header{width:100%; height:90px; background-color:#00adb5; float:left;}*/
 .header{width:100%; height:11%; background-color:#00adb5; float:left;}
 /*logo*/
-.logo{width:85%; height:90px; float:left;}
+.logo{width:auto; height:90px; float:left;}
 .logo li{display: inline-block; width:200px; height:100px;}
 .logo li a{display: block;}
-.logo li a > div{margin-top:3px;}
+.logo li a > div{margin-top:7px;}
 .logo li a > div img{width:100%; height:99%;}
+.adminwellcome{width:80px; margin-top:38px; color:white; font-size:16px; float:right;}
+.gohome{width:25px; height:25px;float:right; margin:36px 10px 0px 10px;}
+.gohome img{width:100%; height:100%;}
+.goout{width:auto;float:right; margin-top:30px;}
+
+
 /*메뉴 js 효과*/
 .sub_nav_list > li.on > a{color:#f7538f; font-weight: bold;}
 .sub_nav.on + .sub_nav_box {background-color: #fff;}
 .sub_nav.on {background-color : #ffffff; border-left : 4px solid #019198; }
+
 /*관리자로그인*/
 .lnb_login{width:15%; float:right;}
 .lnb_login li{display: inline-block; list-style: none; line-height:6.5em;}
 .lnb_login li a{color:#fff;}
-
-
 
 /*사이드 메뉴*/
 #wrapper {width:100%; display: flex; min-height:89%;}

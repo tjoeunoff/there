@@ -101,12 +101,12 @@ public class PlaceController {
 				file.transferTo(new File(savePath + filename));
 				placeService.add(bean);
 				
-				// 번호, 이름, 위도, 경도 json파일로 저장
+				// 踰덊샇, �씠由�, �쐞�룄, 寃쎈룄 json�뙆�씪濡� ���옣
 				int thisIdx = placeService.selectMaxIdx();
 				String jsonPath = request.getSession().getServletContext().getRealPath("/") + "resources\\json\\place.json";
 				
 				File existJsonFile = new File(jsonPath);
-				JSONObject obj = new JSONObject();	// 최종으로 json에 입력되는 내용
+				JSONObject obj = new JSONObject();	// 理쒖쥌�쑝濡� json�뿉 �엯�젰�릺�뒗 �궡�슜
 				
 				if(existJsonFile.exists()) {
 					JSONParser parser = new JSONParser();
@@ -114,10 +114,10 @@ public class PlaceController {
 					Reader reader = new FileReader(jsonPath);
 					JSONObject existObj = (JSONObject) parser.parse(reader);
 					
-					// json에 작성되어있던 플레이스 정보
+					// json�뿉 �옉�꽦�릺�뼱�엳�뜕 �뵆�젅�씠�뒪 �젙蹂�
 					JSONObject existPlaceMap = (JSONObject) existObj.get("positions");
 					
-					// 새로 입력하는 플레이스 정보
+					// �깉濡� �엯�젰�븯�뒗 �뵆�젅�씠�뒪 �젙蹂�
 					JSONObject placeLatLngName = new JSONObject();
 					
 					placeLatLngName.put("name", place_name);
@@ -200,18 +200,18 @@ public class PlaceController {
 		bean.setPlace_longitude(Float.parseFloat(place_longitude));
 		
 		
-		// 번호, 이름, 위도, 경도 json파일로 저장
+		// 踰덊샇, �씠由�, �쐞�룄, 寃쎈룄 json�뙆�씪濡� ���옣
 		String jsonPath = request.getSession().getServletContext().getRealPath("/") + "resources\\json\\place.json";
 
-		JSONObject obj = new JSONObject();	// 최종으로 json에 입력되는 내용
+		JSONObject obj = new JSONObject();	// 理쒖쥌�쑝濡� json�뿉 �엯�젰�릺�뒗 �궡�슜
 		JSONParser parser = new JSONParser();
 		Reader reader = new FileReader(jsonPath);
 		JSONObject existObj = (JSONObject) parser.parse(reader);
 		
-		// json에 작성되어있던 플레이스 정보
+		// json�뿉 �옉�꽦�릺�뼱�엳�뜕 �뵆�젅�씠�뒪 �젙蹂�
 		JSONObject existPlaceMap = (JSONObject) existObj.get("positions");
 		
-		// 새로 입력하는 플레이스 정보
+		// �깉濡� �엯�젰�븯�뒗 �뵆�젅�씠�뒪 �젙蹂�
 		JSONObject placeLatLngName = new JSONObject();
 		placeLatLngName.put("name", place_name);
 		placeLatLngName.put("addr", place_addr);
@@ -222,7 +222,7 @@ public class PlaceController {
 		existPlaceMap.put(place_idx, placeLatLngName);
 
 		obj.put("positions", existPlaceMap);
-		System.out.println(place_idx + "번 수정함 " + obj.get("positions"));	// json수정/삭제 추가작업필요
+		System.out.println(place_idx + "踰� �닔�젙�븿 " + obj.get("positions"));	// json�닔�젙/�궘�젣 異붽��옉�뾽�븘�슂
 		
 		try(
 				FileWriter fileJson = new FileWriter(jsonPath); 
