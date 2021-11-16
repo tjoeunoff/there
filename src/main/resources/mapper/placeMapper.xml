@@ -84,14 +84,22 @@
 	select ifnull(avg(review_score), 0) from review where review_placeidx=#{val}
 	</select>
 	
+	<select id="hasReview" resultType="int">
+	SELECT COUNT(*) FROM review WHERE review_memberid=#{member_id} AND review_placeidx=#{place_idx}
+	</select>
+	
 	
 	<!-- LIKE -->
-	<update id="insertLike" parameterType="rvbean">
-	insert into placelikes (placelikes_memberid, placelikes_placeidx) values (#{placelikes_memberid},#{placelikes_placeidx})
+	<select id="hasLiked" resultType="int">
+	SELECT COUNT(*) FROM placelikes WHERE placelikes_memberid=#{member_id} AND placelikes_placeidx=#{place_idx}
+	</select>
+	
+	<update id="likeAdd">
+	INSERT INTO placelikes (placelikes_memberid, placelikes_placeidx) VALUES (#{member_id}, #{place_idx})
 	</update>
 	
-	<delete id="deleteLike" parameterType="rvbean">
-	delete from placelikes where placelikes_placeidx=#{placelikes_placeidx} and placelikes_memberid=#{placelikes_memberid}
+	<delete id="likeSub">
+	DELETE FROM placelikes WHERE placelikes_memberid=#{member_id} AND placelikes_placeidx=#{place_idx}
 	</delete>
 	
 	<select id="countLike" resultType="int">

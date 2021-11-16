@@ -9,12 +9,36 @@
 <%@ include file="../template/include.jspf" %>
 <script>
 $(function(){
+	// 해시태그 출력
 	const tag = '${plbean.place_hashtag}';
 	const hashArr = tag.split(';');
 	
 	hashArr.forEach(function(ele, idx){
 		$('.view-util p.tags').append('<span>#' + ele + '</span>');
 	});
+	
+	
+	// 좋아요 클릭
+	var place_idx = ${plbean.place_idx};
+	
+	$('#likeButton').click(function() {
+		$.post("./likes/" + place_idx, {
+			place_idx : place_idx,
+			member_id : "${sessionScope.sessionId}"
+		}, function(data) {
+			if (data) {
+				$('#likeButton').text("이 포스팅 좋아요 ❤️");
+				var numLikes = parseInt($('#numLikes').text());
+				$('#numLikes').text(numLikes + 1);
+			} else {
+				$('#likeButton').text("이 포스팅 좋아요 🤍");
+				var numLikes = parseInt($('#numLikes').text());
+				$('#numLikes').text(numLikes - 1);
+			}
+		});
+	});
+	
+	
 });
 </script>
 </head>
@@ -47,7 +71,7 @@ $(function(){
                             <p class="tags"></p>  <!-- 장소 관련태그 -->
                             <ul>
                                 <li class="util-show">👁️‍🗨️ <span>${plbean.place_viewcnt }</span></li> <!-- span안에 조회수 넣기 -->
-                                <li class="util-like">❤️ <span>${likeCnt }</span></li> <!-- span안에 좋아요 수 넣기 / 클릭 시 바로 숫자 올라가야함  -->
+                                <li class="util-like">❤️ <span id="numLikes">${likeCnt }</span></li> <!-- span안에 좋아요 수 넣기 / 클릭 시 바로 숫자 올라가야함  -->
                                 <li class="util-star">⭐ <span>${scoreAvg }</span></li> <!-- span안에 평점 넣기 -->
                                 <li class="util-reivew">📝 <span>${reviewCnt }</span></li> <!-- span안에 리뷰갯수 넣기 -->
                                 <li><a href="">🔗</a></li> <!-- 공유하기 => 이부분은 시간여유 있으면 진행 -->
@@ -71,8 +95,32 @@ $(function(){
                         </div>
 
                         <div class="place-action mb40">
-                            <button type="button" class="" data-toggle="modal" data-target="#likeModal">이 장소 좋아요 ❤️</button>
-                            <button>공유하기🔗</button>
+                            <c:if test="${not empty sessionScope.success }">
+							<button type="button" class="" id="likeButton">
+								<c:choose>
+									<c:when test="${placeHasliked }">
+		                        			이 포스팅 좋아요 ❤️
+		                        	</c:when>
+									<c:otherwise>
+		                        			이 포스팅 좋아요 🤍
+		                        	</c:otherwise>
+								</c:choose>
+							</button>
+							<button>공유하기🔗</button>
+							</c:if>
+							<c:if test="${empty sessionScope.success }">
+							<button type="button" class="" data-toggle="modal" data-target="#likeModal" id="likeButton">
+								<c:choose>
+									<c:when test="${mzHasliked }">
+		                        			이 포스팅 좋아요 ❤️
+		                        		</c:when>
+									<c:otherwise>
+		                        			이 포스팅 좋아요 🤍
+		                        		</c:otherwise>
+								</c:choose>
+							</button>
+							<button>공유하기🔗</button>
+							</c:if>
                         </div>
 
                         <div class="place-review mb60">
@@ -102,9 +150,20 @@ $(function(){
                                 </c:choose>
                               </ul>
                             </div>
-                            <div class="review-btns"> <!-- 리뷰버튼은 로그인O 일때만 노출됨 -->
-                                <button type="button" class="abtn abtn-mint" data-toggle="modal" data-target="#reviewWriteModal">리뷰 작성하기</button>
+                            <c:if test="${sessionScope.sessionId ne null}">
+                            <div class="review-btns">
+                            <c:choose>
+								<c:when test="${placeHasReview }">
+	                        			<button type="button" class="abtn abtn-disabled" disabled>리뷰 작성완료</button>
+	                        	</c:when>
+								<c:otherwise>
+	                        			<button type="button" class="abtn abtn-mint" data-toggle="modal" data-target="#reviewWriteModal">리뷰 작성하기</button>
+	                        	</c:otherwise>
+							</c:choose>
+                            
+                                
                             </div>
+                            </c:if>
                         </div>
                         
                         <div class="place-map mb40">
@@ -163,38 +222,38 @@ $(function(){
     <!-- // main -->
 
 
-    <!-- 좋아요 클릭 시 알림창
-            로그인O 상태 : ❤️+1 이 게시글을 좋아합니다.
-            로그인X 상태 : 로그인이 필요한 서비스입니다.    
-    -->
-    <div class="modal fade like-modal" id="likeModal" tabindex="-1" role="dialog" aria-labelledby="likeModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <!-- 로그인O 시 -->
-                    <h4 class="modal-title" id="likeModalLabel">❤️ + 1</h4>
-                    <p>이 플레이스를 좋아합니다.</p>
-                    <!-- // 로그인O 시 -->
+	<div class="modal fade like-modal" id="likeModal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<!-- 로그인O 시 -->
 
-                    <!-- 로그인X 시 -->
-                    <!-- <h4 class="modal-title" id="likeModalLabel">🤗 로그인이 필요한 서비스입니다.</h4> -->
-                    <!-- // 로그인X 시 -->
-                </div>
-                <div class="modal-footer">
-                    <!-- 로그인O 시 -->
-                    <button type="button" class="abtn abtn-mint" data-dismiss="modal">확인</button>
-                    <!-- // 로그인O 시 -->
+					<!-- // 로그인O 시 -->
 
-                    <!-- 로그인X 시 -->
-                    <!-- <a class="abtn abtn-mint" href="../member/login.html">로그인페이지로 이동</a>
+					<!-- 로그인X 시 -->
+					<h4 class="modal-title" id="myModalLabel">🤗 로그인이 필요한 서비스입니다.</h4>
+					<!-- // 로그인X 시 -->
+				</div>
+				<div class="modal-footer">
+					<!-- 로그인O 시 -->
+					<button type="button" class="abtn abtn-mint" data-dismiss="modal">확인</button>
+					<button type="button" class="abtn abtn-mint" data-dismiss="modal" onclick="location.href='${pageContext.request.contextPath}/member/login'">로그인 화면으로 이동</button>
+					<!-- // 로그인O 시 -->
+
+					<!-- 로그인X 시 -->
+					<!-- <a class="abtn abtn-mint" href="../member/login.html">로그인페이지로 이동</a>
                     <button type="button" class="abtn abtn-gray" data-dismiss="modal">취소</button> -->
-                    <!-- // 로그인X 시 -->
+					<!-- // 로그인X 시 -->
 
-                </div>
-            </div>
-        </div>
-    </div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
     <!-- 리뷰작성 모달 -->
