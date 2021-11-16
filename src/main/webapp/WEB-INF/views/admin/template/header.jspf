@@ -18,7 +18,15 @@
         </ul>
     </c:if>
 	<c:if test="${not pageScope.v }">
-		<p>${sessionScope.sessionId } 님 환영합니다.</p>
+		<div class="goout">
+			<a class="abtn abtn-gray" href="${pageContext.request.contextPath }/member/logout">로그아웃</a>
+		</div>	
+		<div class="gohome">
+			<a href="${pageContext.servletContext.contextPath }">
+				<img src="${imgPath }/home.png" alt="home.png" />
+			</a>	
+		</div>
+		<p class="adminwellcome">${sessionScope.sessionId }님 </p>
 		<!-- 
 		<ul class="lnb_login" id="nomargin">
 			<li><a class="abtn abtn-mint" href="${pageContext.request.contextPath }/member/logout">로그아웃</a></li>
@@ -35,8 +43,7 @@
 
 
 <div id="wrapper">
-    
-    
+        
     <!--side 메뉴-->
     <div class="left_wrap">
         <ul class="sub_nav" data-href="#form_link01">
