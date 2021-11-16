@@ -77,9 +77,23 @@ public class MemberController {
 		return "/home/member/findPw";
 	}
 	
+	@GetMapping("/member/mypage")
+	public String toMypage(Model model,HttpServletRequest req) throws Exception{
+		if((boolean)req.getSession().getAttribute("success")!=true)
+			return "redirect:/";
+		String member_id=(String)req.getSession().getAttribute("sessionId");
+		model.addAttribute("mbrbean",memberService.One(member_id));
+		model.addAttribute("myMzList",memberService.myMzList(member_id));
+		model.addAttribute("myPlList",memberService.myPlList(member_id));
+		model.addAttribute("myRvList",memberService.myRvList(member_id));
+		return "/home/member/mypage";
+	}
 	
-	
-	
+	@PostMapping("/member/change")
+	public String changeInfo(MemberVo mbrbean) throws Exception{
+		memberService.edit(mbrbean);
+		return "redirect:/member/mypage";
+	}
 	
 	
 	//------ AJAX --------
@@ -111,6 +125,18 @@ public class MemberController {
 	@PostMapping("member/getpwans")
 	public String getPwans(String member_id,String member_tel) throws Exception {
 		return memberService.getPwans(member_id, member_tel);
+	}
+	
+	@ResponseBody
+	@PostMapping("member/checknewemail")
+	public boolean checkNewEmail(String member_id,String member_email) throws Exception{
+		return memberService.isNewEmailUnique(member_id, member_email);
+	}
+	
+	@ResponseBody
+	@PostMapping("member/checknewtel")
+	public boolean checkNewTel(String member_id,String member_tel) throws Exception{
+		return memberService.isNewTelUnique(member_id, member_tel);
 	}
 	
 }

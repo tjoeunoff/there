@@ -8,7 +8,6 @@
 <%@ include file="../template/include.jspf" %>
 <script>
 $(function(){
-	console.log(${showWarning});
 	 $('#loginForm').on('submit', function(e) {
 
 		if($('#memberId').val() == '') {

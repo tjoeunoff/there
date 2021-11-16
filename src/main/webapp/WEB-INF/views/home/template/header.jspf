@@ -25,8 +25,8 @@
 <nav id="gnb">
     <ul>
         <li><a href="${pageContext.servletContext.contextPath }/magazine">매거진</a></li>
-        <li><a href="${pageContext.servletContext.contextPath }/location">지역별</a></li>
-        <li><a href="${pageContext.servletContext.contextPath }/categroy">카테고리별</a></li>
+        <li><a href="${pageContext.servletContext.contextPath }/place/location">지역별</a></li>
+        <li><a href="${pageContext.servletContext.contextPath }/place/category">카테고리별</a></li>
     </ul>
 </nav>
 <!-- // nav -->
@@ -43,9 +43,9 @@
 <div id="mGnb">
     <div>
         <ul>
-            <li><a href="${pageContext.servletContext.contextPath }/magazine/magazine-list">매거진</a></li>
-            <li><a href="${pageContext.servletContext.contextPath }/location">지역별</a></li>
-            <li><a href="${pageContext.servletContext.contextPath }/categroy">카테고리별</a></li>
+            <li><a href="${pageContext.servletContext.contextPath }/magazine">매거진</a></li>
+            <li><a href="${pageContext.servletContext.contextPath }/place/location">지역별</a></li>
+            <li><a href="${pageContext.servletContext.contextPath }/place/category">카테고리별</a></li>
         </ul>
     </div>
 </div>
