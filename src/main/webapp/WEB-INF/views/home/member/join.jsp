@@ -64,7 +64,7 @@
         <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label">이메일</label>
             <div class="col-sm-5">
-                <input type="text" name="member_email" pattern=".{1,32}" class="form-control" id="inputEmail3" placeholder="중복확인필수, E-mail, 최대 32 자">
+                <input type="email" name="member_email" pattern=".{1,32}" class="form-control" id="inputEmail3" placeholder="중복확인필수, E-mail, 최대 32 자">
             </div>
             <button type="button" class="btn btn-primary col-sm-1" id="inputEmailConfirm3">확인</button>
         </div>
@@ -76,7 +76,7 @@
         <div class="form-group">
             <label for="inputCellNum3" class="col-sm-2 control-label">전화번호</label>
             <div class="col-sm-5">
-                <input type="text" class="form-control" pattern=".{1,16}" id="inputCellNum3" placeholder="중복확인필수, 전화번호, 최대 16 자" name="member_tel" />
+                <input type="te" class="form-control" pattern=".{1,16}" id="inputCellNum3" placeholder="중복확인필수, 전화번호, 최대 16 자" name="member_tel" />
             </div>
             <button type="button" class="btn btn-primary col-sm-1" id="inputTelConfirm3">확인</button>
         </div>

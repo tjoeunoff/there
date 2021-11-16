@@ -28,8 +28,16 @@
 	update member set member_state=1 where member_id=#{val}
 	</update>
 	
-	<select id="myMzList" resultType="mzbean">
-	select * from magazine where magazine_idx IN (select * from (select mzlikes_magazine_idx AS magazine_idx from mzlikes where mzlikes_memberid=#{val} order by malikes_date desc) AS orgin)
+	<select id="myMzIdxList" resultType="int">
+	select mzlikes_magazineidx AS magazine_idx from mzlikes where mzlikes_memberid=#{val} order by mzlikes_date desc
+	</select>
+	
+	<select id="myPlIdxList" resultType="int">
+	select placelikes_placeidx AS place_idx from placelikes where placelikes_memberid=#{val} order by placelikes_date desc
+	</select>
+	
+	<select id="myRvList" resultType="rvbean">
+	SELECT * FROM review WHERE review_memberid='user01' ORDER BY review_date DESC;
 	</select>
 	
 	<select id="isIdDuplicate" resultType="int">
@@ -51,5 +59,17 @@
 	<select id="getPwans" resultType="string">
 	SELECT member_pwans FROM member WHERE member_id=#{member_id} AND member_tel=#{member_tel}
 	</select>
+	
+	<select id="isNewEmailDuplicate" resultType="int">
+	SELECT COUNT(*) FROM member WHERE member_email=#{member_email} AND member_id!=#{member_id}
+	</select>
+	
+	<select id="isNewTelDuplicate" resultType="int">
+	SELECT COUNT(*) FROM member WHERE member_tel=#{member_tel} AND member_id!=#{member_id}
+	</select>
+	
+	<update id="updatePwans">
+	UPDATE member SET member_pwans=#{member_pwans} WHERE member_id=#{member_id}
+	</update>
 	
 </mapper>
