@@ -394,7 +394,7 @@
 #reviewWriteModal .radio-star input + span {position: absolute; top: 0; right: 0; display: block; width: 150px; height: 27px; pointer-events: none;}
 
 #reviewWriteModal .modal-body {padding: 30px;}
-#reviewWriteModal .form-group {position: relative; disFplay: flex; align-items: center; flex-wrap: wrap; margin-bottom: 20px;}
+#reviewWriteModal .form-group {position: relative; display: flex; align-items: center; flex-wrap: wrap; margin-bottom: 20px;}
 #reviewWriteModal .form-group > span,
 #reviewWriteModal .form-group > label {font-size: 16px; font-weight: 500; width: 100px;}
 #reviewWriteModal .form-group > p,

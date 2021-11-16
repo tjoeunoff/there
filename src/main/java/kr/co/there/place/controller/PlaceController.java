@@ -294,7 +294,9 @@ public class PlaceController {
 		model.addAttribute("scoreAvg", map.get("scoreAvg"));
 		model.addAttribute("placeHasliked", placeService.hasLiked((String)req.getSession().getAttribute("sessionId"), place_idx));
 		model.addAttribute("placeHasReview", placeService.hasReview((String)req.getSession().getAttribute("sessionId"), place_idx));
-		
+		model.addAttribute("idxList", placeService.selectIdx(place_idx));
+
+				
 		return "/home/place/place-detail";
 	}
 	

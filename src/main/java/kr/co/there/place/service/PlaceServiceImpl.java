@@ -157,6 +157,7 @@ public class PlaceServiceImpl implements PlaceService {
 				return placeDao.selectMaxIdx();
 		}
 	}
+	
 
 	@Override
 	public boolean hasLiked(String member_id, int place_idx) throws SQLException {
@@ -196,9 +197,30 @@ public class PlaceServiceImpl implements PlaceService {
 		}
 	}
 
-
-
-
+	@Override
+	public HashMap<String, Integer> selectIdx(int param) throws SQLException {
+		List<Integer> idxList;
+		HashMap<String, Integer> map = new HashMap<>();
+		
+		try(
+				SqlSession sqlSession=sqlSessionFactory.openSession();
+				){
+				PlaceDao placeDao = sqlSession.getMapper(PlaceDao.class);
+				idxList = placeDao.selectIdx();
+				
+				int num = idxList.indexOf(param);				// 내가 list에서 몇번째 글인지 순서
+				int firstIdx = idxList.get(0);					// 맨앞글의 글번호
+				int lastIdx = idxList.get(idxList.size()-1);	// 맨뒤글의 글번호
+				
+				if(num == 0) {map.put("prevIdx", lastIdx);} 				// 맨 처음 글일때 이전글 설정
+				else {map.put("prevIdx", idxList.get(num-1));}
+				
+				if(num == idxList.size()-1) {map.put("nextIdx", firstIdx);} // 맨 마지막 글일때 다음글 설정
+				else {map.put("nextIdx", idxList.get(num+1));}
+				
+				return map;
+		}
+	}
 
 
 }
