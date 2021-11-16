@@ -53,6 +53,57 @@
         		
     	});
     	
+    	// 슬라이더
+    	var listSlider = new Swiper(".list-slider", {
+	        slidesPerView: 1,
+	        spaceBetween: 20,
+	        navigation: {
+	            nextEl: ".slide-next",
+	            prevEl: ".slide-prev",
+	        },
+	        breakpoints: {
+	            // when window width is >= 480px
+	            480: {
+	                slidesPerView: 1.4,
+	                spaceBetween: 20,
+	            },
+	            // when window width is >= 640px
+	            640: {
+	                slidesPerView: 1.8,
+	                spaceBetween: 20,
+	            },
+	            // when window width is >= 992px
+	            992: {
+	                slidesPerView: 1.8,
+	                spaceBetween: 20,
+	            },
+	            // when window width is >= 1320px
+	            1200: {
+	                slidesPerView: 3.5,
+	                spaceBetween: 20,
+	            },
+	        }
+	
+	    });
+    	
+    	
+    	// show hashtag
+    	var tagsArr = new Array();
+    	$.each($('.hidden-tags'), function(idx, ele){
+    		tagsArr[idx] = $(this).text();
+    	});
+    	$('.hidden-tags').hide();
+    	
+    	const hashArr = new Array();
+    	tagsArr.forEach(function(ele, idx){
+    		hashArr[idx] = ele.split(';');
+    		
+    		hashArr[idx].forEach(function(ele2, idx2){
+    			$('.list-item').eq(idx).find('p.tags').append('<span>#' + ele2 + '</span>');
+    		});
+    	});
+    	
+    	
     });
     
     </script>
@@ -97,57 +148,88 @@
                                 </li>
                             </ul>
                         </div>
-                        <button type="button" class="btn btn-modi" data-toggle="modal" data-target="#myModal">개인정보수정 ⚙️</button> <!-- 모달창 띄워서 수정하기 -->
+                        <div style="width:450px; margin:0 auto;">
+	                        <button type="button" class="btn btn-modi" data-toggle="modal" data-target="#myModal">개인정보수정 ⚙️</button> <!-- 모달창 띄워서 수정하기 -->
+	                        <button type="button" class="btn btn-modi" data-toggle="modal" data-target="#delModal">회원 탈퇴 ⚙️</button>
+	                    </div>    
                     </div>
                 </div>
 
-                <div class="my-activity-sect">
+                <div class="my-activity-sect mb100">
                     <div class="container">
                         <div class="my-like-places mb100">
                             <div class="my-tit">
                                 <h3 class="mb30">내가 ❤️좋아하는 장소</h3> <!-- 최근 좋아요누른 장소 4개만 노출 -->
-                                <a class="abtn abtn-mint" href="">더보기</a> <!-- 더보기 구현하면 좋으나 우선 버튼만 있는걸로 -->
                             </div>
-                            <div>
-                                <ul class="row">
-                                <c:forEach items="${myPlList}" var="plbean" begin="0" end="4">
-                                
-                                    <li class="col-md-3">
-                                        <div class="img-wrap">
-                                            <div style="background-image: url(${pageContext.request.contextPath}/resources/img/place/${plbean.place_thumb} );"></div>  <!-- 내가 좋아요한 장소 썸네일, 장소명 가져오기 -->
-                                        </div>
-                                        <strong>${plbean.place_name} </strong>
-                                    </li>
-                                 </c:forEach>
-                                </ul>
-                            </div>
+							<div class="content-wrap">
+								<div class="weekly-magazine-sect">
+									<div class="swiper list-slider">
+										<div class="swiper-wrapper">
+											<c:forEach items="${myPlList }" var="plbean" begin="0" end="3">
+												<div class="swiper-slide list-item">
+													<a
+														href="${pageContext.request.contextPath}/place/${plbean.place_idx }">
+														<!-- 썸네일의 경우 img태그가 아닌 background-image로 -->
+														<div class="thumb-img" style="background-image: url(${imgPath }/place/${plbean.place_thumb });"></div>
+														<div class="thumb-desc">
+															<strong>${plbean.place_name }</strong>
+															<!-- 게시글 제목 -->
+															<p class="tags"></p>
+															<p class="hidden-tags">${plbean.place_hashtag }</p>
+															<!-- 게시글 관련태그 => 게시물 등록시 작성필요 -->
+														</div>
+													</a>
+												</div>
+											</c:forEach>
+										</div>
+										<div class="slide-next">👉</div>
+										<div class="slide-prev">👈</div>
+									</div>
+								</div>
+							</div>
                         </div>
-                        <div class="my-like-magazines mb100">
-                            <div class="my-tit">
-                                <h3 class="mb30">내가 ❤️좋아하는 매거진</h3>  <!-- 최근 좋아요누른 매거진 4개만 노출 -->
-                                <a class="abtn abtn-mint" href="">더보기</a> <!-- 더보기 구현하면 좋으나 우선 버튼만 있는걸로 -->
-                            </div>
-                            <div>
-                                <ul class="row">
-                                <c:forEach items="${myMzList}" var="mzbean" begin="0" end="4">
-                                    <li class="col-md-3">
-                                        <div class="img-wrap">
-                                            <div style="background-image: url(${pageContext.request.contextPath}/resources/img/magazine/${mzbean.magazine_thumb});"></div>  <!-- 내가 좋아요한 포스팅 썸네일, 제목 가져오기 -->
-                                        </div>
-                                        <strong>${mzbean.magazine_subject }</strong>
-                                    </li>
-								</c:forEach>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="my-reviews">
+
+					<div class="my-like-magazines mb100">
+						<div class="my-tit">
+							<h3 class="mb30">내가 ❤️좋아하는 매거진</h3>
+							<!-- 최근 좋아요누른 매거진 4개만 노출 -->
+						</div>
+						<div class="content-wrap">
+							<div class="weekly-magazine-sect">
+								<div class="swiper list-slider">
+									<div class="swiper-wrapper">
+										<c:forEach items="${myMzList }" var="mzbean" begin="0" end="3">
+											<div class="swiper-slide">
+												<a
+													href="${pageContext.request.contextPath}/magazine/${mzbean.magazine_idx }">
+													<!-- 썸네일의 경우 img태그가 아닌 background-image로 -->
+													<div class="thumb-img" style="background-image: url(${imgPath }/magazine/${mzbean.magazine_thumb });"></div>
+													<div class="thumb-desc">
+														<strong>${mzbean.magazine_subject }</strong>
+														<!-- 게시글 제목 -->
+														<p>
+															<span>${mzbean.magazine_hashtag }</span>
+														</p>
+														<!-- 게시글 관련태그 => 게시물 등록시 작성필요 -->
+													</div>
+												</a>
+											</div>
+										</c:forEach>
+									</div>
+									<div class="slide-next">👉</div>
+									<div class="slide-prev">👈</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="my-reviews">
                             <div class="my-tit">
                                 <h3 class="mb30">내가 작성한 리뷰 📝</h3>  <!-- 최근 작성한 리뷰 3개만 노출 -->
-                                <a class="abtn abtn-mint" href="">더보기</a> <!-- 더보기 구현하면 좋으나 우선 버튼만 있는걸로 -->
                             </div>
                             <div class="review-list">
                                 <ul>
-                                <c:forEach items="${myRvList}" var="rvbean" begin="0" end="3">
+                                <c:forEach items="${myRvList}" var="rvbean">
                                     <li>
                                         <span><c:forEach var="i" begin="1" end="${rvbean.review_score}">⭐</c:forEach></span>
                                         <p>${rvbean.review_content }</p>
@@ -170,14 +252,7 @@
     <!-- // main -->
 
 
-    <footer id="footer">
-    <div class="container">
-        <div class="foot-info-link">
-            <p>&copy; 2021 OFFLineTeam All Rights Reserved.</p>
-        </div>
-
-    </div>
-    </footer>
+    <%@ include file ="../template/footer.jspf" %>
     <!-- // footer -->
 
 
@@ -231,8 +306,32 @@
         </div>
         </div>
     </div>
-
-
+	
+	<!-- 개인정보 삭제 모달 -->
+	<div class="my-info-edit modal fade" tabindex="-1" role="dialog" id="delModal" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">확인</h4>
+				</div>
+				<div class="modal-body">
+					<p>${mbrbean.member_id } 회원 탈퇴를 하시겠습니까?</p>
+				</div>
+				<form method="post" action="${pageContext.request.contextPath }/member/out">
+					<input type="hidden" name="member_id" value="${mbrbean.member_id }"/>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+						<button type="submit" class="btn btn-danger">탈퇴</button>
+					</div>
+				</form>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
 
 </body>
 </html>

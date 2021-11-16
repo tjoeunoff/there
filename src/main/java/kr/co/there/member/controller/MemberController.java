@@ -1,5 +1,7 @@
 package kr.co.there.member.controller;
 
+import java.sql.SQLException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +95,12 @@ public class MemberController {
 	public String changeInfo(MemberVo mbrbean) throws Exception{
 		memberService.edit(mbrbean);
 		return "redirect:/member/mypage";
+	}
+	
+	@PostMapping("/member/out")
+	public String out(String member_id) throws Exception {
+		memberService.remove(member_id);
+		return "redirect:/member/logout";
 	}
 	
 	
