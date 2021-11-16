@@ -78,36 +78,78 @@ $(function(){
             <div class="container">
                 <h2 class="sect-tit mb40">지역별 📍 추천 PLACE</h2>
                 <div class="map-btns tac mb20">
-                    <button class="abtn abtn-gray">내 주변 보기</button>
+                    <button class="around-btn abtn abtn-gray">내 주변 보기</button>
                     <a class="abtn abtn-mint" href="${pageContext.request.contextPath}/location">자세히 보기</a>
                 </div>
                 <div id="map"></div>
-                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e5f5bb9115d812a34ed32b190bd82edf&libraries=clusterer"></script>
+                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e5f5bb9115d812a34ed32b190bd82edf"></script>
                 <script>
-                    var map = new kakao.maps.Map(document.getElementById('map'), {
-                        center : new kakao.maps.LatLng(37.564079, 126.980046),
-                        level : 7
-                    });
-                    var clusterer = new kakao.maps.MarkerClusterer({
-                        map: map,
-                        averageCenter: true,
-                        minLevel: 10,
-                        disableClickZoom: true
-                    });
-    
-                    $.get("/chicken.json", function(data) {
-                        var markers = $(data.positions).map(function(i, position) {
-                            return new kakao.maps.Marker({
-                                position : new kakao.maps.LatLng(position.lat, position.lng)
-                            });
-                        });
-                        clusterer.addMarkers(markers);
-                    });
+                $(function(){
+                	
+                    var mapContainer = document.getElementById('map'),
+                        mapOption = { 
+                            center: new kakao.maps.LatLng(37.5642135, 127.0016985),
+                            level: 7
+                        };
+                    var map = new kakao.maps.Map(mapContainer, mapOption);
 
-                    kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
-                        var level = map.getLevel()-1;
-                        map.setLevel(level, {anchor: cluster.getCenter()});
-                    });
+                    $.get("${jsonPath }/place.json", function(data) {
+                        var place = $(data.positions)[0];
+                    	var placeIdx = Object.keys(place);
+                    	var info = new Array(4);
+                        var arr = new Array(placeIdx);
+                    	for(var i = 0; i < placeIdx.length; i++) {
+                    		key = placeIdx[i];
+                            info = ([place[key].lat, place[key].lng, place[key].name, key]);
+                            //console.log(info);
+                            arr[i] = info;
+                    	}
+
+
+                        for (var i = 0; i < placeIdx.length; i ++) {
+                            var marker = new kakao.maps.Marker({
+                                map: map,
+                                position: new kakao.maps.LatLng(arr[i][0], arr[i][1]),
+                                image: new kakao.maps.MarkerImage('${imgPath }/pin.png', new kakao.maps.Size(32, 32), {offset: new kakao.maps.Point(32, 32)})
+                            });
+
+                            var infowindow = new kakao.maps.InfoWindow({
+                                content: '<div style="padding: 10px; font-size: 14px;"><a href="${pageContext.request.contextPath}/place/'+ arr[i][3] +'">'+ arr[i][2] +'</a></div>',
+                                removable: true
+                            });
+
+                            kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker, infowindow));
+                        }
+
+                        });
+
+                        function makeClickListener(map, marker, infowindow) {
+                            return function() {
+                                infowindow.open(map, marker);
+                            };
+                        }
+                        
+                        
+                        // 내 주변 보기 클릭
+                        $('.around-btn').on('click', function(){
+                        	if (navigator.geolocation) {
+                                navigator.geolocation.getCurrentPosition(function(position) {
+                                    
+                                	var lat = position.coords.latitude, // 위도
+                                    	lon = position.coords.longitude; // 경도
+                                    var locPosition = new kakao.maps.LatLng(lat, lon);
+                                	
+                                    var marker = new kakao.maps.Marker({  
+                                        map: map, 
+                                        position: locPosition,
+                                        image: new kakao.maps.MarkerImage('${imgPath }/me.png', new kakao.maps.Size(64, 64), {offset: new kakao.maps.Point(64, 64)})
+                                    }); 
+                                    
+                                    map.setCenter(locPosition);  
+                                });
+                            }
+                        });
+                });
                 </script>
             </div>
         </div>
