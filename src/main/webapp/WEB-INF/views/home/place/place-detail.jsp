@@ -52,7 +52,7 @@ $(function(){
                     <ol class="breadcrumb">
                         <li><a href="#">Home</a></li>
                         <li><a href="">카테고리별</a></li>
-                        <li class="active">야외 극장 👫</li>    <!-- 장소명 breadcrumb으로 넣기 -->
+                        <li class="active">${plbean.place_name }</li>    <!-- 장소명 breadcrumb으로 넣기 -->
                     </ol>
                     </ol>
                     <div class="page-header mb40">

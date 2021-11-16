@@ -51,7 +51,7 @@
 					<ol class="breadcrumb">
 						<li><a href="#">Home</a></li>
 						<li><a href="">매거진</a></li>
-						<li class="active">떠나자 단풍 구경! 🍁</li>
+						<li class="active">${mzbean.magazine_subject }</li>
 						<!-- 게시물 제목 breadcrumb으로 넣기 -->
 					</ol>
 					</ol>

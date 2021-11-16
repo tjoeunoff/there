@@ -73,6 +73,14 @@ var setting = {
     		reader.readAsDataURL(image); 
     	} 
     }
+    
+    $(document).ready(function(){
+    	$('#mzToListButton').click(function(){
+    		document.location.href="${pageContext.request.contextPath}/admin/magazine";
+    	});
+    	
+    	
+    });
 </script>
 <style>
 	#thumbImage{
@@ -160,9 +168,11 @@ var setting = {
                     </div>
                 </div>  
                 
-                <button type="submit" class="btn btn-primary pull-right btn-margin">입력</button>
-                <button type="reset" class="btn btn-default pull-right btn- margin">취소</button>
-                <button type="button" class="btn btn-default pull-right btn-margin" onclick="history.back();">뒤로가기</button>                    
+                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+	                <div class="btn-group"><button type="submit" class="btn btn-primary">입력</button></div>
+	                <div class="btn-group"><button type="reset" class="btn btn-default">취소</button></div>
+	                <div class="btn-group"><button type="button" class="btn btn-default" id="mzToListButton">목록으로</button></div>
+	            </div>
             </form>
         </div>
             
