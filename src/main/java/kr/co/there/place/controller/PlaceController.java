@@ -43,7 +43,11 @@ public class PlaceController {
 	// ===== admin page =====
 	@GetMapping("/admin/place")
 	public String list(Model model,HttpServletRequest req) throws Exception {
-		if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+		try {
+			if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+				return "redirect:/";
+			}
+		} catch(NullPointerException e) { //세션 값이 들어있지 않은 경우 이 예외가 발생하는 듯 하다. 즉, 로그아웃 상태에서 어드민 페이지를 요청할 때 예외를 잡고 메인페이지를 보여준다.
 			return "redirect:/";
 		}
 		model.addAttribute("list", placeService.list());
@@ -52,7 +56,11 @@ public class PlaceController {
 
 	@GetMapping("/admin/place/{place_idx}")
 	public String detail(@PathVariable("place_idx") int place_idx, Model model,HttpServletRequest req) throws SQLException {
-		if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+		try {
+			if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+				return "redirect:/";
+			}
+		} catch(NullPointerException e) { //세션 값이 들어있지 않은 경우 이 예외가 발생하는 듯 하다. 즉, 로그아웃 상태에서 어드민 페이지를 요청할 때 예외를 잡고 메인페이지를 보여준다.
 			return "redirect:/";
 		}
 		HashMap<String, Object> map = new HashMap<>();
@@ -67,7 +75,11 @@ public class PlaceController {
 	
 	@GetMapping("/admin/place/form")
 	public String moveAddPage(HttpServletRequest req) {
-		if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+		try {
+			if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+				return "redirect:/";
+			}
+		} catch(NullPointerException e) { //세션 값이 들어있지 않은 경우 이 예외가 발생하는 듯 하다. 즉, 로그아웃 상태에서 어드민 페이지를 요청할 때 예외를 잡고 메인페이지를 보여준다.
 			return "redirect:/";
 		}
 		return "/admin/place/admin_place_add";
@@ -164,7 +176,11 @@ public class PlaceController {
 	
 	@GetMapping("/admin/place/form/{place_idx}")
 	public String moveEditPage(@PathVariable("place_idx") int place_idx, Model model,HttpServletRequest req) throws SQLException {
-		if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+		try {
+			if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+				return "redirect:/";
+			}
+		} catch(NullPointerException e) { //세션 값이 들어있지 않은 경우 이 예외가 발생하는 듯 하다. 즉, 로그아웃 상태에서 어드민 페이지를 요청할 때 예외를 잡고 메인페이지를 보여준다.
 			return "redirect:/";
 		}
 		HashMap<String, Object> map = new HashMap<>();
@@ -262,7 +278,11 @@ public class PlaceController {
 	
 	@GetMapping("/admin/place/review")
 	public String ReviewList(Model model,HttpServletRequest req) throws SQLException {
-		if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+		try {
+			if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+				return "redirect:/";
+			}
+		} catch(NullPointerException e) { //세션 값이 들어있지 않은 경우 이 예외가 발생하는 듯 하다. 즉, 로그아웃 상태에서 어드민 페이지를 요청할 때 예외를 잡고 메인페이지를 보여준다.
 			return "redirect:/";
 		}
 		model.addAttribute("list", placeService.reviewList());
@@ -285,19 +305,21 @@ public class PlaceController {
 	
 	@GetMapping("/place/{place_idx}")
 	public String showPlaceDetailPage(@PathVariable("place_idx") int place_idx, Model model, HttpServletRequest req) throws SQLException {
-		HashMap<String, Object> map = new HashMap<>();
-		map = placeService.One(place_idx, true, true);
-		model.addAttribute("plbean", map.get("placeInfo"));
-		model.addAttribute("rvlist", map.get("reviewList"));
-		model.addAttribute("likeCnt", map.get("likeCnt"));
-		model.addAttribute("reviewCnt", map.get("reviewCnt"));
-		model.addAttribute("scoreAvg", map.get("scoreAvg"));
-		model.addAttribute("placeHasliked", placeService.hasLiked((String)req.getSession().getAttribute("sessionId"), place_idx));
-		model.addAttribute("placeHasReview", placeService.hasReview((String)req.getSession().getAttribute("sessionId"), place_idx));
-		model.addAttribute("idxList", placeService.selectIdx(place_idx));
-
-				
-		return "/home/place/place-detail";
+		try {
+			HashMap<String, Object> map = new HashMap<>();
+			map = placeService.One(place_idx, true, true);
+			model.addAttribute("plbean", map.get("placeInfo"));
+			model.addAttribute("rvlist", map.get("reviewList"));
+			model.addAttribute("likeCnt", map.get("likeCnt"));
+			model.addAttribute("reviewCnt", map.get("reviewCnt"));
+			model.addAttribute("scoreAvg", map.get("scoreAvg"));
+			model.addAttribute("placeHasliked", placeService.hasLiked((String)req.getSession().getAttribute("sessionId"), place_idx));
+			model.addAttribute("placeHasReview", placeService.hasReview((String)req.getSession().getAttribute("sessionId"), place_idx));
+			model.addAttribute("idxList", placeService.selectIdx(place_idx));
+			return "/home/place/place-detail";
+		} catch(IndexOutOfBoundsException e) { //작성하지 않은 place 문서를 요청하면 이 예외가 발생한다.
+			return "/errorpage";
+		}
 	}
 	
 	@PostMapping("/place/{place_idx}")

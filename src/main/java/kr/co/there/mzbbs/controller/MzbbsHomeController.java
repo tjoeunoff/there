@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.there.mzbbs.model.entity.MzbbsVo;
 import kr.co.there.mzbbs.service.MzbbsService;
 
 @Controller
@@ -30,7 +31,11 @@ public class MzbbsHomeController {
 	
 	@GetMapping("/{magazine_idx}")
 	public String detail(@PathVariable int magazine_idx, Model model, HttpServletRequest req) throws SQLException{
-		model.addAttribute("mzbean",mzbbsService.one(magazine_idx, true));
+		MzbbsVo mzbean=mzbbsService.one(magazine_idx, true);
+		if(mzbean==null) { //요청한 메거진 bean이 null일 경우 오류페이지 보내줌
+			return "/errorpage";
+		}
+		model.addAttribute("mzbean",mzbean);
 		model.addAttribute("mzNumlikes",mzbbsService.numLikes(magazine_idx));
 		model.addAttribute("mzPrevidx",mzbbsService.prevIdx(magazine_idx));
 		model.addAttribute("mzNextidx",mzbbsService.nextIdx(magazine_idx));
