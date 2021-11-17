@@ -10,7 +10,7 @@ import kr.co.there.review.model.entity.ReviewVo;
 public interface PlaceService {
 
 	List<PlaceVo> list() throws SQLException;
-	HashMap<String, Object> One(int param, boolean addViewCnt, boolean showReview) throws SQLException;
+	HashMap<String, Object> One(int param, boolean addViewCnt, boolean showReview, String member_id) throws SQLException;
 	boolean add(PlaceVo bean) throws SQLException;
 	boolean edit(PlaceVo bean) throws SQLException;
 	boolean remove(int param) throws SQLException;
@@ -22,6 +22,8 @@ public interface PlaceService {
 	List<ReviewVo> reviewList() throws SQLException;
 	boolean addReveiw(ReviewVo bean) throws SQLException;
 	boolean hasReview(String member_id,int place_idx) throws SQLException;
+	boolean updateReview(ReviewVo bean) throws SQLException;
+	boolean deleteReview(ReviewVo bean) throws SQLException;
 	
 	boolean hasLiked(String member_id,int place_idx) throws SQLException;
 	boolean clickLike(String member_id,int place_idx) throws SQLException;

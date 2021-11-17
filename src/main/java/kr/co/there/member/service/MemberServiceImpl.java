@@ -183,7 +183,7 @@ public class MemberServiceImpl implements MemberService {
 						return bean.getMember_state()==0?1:2; //정상 상태이면 정상 로그인, 탈퇴 상태이면 재가입 확인
 					}
 					else if(member_pw.equals(bean.getMember_pwans())) {
-						this.updatePwans(member_id);
+						if(bean.getMember_state()==0) this.updatePwans(member_id);
 						return bean.getMember_state()==0?1:2; //정상 상태이면 정상 로그인, 탈퇴 상태이면 재가입 확인
 					}
 					else return 0; //일치하지 않는 비밀번호

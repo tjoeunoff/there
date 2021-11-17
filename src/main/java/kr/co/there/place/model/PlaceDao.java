@@ -24,7 +24,10 @@ public interface PlaceDao {
 	
 	List<ReviewVo> selectReviewAll() throws SQLException;
 	List<ReviewVo> selectReviewbyPlace(int place_idx) throws SQLException;
+	ReviewVo selectReviewOne(@Param("member_id") String member_id, @Param("place_idx") int place_idx) throws SQLException;
 	int insertReview(ReviewVo bean) throws SQLException;
+	int updateReview(ReviewVo bean) throws SQLException;
+	int deleteReview(ReviewVo bean) throws SQLException;
 	int countReview(int place_idx) throws SQLException;
 	double avgScore(int place_idx) throws SQLException;
 	int hasReview(@Param("member_id") String member_id, @Param("place_idx") int place_idx) throws SQLException;

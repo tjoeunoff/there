@@ -39,6 +39,10 @@ $(function(){
 	});
 	
 	
+	// 리뷰수정모달 기존평점 불러오기
+	var myScore = ${rvbean.review_score };
+	$('#reviewModifyModal .select-star label').eq(myScore-1).children('input[type="radio"]').prop('checked', 'checked');
+	
 });
 </script>
 </head>
@@ -151,16 +155,17 @@ $(function(){
                               </ul>
                             </div>
                             <c:if test="${sessionScope.sessionId ne null}">
-                            <div class="review-btns">
-                            <c:choose>
-								<c:when test="${placeHasReview }">
-	                        			<button type="button" class="abtn abtn-disabled" disabled>리뷰 작성완료</button>
-	                        	</c:when>
-								<c:otherwise>
-	                        			<button type="button" class="abtn abtn-mint" data-toggle="modal" data-target="#reviewWriteModal">리뷰 작성하기</button>
-	                        	</c:otherwise>
-							</c:choose>
-                            </div>
+	                            <div class="review-btns">
+		                            <c:choose>
+										<c:when test="${placeHasReview }">
+			                        			<button type="button" class="abtn abtn-mint" data-toggle="modal" data-target="#reviewModifyModal">리뷰 수정하기</button>
+			                        			<button type="button" class="abtn abtn-mint" data-toggle="modal" data-target="#reviewDeleteModal">리뷰 삭제하기</button>
+			                        	</c:when>
+										<c:otherwise>
+			                        			<button type="button" class="abtn abtn-mint" data-toggle="modal" data-target="#reviewWriteModal">리뷰 작성하기</button>
+			                        	</c:otherwise>
+									</c:choose>
+	                            </div>
                             </c:if>
                         </div>
                         
@@ -251,9 +256,8 @@ $(function(){
 		</div>
 	</div>
 
-
     <!-- 리뷰작성 모달 -->
-    <div class="modal fade like-modal" id="reviewWriteModal" tabindex="-1" role="dialog" aria-labelledby="reviewWriteModalLabel">
+    <div class="modal fade review-modal" id="reviewWriteModal" tabindex="-1" role="dialog" aria-labelledby="reviewWriteModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -262,33 +266,12 @@ $(function(){
                 </div>
                 <form action="" method="post">
                 	<input type="hidden" name="review_placeidx" value="${plbean.place_idx }">
-                	<input type="hidden" name="review_memberid" value="user01" >  <!-- 현재 더미에넣은 사용자 아이디 -->
+                	<input type="hidden" name="review_memberid" value="${sessionScope.sessionId}" >  <!-- 현재 더미에넣은 사용자 아이디 -->
                     <div class="modal-body"> 
                         <div class="form-group">
                             <span>방문 장소</span>
                             <p>${plbean.place_name }</p> <!-- 해당페이지의 플레이스명 -->
                         </div>
-                        <!-- 
-                        <div class="form-group">
-                            <label for="visitDate">방문 날짜</label>
-                            <input type="text" id="visitDate" name="visitDate">  datepicker로 날짜 선택
-                            <span class="date-icon">📅 날짜선택</span>
-                            <script>
-                                $(function(){ 
-                                    $('#visitDate').datepicker({
-                                        format: "yyyy-mm-dd DD",
-                                        language: "ko",
-                                        endDate: "0d"
-                                    });
-
-                                    $('.date-icon').on('click', function(){
-                                        $('#visitDate').focus();
-                                    });
-
-                                });
-                            </script>
-                        </div>
-                        -->
                         <div class="form-group">
                             <span>평점</span>
                             <div class="select-star">
@@ -318,7 +301,11 @@ $(function(){
                             <label for="reviewCnt">리뷰</label>
                             <textarea name="review_content" id="reviewCnt"></textarea>
                         </div>
-
+					<script>
+						$('.radio-star').on('click', function(){
+							console.log($(this).children('input').prop('checked'));
+						});
+					</script>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="abtn abtn-gray" data-dismiss="modal">취소</button>
@@ -328,8 +315,99 @@ $(function(){
             </div>
         </div>
     </div>
-
     
-<%@ include file="../template/footer.jspf" %>
+        <!-- 리뷰 수정 모달 -->
+	<div class="modal fade review-modal" id="reviewModifyModal" tabindex="-1" role="dialog" aria-labelledby="reviewModifyModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">✏️ 리뷰 수정하기</h4>
+				</div>
+				<form action="" method="post">
+					<input type="hidden" name="_method" value="put">
+					<input type="hidden" name="review_placeidx"	value="${plbean.place_idx }">
+					<input type="hidden" name="review_memberid" value="${sessionScope.sessionId}">
+					<!-- 현재 더미에넣은 사용자 아이디 -->
+					<div class="modal-body">
+						<div class="form-group">
+							<span>방문 장소</span>
+							<p>${plbean.place_name }</p>
+							<!-- 해당페이지의 플레이스명 -->
+						</div>
+                       <div class="form-group">
+                            <span>평점</span>
+                            <div class="select-star">
+                                <label class="radio-star" for="star11">
+                                    <input type="radio" name="review_score" id="star11" value="1">
+                                    <span></span>
+                                </label>
+                                <label class="radio-star" for="star21">
+                                    <input type="radio" name="review_score" id="star21" value="2">
+                                    <span></span>
+                                </label>
+                                <label class="radio-star" for="star31">
+                                    <input type="radio" name="review_score" id="star31" value="3">
+                                    <span></span>
+                                </label>
+                                <label class="radio-star" for="star41">
+                                    <input type="radio" name="review_score" id="star41" value="4">
+                                    <span></span>
+                                </label>
+                                <label class="radio-star" for="star51">
+                                    <input type="radio" name="review_score" id="star51" value="5">
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label for="reviewCnt">리뷰</label>
+							<textarea name="review_content" id="reviewCnt">${rvbean.review_content }</textarea>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="abtn abtn-gray" data-dismiss="modal">취소</button>
+						<button type="submit" class="abtn abtn-mint" id="modifyBtn">수정</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- 리뷰 삭제 모달 -->
+	<div class="modal fade review-modal" id="reviewDeleteModal" tabindex="-1" role="dialog" aria-labelledby="reviewDeleteModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">✏️ 리뷰 삭제하기</h4>
+				</div>
+				<form action="${pageContext.request.contextPath }/place/${plbean.place_idx}" method="post">
+                	<input type="hidden" name="review_placeidx" value="${plbean.place_idx }">
+                	<input type="hidden" name="review_memberid" value="${sessionScope.sessionId}">
+					<input type="hidden" name="_method" value="delete">
+					<!-- 현재 더미에넣은 사용자 아이디 -->
+					<input type="hidden" id="delBtn" name="review_content"
+						value="${plbean.place_idx }" />
+					<div class="modal-body">
+						리뷰를 삭제하시겠습니까?
+
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="abtn abtn-gray" data-dismiss="modal">취소</button>
+						<button type="submit" class="abtn abtn-mint" id="delBtn">리뷰 삭제</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<%@ include file="../template/footer.jspf" %>
 </body>
 </html>
