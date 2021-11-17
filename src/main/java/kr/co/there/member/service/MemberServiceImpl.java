@@ -169,27 +169,24 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public boolean isLogin(String member_id, String member_pw) throws SQLException {
+	public int isLogin(String member_id, String member_pw) throws SQLException {
 		try(
 				SqlSession sqlSession = sqlSessionFactory.openSession();
 				){
 				MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
 				MemberVo bean = memberDao.selectOne(member_id);
-				if(bean == null) {
-					return false;
+				if(bean == null) { //없는 아이디
+					return 0;
 				}
 				else {
-					if(bean.getMember_state() != 0) {
-						return false;
-					}
-					else if(member_pw.equals(bean.getMember_pw())) {
-						return true;
+					if(member_pw.equals(bean.getMember_pw())) {
+						return bean.getMember_state()==0?1:2; //정상 상태이면 정상 로그인, 탈퇴 상태이면 재가입 확인
 					}
 					else if(member_pw.equals(bean.getMember_pwans())) {
 						this.updatePwans(member_id);
-						return true;
+						return bean.getMember_state()==0?1:2; //정상 상태이면 정상 로그인, 탈퇴 상태이면 재가입 확인
 					}
-					else return false;
+					else return 0; //일치하지 않는 비밀번호
 				}
 		}
 	}
@@ -241,6 +238,16 @@ public class MemberServiceImpl implements MemberService {
 				){
 				MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
 				return memberDao.updatePwans(member_id, randomString())>0;
+		}
+	}
+	
+	@Override
+	public boolean rejoin(String member_id,String member_pw) throws SQLException {
+		try(
+				SqlSession sqlSession = sqlSessionFactory.openSession();
+				){
+				MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
+				return memberDao.rejoin(member_id,member_pw)>0;
 		}
 	}
 

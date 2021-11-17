@@ -1,7 +1,5 @@
 package kr.co.there.member.controller;
 
-import java.sql.SQLException;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,21 +47,29 @@ public class MemberController {
 	
 	@PostMapping("/member/login")
 	public String loginResult(MemberVo bean, HttpServletRequest req,Model model) throws Exception {
-		if(memberService.isLogin(bean.getMember_id(), bean.getMember_pw())) {
+		int isLogin=memberService.isLogin(bean.getMember_id(), bean.getMember_pw());
+		if(isLogin==1) {
 			req.getSession().setAttribute("success", true);
 			req.getSession().setAttribute("sessionId", bean.getMember_id());
 			req.getSession().setAttribute("sessionAuth", memberService.One(bean.getMember_id()).getMember_authid());
 			return "redirect:/";
 		}
+		else if(isLogin==0) {
+			model.addAttribute("showWarning",1);
+			model.addAttribute("mbrbean",bean);
+			return "/home/member/login";
+		}
 		else {
-			model.addAttribute("showWarning",true);
+			model.addAttribute("showWarning",2);
+			model.addAttribute("mbrbean",bean);
 			return "/home/member/login";
 		}
 	}
 	
 	@GetMapping("/member/login")
 	public String login(Model model) {
-		model.addAttribute("showWarning",false);
+		model.addAttribute("showWarning",0);
+		model.addAttribute("mbrbean",new MemberVo());
 		return "/home/member/login";
 	}
 	
@@ -149,6 +155,12 @@ public class MemberController {
 	@PostMapping("member/checknewtel")
 	public boolean checkNewTel(String member_id,String member_tel) throws Exception{
 		return memberService.isNewTelUnique(member_id, member_tel);
+	}
+	
+	@ResponseBody
+	@PostMapping("member/rejoin")
+	public boolean rejoin(String member_id,String member_pw) throws Exception{
+		return memberService.rejoin(member_id,member_pw);
 	}
 	
 }

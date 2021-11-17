@@ -19,7 +19,7 @@ public interface MemberService {
 	List<ReviewVo> myRvList(String member_id) throws SQLException;
 	
 	//로그인
-	boolean isLogin(String member_id, String member_pw) throws SQLException;
+	int isLogin(String member_id, String member_pw) throws SQLException; //0: 로그인 실패, 1: 로그인 성공, 2: 탈퇴한 아이디의 로그인 시도
 	
 	//회원가입 시 중복 체크에 호출할 메서드들
 	boolean isIdUnique(String member_id) throws SQLException; //겹쳐지지 않은 아이디일 경우 true 반환
@@ -37,4 +37,7 @@ public interface MemberService {
 	
 	//대체 비밀번호 교체
 	boolean updatePwans(String member_id) throws SQLException;
+	
+	//재가입
+	boolean rejoin(String member_id,String member_pw) throws SQLException;
 }
