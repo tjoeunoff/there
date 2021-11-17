@@ -82,7 +82,7 @@ $(function(){
             <div class="top-banr-sect">
                 <div class="container">
                     <ol class="breadcrumb">
-                        <li><a href="#">Home</a></li>
+                        <li><a href="${pageContext.request.contextPath }">Home</a></li>
                         <li class="active">카테고리별</li>
                     </ol>
                     </ol>

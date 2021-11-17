@@ -91,8 +91,13 @@ public class MemberController {
 	
 	@GetMapping("/member/mypage")
 	public String toMypage(Model model,HttpServletRequest req) throws Exception{
-		if((boolean)req.getSession().getAttribute("success")!=true)
-			return "redirect:/";
+		try {
+			if((boolean)req.getSession().getAttribute("success")!=true)
+				return "redirect:/";
+		} catch(NullPointerException e) {
+			return "/errorpage";
+		}
+		
 		String member_id=(String)req.getSession().getAttribute("sessionId");
 		model.addAttribute("mbrbean",memberService.One(member_id));
 		model.addAttribute("myMzList",memberService.myMzList(member_id));
