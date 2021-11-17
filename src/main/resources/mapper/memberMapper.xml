@@ -72,4 +72,8 @@
 	UPDATE member SET member_pwans=#{member_pwans} WHERE member_id=#{member_id}
 	</update>
 	
+	<update id="rejoin">
+	UPDATE member SET member_state=0 WHERE (member_id=#{member_id} AND member_pw=#{member_pw}) OR (member_id=#{member_id} AND member_pwans=#{member_pw})
+	</update>
+	
 </mapper>

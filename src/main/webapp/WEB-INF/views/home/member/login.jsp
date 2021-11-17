@@ -30,6 +30,32 @@ $(function(){
           
      });
 });
+
+$(document).ready(function(){
+	$('#memberId').keyup(function(){
+		$('#id-alert-danger').hide();
+		$('#id-alert-warning').hide();
+		$('#id-button-warning').hide();
+	});
+	$('#memberPw').keyup(function(){
+		$('#id-alert-danger').hide();
+		$('#id-alert-warning').hide();
+		$('#id-button-warning').hide();
+	});
+	$('#id-button-warning').click(function(){
+		$.post("./rejoin",{
+			member_id: $('#memberId').val(),
+			member_pw: $('#memberPw').val()
+		},function(data){
+			if(data){
+				$('#id-button-warning').hide();
+				$('#id-alert-warning').text('재가입이 완료되었습니다. 로그인 버튼을 클릭하여 로그인하실 수 있습니다.');
+			} else{
+				$('#id-alert-warning').text('재가입에 실패하였습니다. 입력한 아이디, 비밀번호가 정확한지 다시 한 번 확인해 주십시오.');
+			}
+		});
+	});
+});
 </script>
 </head>
 <body>
@@ -48,20 +74,28 @@ $(function(){
 					<div class="box-border">
 						<label for="memberId">🙍</label>
 						<div>
-					    	<input type="text" name="member_id" id="memberId" placeholder="아이디">
+					    	<input type="text" name="member_id" id="memberId" placeholder="아이디" value="${mbrbean.member_id}"/>
 					    </div>
 					</div>
 					<div class="box-border">
 						<label for="memberPw">🔒</label>
 						<div>
-							<input type="password" name="member_pw" id="memberPw" placeholder="비밀번호">
+							<input type="password" name="member_pw" id="memberPw" placeholder="비밀번호" value="${mbrbean.member_pw}" />
 						</div>
 					</div>
-					<c:if test="${showWarning}" >
+					<c:if test="${showWarning==1}" var="r">
 			        <div class="form-group">
-			            <div class="alert alert-danger col-sm-5 col-sm-offset-2" id="id-alert-danger">
+			            <div class="alert alert-danger col-sm-8 col-sm-offset-2" id="id-alert-danger">
 			            	아이디 또는 비밀번호를 정확히 입력해 주세요
 			            </div>
+			        </div>
+			        </c:if>
+			        <c:if test="${not r and showWarning==2 }">
+			        <div class="form-group">
+			        	<div class="alert alert-warning col-sm-8 col-sm-offset-2" id="id-alert-warning">탈퇴한 회원입니다. 재가입하시겠습니까?</div>
+			        	<div class="row"></div>
+			        	<button type="button" class="btn btn-warning col-sm-8 col-sm-offset-2" id="id-button-warning">재가입</button>
+			        	<div class="row"></div>
 			        </div>
 			        </c:if>
 					<div>

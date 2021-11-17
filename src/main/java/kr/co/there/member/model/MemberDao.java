@@ -35,5 +35,8 @@ public interface MemberDao {
 	int isNewTelDuplicate(@Param("member_id") String member_id,@Param("member_tel") String member_tel) throws SQLException; // 모달 창에 입력한 전화번호가 사용가능할 경우 0 반환
 	
 	//대체 비밀번호 교체
-	int updatePwans(@Param("member_id") String member_id,@Param("member_pwans")String member_pwans) throws SQLException;
+	int updatePwans(@Param("member_id") String member_id,@Param("member_pwans") String member_pwans) throws SQLException;
+	
+	//재가입
+	int rejoin(@Param("member_id") String member_id,@Param("member_pw") String member_pw) throws SQLException;
 }
