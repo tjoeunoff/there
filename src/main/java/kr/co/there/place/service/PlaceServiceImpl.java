@@ -32,7 +32,7 @@ public class PlaceServiceImpl implements PlaceService {
 	}
 
 	@Override
-	public HashMap<String, Object> One(int param, boolean addViewCnt, boolean showReview) throws SQLException {
+	public HashMap<String, Object> One(int param, boolean addViewCnt, boolean showReview, String member_id) throws SQLException {
 		try(
 				SqlSession sqlSession = sqlSessionFactory.openSession();
 			){
@@ -43,6 +43,7 @@ public class PlaceServiceImpl implements PlaceService {
 				map.put("likeCnt", placeDao.countLike(param));
 				map.put("reviewCnt", placeDao.countReview(param));
 				map.put("placeInfo", placeDao.selectOne(param));
+				map.put("reviewOne", placeDao.selectReviewOne(member_id, param));
 				
 				double scoreAvg = placeDao.avgScore(param);
 				scoreAvg = Math.round(scoreAvg*10) / 10.0;
@@ -219,6 +220,28 @@ public class PlaceServiceImpl implements PlaceService {
 				else {map.put("nextIdx", idxList.get(num+1));}
 				
 				return map;
+		}
+	}
+
+	@Override
+	public boolean updateReview(ReviewVo bean) throws SQLException {
+		try(
+				SqlSession sqlSession = sqlSessionFactory.openSession();
+			){
+				PlaceDao placeDao = sqlSession.getMapper(PlaceDao.class);
+				placeDao.updateReview(bean);
+				return true;
+		}
+	}
+
+	@Override
+	public boolean deleteReview(ReviewVo bean) throws SQLException {
+		try(
+				SqlSession sqlSession = sqlSessionFactory.openSession();
+			){
+			PlaceDao placeDao = sqlSession.getMapper(PlaceDao.class);
+			placeDao.deleteReview(bean);
+			return true;
 		}
 	}
 

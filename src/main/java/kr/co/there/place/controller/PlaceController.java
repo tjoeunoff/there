@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -64,7 +65,7 @@ public class PlaceController {
 			return "redirect:/";
 		}
 		HashMap<String, Object> map = new HashMap<>();
-		map = placeService.One(place_idx, false, false);
+		map = placeService.One(place_idx, false, false, null);
 		model.addAttribute("likeCnt", map.get("likeCnt"));
 		model.addAttribute("reviewCnt", map.get("reviewCnt"));
 		model.addAttribute("plbean", map.get("placeInfo"));
@@ -184,7 +185,7 @@ public class PlaceController {
 			return "redirect:/";
 		}
 		HashMap<String, Object> map = new HashMap<>();
-		map = placeService.One(place_idx, false, false);
+		map = placeService.One(place_idx, false, false, null);
 		model.addAttribute("plbean", map.get("placeInfo"));
 		
 		return "/admin/place/admin_place_edit";
@@ -307,7 +308,7 @@ public class PlaceController {
 	public String showPlaceDetailPage(@PathVariable("place_idx") int place_idx, Model model, HttpServletRequest req) throws SQLException {
 		try {
 			HashMap<String, Object> map = new HashMap<>();
-			map = placeService.One(place_idx, true, true);
+			map = placeService.One(place_idx, true, true, (String)req.getSession().getAttribute("sessionId"));
 			model.addAttribute("plbean", map.get("placeInfo"));
 			model.addAttribute("rvlist", map.get("reviewList"));
 			model.addAttribute("likeCnt", map.get("likeCnt"));
@@ -316,10 +317,25 @@ public class PlaceController {
 			model.addAttribute("placeHasliked", placeService.hasLiked((String)req.getSession().getAttribute("sessionId"), place_idx));
 			model.addAttribute("placeHasReview", placeService.hasReview((String)req.getSession().getAttribute("sessionId"), place_idx));
 			model.addAttribute("idxList", placeService.selectIdx(place_idx));
+			model.addAttribute("rvbean", map.get("reviewOne"));
 			return "/home/place/place-detail";
 		} catch(IndexOutOfBoundsException e) { //작성하지 않은 place 문서를 요청하면 이 예외가 발생한다.
 			return "/errorpage";
 		}
+	}
+	
+	@DeleteMapping("/place/{place_idx}")
+	public String deleteReview(@PathVariable int place_idx, ReviewVo bean) throws Exception {
+		placeService.deleteReview(bean);
+		return "redirect:/place/{place_idx}";
+	}
+	
+	@PutMapping("/place/{place_idx}")
+	public String updateReview(@PathVariable int place_idx, ReviewVo bean, HttpServletRequest req) throws Exception {
+		bean.setReview_memberid((String)req.getSession().getAttribute("sessionId"));
+		bean.setReview_placeidx(place_idx);
+		placeService.updateReview(bean);
+		return "redirect:/place/{place_idx}";
 	}
 	
 	@PostMapping("/place/{place_idx}")

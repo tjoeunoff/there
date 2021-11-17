@@ -71,6 +71,10 @@
 	values (#{review_memberid}, #{review_placeidx}, #{review_score}, #{review_content})
 	</update>
 	
+	<select id="selectReviewOne" resultType="rvbean">
+	select * from review where review_memberid=#{member_id} and review_placeidx=#{place_idx}
+	</select>
+	
 	<update id="updateReview" parameterType="rvbean">
 	update review set review_score=#{review_score}, review_content=#{review_content}
 	where review_memberid=#{review_memberid} and review_placeidx=#{review_placeidx}

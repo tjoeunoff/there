@@ -376,8 +376,8 @@
 .place-view-wrap .list-nav-btns li:first-child a:before {content: '👈'; display: inline-block; margin-right: 10px; transform: translate(0,-4px);}
 .place-view-wrap .list-nav-btns li:last-child a:after {content: '👉'; display: inline-block; margin-left: 10px; transform: translate(0,-4px);}
 
-#reviewWriteModal .select-star {position: relative; display: flex;overflow: hidden; width: 150px; height: 36px;}
-#reviewWriteModal .select-star:after {
+.review-modal .select-star {position: relative; display: flex;overflow: hidden; width: 150px; height: 36px;}
+.review-modal .select-star:after {
     content: "";
     position: absolute;
     top: 0; left: 0;
@@ -388,22 +388,22 @@
     background-size: contain;
     pointer-events: none;
 }
-#reviewWriteModal .radio-star {position: relative; width: 30px; height: 27px; cursor: pointer;}
-#reviewWriteModal .radio-star input {position: absolute; width: 0; height: 0; opacity: 0; overflow: hidden;}
-#reviewWriteModal .radio-star input:checked + span {background-color: #06b2bb;}
-#reviewWriteModal .radio-star input + span {position: absolute; top: 0; right: 0; display: block; width: 150px; height: 27px; pointer-events: none;}
+.review-modal .radio-star {position: relative; width: 30px; height: 27px; cursor: pointer;}
+.review-modal .radio-star input {position: absolute; width: 0; height: 0; opacity: 0; overflow: hidden;}
+.review-modal .radio-star input:checked + span {background-color: #06b2bb;}
+.review-modal .radio-star input + span {position: absolute; top: 0; right: 0; display: block; width: 150px; height: 27px; pointer-events: none;}
 
-#reviewWriteModal .modal-body {padding: 30px;}
-#reviewWriteModal .form-group {position: relative; display: flex; align-items: center; flex-wrap: wrap; margin-bottom: 20px;}
-#reviewWriteModal .form-group > span,
-#reviewWriteModal .form-group > label {font-size: 16px; font-weight: 500; width: 100px;}
-#reviewWriteModal .form-group > p,
-#reviewWriteModal .form-group > input,
-#reviewWriteModal .form-group > textarea {width: calc(100% - 100px); font-size: 17px;}
-#reviewWriteModal .form-group > textarea {padding: 15px; min-height: 200px; font-size: 15px;}
+.review-modal .modal-body {padding: 30px;}
+.review-modal .form-group {position: relative; display: flex; align-items: center; flex-wrap: wrap; margin-bottom: 20px;}
+.review-modal .form-group > span,
+.review-modal .form-group > label {font-size: 16px; font-weight: 500; width: 100px;}
+.review-modal .form-group > p,
+.review-modal .form-group > input,
+.review-modal .form-group > textarea {width: calc(100% - 100px); font-size: 17px;}
+.review-modal .form-group > textarea {padding: 15px; min-height: 200px; font-size: 15px;}
 
-#reviewWriteModal .form-group #visitDate {padding-left: 0; border: 0; outline: none; pointer-events: none;}
-#reviewWriteModal .form-group .date-icon {
+.review-modal .form-group #visitDate {padding-left: 0; border: 0; outline: none; pointer-events: none;}
+.review-modal .form-group .date-icon {
     position: absolute; 
     top: -2px;
     left: 260px; 
