@@ -49,8 +49,8 @@
 				<!-- 각 view페이지는 게시글작성 시 등록한 썸네일이 배경이미지로 들어감 -->
 				<div class="container">
 					<ol class="breadcrumb">
-						<li><a href="#">Home</a></li>
-						<li><a href="">매거진</a></li>
+						<li><a href="${pageContext.request.contextPath }">Home</a></li>
+						<li><a href="${pageContext.request.contextPath }/magazine">매거진</a></li>
 						<li class="active">${mzbean.magazine_subject }</li>
 						<!-- 게시물 제목 breadcrumb으로 넣기 -->
 					</ol>

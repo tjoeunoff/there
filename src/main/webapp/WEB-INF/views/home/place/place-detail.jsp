@@ -54,8 +54,8 @@ $(function(){
             <div class="top-banr-sect" style="background-image: url(${imgPath }/place/${plbean.place_thumb });"> <!-- 장소detail 페이지는 장소등록 시 등록한 썸네일이 배경이미지로 들어감 -->
                 <div class="container">
                     <ol class="breadcrumb">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="">카테고리별</a></li>
+                        <li><a href="${pageContext.request.contextPath }">Home</a></li>
+                        <li><a href="${pageContext.request.contextPath }/place/category">카테고리별</a></li>
                         <li class="active">${plbean.place_name }</li>    <!-- 장소명 breadcrumb으로 넣기 -->
                     </ol>
                     </ol>

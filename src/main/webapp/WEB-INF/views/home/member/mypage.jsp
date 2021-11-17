@@ -102,8 +102,7 @@
     			$('.list-item').eq(idx).find('p.tags').append('<span>#' + ele2 + '</span>');
     		});
     	});
-    	
-    	
+		
     });
     
     </script>
@@ -150,7 +149,9 @@
                         </div>
                         <div style="width:450px; margin:0 auto;">
 	                        <button type="button" class="btn btn-modi" data-toggle="modal" data-target="#myModal">개인정보수정 ⚙️</button> <!-- 모달창 띄워서 수정하기 -->
-	                        <button type="button" class="btn btn-modi" data-toggle="modal" data-target="#delModal">회원 탈퇴 ⚙️</button>
+	                        <c:if test="${sessionScope.sessionAuth ne 1}">
+	                        	<button type="button" class="btn btn-modi" data-toggle="modal" data-target="#delModal">회원 탈퇴 ⚙️</button>
+	                        </c:if>
 	                    </div>    
                     </div>
                 </div>
