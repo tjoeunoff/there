@@ -183,10 +183,11 @@
 
 
 
-/* magazine view */
+/* magazine detail */
 .bbs-view-wrap .view-head {position: relative; margin-bottom: 60px; padding-bottom: 34px; border-bottom: 1px solid #eaeaea;}
 .bbs-view-wrap .view-head > h3 {font-size: 28px; margin-bottom: 30px;}
 .bbs-view-wrap .view-head > p > span {font-size: 18px; margin-right: 20px;}
+.bbs-view-wrap .view-head .tags span {background: #bbb; font-size: 17px; color: #fff; border-radius: 5px; padding: 2px 7px 4px;}
 .bbs-view-wrap .view-head .view-util {position: absolute; top: 0; right: 0;}
 .bbs-view-wrap .view-head .view-util ul {
     display: flex; 

@@ -242,10 +242,6 @@
                     </div>
                 </div>
 
-
-
-
-
         </div>
         <!-- // content-wrap  -->
 
@@ -258,54 +254,54 @@
 
 
 
-
     <!-- 개인정보 수정 모달 -->
     <div class="my-info-edit modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">개인정보 수정</h4>
-            </div>
-            
-            <form action="${pageContext.request.contextPath }/member/change" method="post" class="form-horizontal">
-            	<input type="hidden" name="member_id" value="${mbrbean.member_id }" />
-            	<input type="hidden" name="member_name" value="${mbrbean.member_name }" />
-            	<div class="modal-body">
-					<div class="form-group">
-						<label for="inputId3" class="col-sm-2 control-label">아이디</label>
-						<div class="col-sm-5">${mbrbean.member_id }</div>
-					</div>
-					<div class="form-group">
-						<label for="modal_pw" class="col-sm-2 control-label">비밀번호</label>
-						<div class="col-sm-5"><input type="password" name="member_pw" value="${mbrbean.member_pw }" id="modal_pw" pattern=".{1,16}" placeholder="비밀번호, 최대 16 자" /></div>
-					</div>
-					<div class="form-group">
-						<label for="inputName3" class="col-sm-2 control-label">이름</label>
-						<div class="col-sm-5">${mbrbean.member_name }</div>
-					</div>
-					<div class="form-group">
-						<label for="modal_tel" class="col-sm-2 control-label">전화번호</label>
-						<div class="col-sm-5"><input type="tel" name="member_tel" value="${mbrbean.member_tel }" id="modal_tel" pattern=".{1,16}" placeholder="전화번호, 최대 16 자" /></div>
-						
-					</div>
-					<div class="alert alert-danger" id="tel-alert-danger">사용할 수 없는 전화번호입니다.</div>
-					<div class="form-group">
-						<label for="modal_email" class="col-sm-2 control-label">이메일</label>
-						<div class="col-sm-5"><input type="email" name="member_email" value="${mbrbean.member_email }" id="modal_email" pattern=".{1,32}" placeholder="이메일, 최대 32 자" /></div>
-					</div>
-					<div class="alert alert-danger" id="email-alert-danger">사용할 수 없는 이메일입니다.</div>
-				</div>
-
-	            
-	            <div class="modal-footer">
-	                <button type="button" class="btn" data-dismiss="modal">Close</button>
-	                <button type="submit" class="btn" id="modalSubmit">Save changes</button>
+	        <div class="modal-content">
+	            <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	            <h4 class="modal-title" id="myModalLabel">개인정보 수정</h4>
 	            </div>
-            </form>
-            
+	            
+	            <form action="${pageContext.request.contextPath }/member/change" method="post" class="form-horizontal">
+	            	<input type="hidden" name="member_id" value="${mbrbean.member_id }" />
+	            	<input type="hidden" name="member_name" value="${mbrbean.member_name }" />
+	            	<div class="modal-body">
+						<div class="form-group">
+							<label for="inputId3" class="col-sm-2 control-label">아이디</label>
+							<div class="col-sm-5">${mbrbean.member_id }</div>
+						</div>
+						<div class="form-group">
+							<label for="modal_pw" class="col-sm-2 control-label">비밀번호</label>
+							<div class="col-sm-5"><input type="password" name="member_pw" value="${mbrbean.member_pw }" id="modal_pw" pattern=".{1,16}" placeholder="비밀번호, 최대 16 자" /></div>
+						</div>
+						<div class="form-group">
+							<label for="inputName3" class="col-sm-2 control-label">이름</label>
+							<div class="col-sm-5">${mbrbean.member_name }</div>
+						</div>
+						<div class="form-group">
+							<label for="modal_tel" class="col-sm-2 control-label">전화번호</label>
+							<div class="col-sm-5"><input type="tel" name="member_tel" value="${mbrbean.member_tel }" id="modal_tel" pattern=".{1,16}" placeholder="전화번호, 최대 16 자" /></div>
+							
+						</div>
+						<div class="alert alert-danger" id="tel-alert-danger">사용할 수 없는 전화번호입니다.</div>
+						<div class="form-group">
+							<label for="modal_email" class="col-sm-2 control-label">이메일</label>
+							<div class="col-sm-5"><input type="email" name="member_email" value="${mbrbean.member_email }" id="modal_email" pattern=".{1,32}" placeholder="이메일, 최대 32 자" /></div>
+						</div>
+						<div class="alert alert-danger" id="email-alert-danger">사용할 수 없는 이메일입니다.</div>
+					</div>
+	
+		            
+		            <div class="modal-footer">
+		                <button type="button" class="btn" data-dismiss="modal">Close</button>
+		                <button type="submit" class="btn" id="modalSubmit">Save changes</button>
+		            </div>
+	            </form>
+	        </div>
+	        <!-- /.modal-content -->
         </div>
-        </div>
+        <!-- /.modal-dialog -->
     </div>
 	
 	<!-- 개인정보 삭제 모달 -->

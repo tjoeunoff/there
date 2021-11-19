@@ -10,9 +10,6 @@
 <%@ include file="../template/include.jspf"%>
 <script type="text/javascript">
 	$(document).ready(function() {
-		//var contextPath=window.location.href.split('/')[window.location.href.split('/').length-3];
-		//var magazine_idx=window.location.href.split('/')[window.location.href.split('/').length-1];
-		
 		var magazine_idx = ${mzbean.magazine_idx};
 		var member_id = '${mbrbean.member_id}';
 		$('#likeButton').click(function() {
@@ -30,6 +27,29 @@
 					$('#numLikes').text(numLikes - 1);
 				}
 			});
+		});
+		
+		// 해시태그 출력
+		/*
+		const tag = '${mzbean.magazine_hashtag}';
+		const hashArr = tag.split(';');
+		
+		hashArr.forEach(function(ele, idx){
+			var hash=$('<span>#' + ele + '</span>');
+			hash.css('background','#bbb');
+			hash.css('border-radius','5px');
+			hash.css('font-size','17px');
+			hash.css('color','white');
+			hash.css('padding','2px 7px 4px');
+			$('.view-head p.tags').append(hash);
+		});
+		*/
+		// 해시태그 출력
+		const tag = '${mzbean.magazine_hashtag}';
+		const hashArr = tag.split(';');
+		
+		hashArr.forEach(function(ele, idx){
+			$('.view-head p.tags').append('<span>#' + ele + '</span>');
 		});
 	});
 </script>
@@ -52,7 +72,6 @@
 						<li><a href="${pageContext.request.contextPath }">Home</a></li>
 						<li><a href="${pageContext.request.contextPath }/magazine">매거진</a></li>
 						<li class="active">${mzbean.magazine_subject }</li>
-						<!-- 게시물 제목 breadcrumb으로 넣기 -->
 					</ol>
 					</ol>
 					<div class="page-header mb40">
@@ -67,21 +86,24 @@
 			<div class="bbs-view-wrap">
 				<div class="container">
 					<div class="view-head">
-						<h3>${mzbean.magazine_subject }</h3>
 						<!-- 게시글 제목 -->
+						<h3>${mzbean.magazine_subject }</h3>
+						<!-- 게시글 관련태그 -->
+						<!-- 
 						<p>
 							<span>${mzbean.magazine_hashtag }</span>
 						</p>
-						<!-- 게시글 관련태그 -->
+						 -->
+						<p class="tags"></p>
 						<div class="view-util">
+							
 							<ul>
-								<li class="util-show">👁️‍🗨️ <span>${mzbean.magazine_viewcnt }</span></li>
 								<!-- span안에 조회수 넣기 -->
+								<li class="util-show">👁️‍🗨️ <span>${mzbean.magazine_viewcnt }</span></li>
+								<!-- span안에 좋아요 수 넣기 / 클릭 시 바로 숫자 올라감(ajax)  -->
 								<li class="util-like">❤️<span id="numLikes">${mzNumlikes }</span>
-								</li>
-								<!-- span안에 좋아요 수 넣기 / 클릭 시 바로 숫자 올라가야함  -->
-								<li class="share"><a href="">🔗</a></li>
 								<!-- 공유하기 => 이부분은 시간여유 있으면 진행 -->
+								</li><li class="share"><a href="">🔗</a></li>
 							</ul>
 							<p>
 								작성일&nbsp;&nbsp;&nbsp;<span class="date">${mzbean.magazine_date.getYear()+1900}.${mzbean.magazine_date.getMonth()+1 }.${mzbean.magazine_date.getDate() }</span>
@@ -91,7 +113,7 @@
 					</div>
 
 					<div class="view-content">
-						<!-- 게시글 등록시 내용으로 입력한 contenct (ckeditor 사용?) -->
+						<!-- 게시글 등록시 내용으로 입력한 content -->
 						${mzbean.magazine_content }
 						<!-- // 게시글 등록시 입력한 내용 -->
 					</div>
@@ -154,30 +176,24 @@
 				<!-- container -->
 			</div>
 			<!-- // bbs-view-wrap -->
-
-
-
 		</div>
 		<!-- // content-wrap  -->
-
 	</main>
 	<!-- // main -->
-
 
 	<footer id="footer">
 		<div class="container">
 			<div class="foot-info-link">
 				<p>&copy; 2021 OFFLineTeam All Rights Reserved.</p>
 			</div>
-
 		</div>
 	</footer>
 	<!-- // footer -->
 
 
-	<!-- 좋아요 클릭 시 알림창
-            로그인O 상태 : ❤️+1 이 게시글을 좋아합니다.
-            로그인X 상태 : 로그인이 필요한 서비스입니다.    
+	<!-- 
+    로그인O 상태 : ❤️+1 이 게시글을 좋아합니다.
+    로그인X 상태 : 로그인이 필요한 서비스입니다. + 로그인화면으로 이동 버튼 
     -->
 	<div class="modal fade like-modal" id="likeModal" tabindex="-1"
 		role="dialog" aria-labelledby="myModalLabel">
@@ -188,25 +204,11 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<!-- 로그인O 시 -->
-
-					<!-- // 로그인O 시 -->
-
-					<!-- 로그인X 시 -->
 					<h4 class="modal-title" id="myModalLabel">🤗 로그인이 필요한 서비스입니다.</h4>
-					<!-- // 로그인X 시 -->
 				</div>
 				<div class="modal-footer">
-					<!-- 로그인O 시 -->
 					<button type="button" class="abtn abtn-mint" data-dismiss="modal">확인</button>
 					<button type="button" class="abtn abtn-mint" data-dismiss="modal" onclick="location.href='${pageContext.request.contextPath}/member/login'">로그인 화면으로 이동</button>
-					<!-- // 로그인O 시 -->
-
-					<!-- 로그인X 시 -->
-					<!-- <a class="abtn abtn-mint" href="../member/login.html">로그인페이지로 이동</a>
-                    <button type="button" class="abtn abtn-gray" data-dismiss="modal">취소</button> -->
-					<!-- // 로그인X 시 -->
-
 				</div>
 			</div>
 		</div>

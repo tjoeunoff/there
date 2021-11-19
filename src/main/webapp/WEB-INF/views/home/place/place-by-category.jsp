@@ -133,10 +133,8 @@ $(function(){
                 <!-- // container -->
             </div>
             <!-- // place-list-wrap -->
-
         </div>
         <!-- // content-wrap  -->
-
     </main>
     <!-- // main -->
 
