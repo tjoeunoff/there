@@ -43,6 +43,12 @@ $(function(){
 	var myScore = ${empty rvbean.review_score ? 0 : rvbean.review_score };
 	$('#reviewModifyModal .select-star label').eq(myScore-1).children('input[type="radio"]').prop('checked', 'checked');
 	
+	function saveUrl(){
+		var currentUrl=window.location.pathname.substring(window.location.pathname.indexOf('/',1));
+		var todayDate=new Date();
+		todayDate.setDate(todayDate.getDate()+1);
+		document.cookie="url"+"="+escape(currentUrl)+"; path=/; expires="+todayDate.toGMTString()+";";
+	}
 });
 </script>
 </head>
@@ -236,7 +242,7 @@ $(function(){
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="abtn abtn-mint" data-dismiss="modal">확인</button>
-					<button type="button" class="abtn abtn-mint" data-dismiss="modal" onclick="location.href='${pageContext.request.contextPath}/member/login'">로그인 화면으로 이동</button>
+					<button type="button" class="abtn abtn-mint" data-dismiss="modal" onclick="saveUrl(); location.href='${pageContext.request.contextPath}/member/login'">로그인 화면으로 이동</button>
 
 				</div>
 			</div>

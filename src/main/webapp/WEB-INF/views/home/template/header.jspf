@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript">
+	function saveUrl(){
+		var currentUrl=window.location.pathname.substring(window.location.pathname.indexOf('/',1));
+		var todayDate=new Date();
+		todayDate.setDate(todayDate.getDate()+1);
+		document.cookie="url"+"="+escape(currentUrl)+"; path=/; expires="+todayDate.toGMTString()+";";
+	}
+</script>
 <header id="header">
     <div class="head-inner">
         <h1 class="logo"><a href="${pageContext.servletContext.contextPath }"></a></h1>
@@ -8,12 +16,12 @@
         	<c:if test="${empty sessionScope.success }" var="v" scope="page">
 	            <ul>
 	                <li><a class="abtn abtn-gray" href="${pageContext.request.contextPath }/member/join">회원가입</a></li>
-	                <li><a class="abtn abtn-mint" href="${pageContext.request.contextPath }/member/login">로그인</a></li>
+	                <li><a class="abtn abtn-mint" href="${pageContext.request.contextPath }/member/login"  onclick="saveUrl();">로그인</a></li>
 	            </ul>
 	        </c:if>
 	        <c:if test="${not pageScope.v }">
 	        	<ul>
-	        		<li><a class="abtn abtn-mint" href="${pageContext.request.contextPath }/member/logout">로그아웃</a></li>
+	        		<li><a class="abtn abtn-mint" href="${pageContext.request.contextPath }/member/logout"  onclick="saveUrl();">로그아웃</a></li>
 	        		<li><a class="abtn abtn-mint" href="${pageContext.request.contextPath }/member/mypage">마이페이지</a></li>
 	        	</ul>
 	        </c:if>

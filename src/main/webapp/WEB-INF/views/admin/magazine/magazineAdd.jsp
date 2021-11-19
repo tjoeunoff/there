@@ -64,7 +64,6 @@ var setting = {
     			}
     			thumbImage.attr("src", event.target.result);
     			if(!doesImgtagAlreadyExist){
-    				console.log(4);
     				$('#imageContainer').append(thumbImage);
     			}
     		}; 

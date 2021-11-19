@@ -1,6 +1,8 @@
 package kr.co.there.member.controller;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,11 +24,11 @@ public class MemberController {
 	@GetMapping(value = "/admin/member")
 	public String list(Model model,HttpServletRequest req) throws Exception {
 		try {
-			if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+			if((int)req.getSession().getAttribute("sessionAuth")!=1) {
 				return "redirect:/";
 			}
 		} catch(NullPointerException e) { //세션 값이 들어있지 않은 경우 이 예외가 발생하는 듯 하다. 즉, 로그아웃 상태에서 어드민 페이지를 요청할 때 예외를 잡고 메인페이지를 보여준다.
-			return "redirect:/";
+			return "redirect:/member/login";
 		}
 		model.addAttribute("mbrList", memberService.list());
 		return "/admin/member/memberList";
@@ -46,13 +48,29 @@ public class MemberController {
 	}
 	
 	@PostMapping("/member/login")
-	public String loginResult(MemberVo bean, HttpServletRequest req,Model model) throws Exception {
+	public String loginResult(MemberVo bean, HttpServletRequest req, HttpServletResponse resp,Model model) throws Exception {
 		int isLogin=memberService.isLogin(bean.getMember_id(), bean.getMember_pw());
 		if(isLogin==1) {
 			req.getSession().setAttribute("success", true);
 			req.getSession().setAttribute("sessionId", bean.getMember_id());
 			req.getSession().setAttribute("sessionAuth", memberService.One(bean.getMember_id()).getMember_authid());
-			return "redirect:/";
+			Cookie[] cookies=req.getCookies();
+			Cookie urlCookie=null;
+			if(cookies!=null) { //url 정보를 담고 있는 쿠키가 있을 때
+				for(int i=0;i<cookies.length;i++) {
+					urlCookie=cookies[i];
+					if("url".equals(urlCookie.getName())) break;
+				} //i loop
+				String url=urlCookie.getValue(); //url 정보를 담고 있는 쿠키를 읽고 해당 쿠키를 지운다.
+				Cookie kc=new Cookie("url",null);
+				kc.setMaxAge(0);
+				resp.addCookie(kc);
+				if(!"/member/login".equals(url)) return "redirect:"+url;
+				else return "redirect:/";
+			} 
+			else { //url 정보를 담고 있는 쿠키가 없을 때
+				return "redirect:/";	
+			} 
 		}
 		else if(isLogin==0) {
 			model.addAttribute("showWarning",1);
@@ -74,9 +92,23 @@ public class MemberController {
 	}
 	
 	@GetMapping("/member/logout")
-	public String logout(HttpServletRequest req) {
+	public String logout(HttpServletRequest req,HttpServletResponse resp) {
 		req.getSession().invalidate();
-		return "redirect:/";
+		Cookie[] cookies=req.getCookies();
+		Cookie urlCookie=null;
+		if(cookies!=null) {
+			for(int i=0;i<cookies.length;i++) {
+				urlCookie=cookies[i];
+				if("url".equals(urlCookie.getName())) break;
+			} //i loop
+			String url=urlCookie.getValue(); //url 정보를 담고 있는 쿠키를 읽고 해당 쿠키를 지운다.
+			Cookie kc=new Cookie("url",null);
+			kc.setMaxAge(0);
+			resp.addCookie(kc);
+			return "redirect:"+url;
+		} //url 정보를 담고 있는 쿠키가 있을 때
+		else //url 정보를 담고 있는 쿠키가 없을 때
+			return "redirect:/";
 	}
 	
 	@GetMapping("/member/findId")
