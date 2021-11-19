@@ -105,7 +105,8 @@ public class MemberController {
 			Cookie kc=new Cookie("url",null);
 			kc.setMaxAge(0);
 			resp.addCookie(kc);
-			return "redirect:"+url;
+			if(!"/member/mypage".equals(url)) return "redirect:"+url;
+			else return "redirect:/";
 		} //url 정보를 담고 있는 쿠키가 있을 때
 		else //url 정보를 담고 있는 쿠키가 없을 때
 			return "redirect:/";

@@ -200,7 +200,7 @@
 								<div class="swiper list-slider">
 									<div class="swiper-wrapper">
 										<c:forEach items="${myMzList }" var="mzbean" begin="0" end="3">
-											<div class="swiper-slide">
+											<div class="swiper-slide list-item">
 												<a
 													href="${pageContext.request.contextPath}/magazine/${mzbean.magazine_idx }">
 													<!-- 썸네일의 경우 img태그가 아닌 background-image로 -->
@@ -208,9 +208,8 @@
 													<div class="thumb-desc">
 														<strong>${mzbean.magazine_subject }</strong>
 														<!-- 게시글 제목 -->
-														<p>
-															<span>${mzbean.magazine_hashtag }</span>
-														</p>
+														<p class="tags"></p>
+														<p class="hidden-tags">${mzbean.magazine_hashtag }</p>
 														<!-- 게시글 관련태그 => 게시물 등록시 작성필요 -->
 													</div>
 												</a>
