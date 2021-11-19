@@ -20,7 +20,7 @@
 - Eclipse
 - MySQL
 - spring
-- photoshop cs6
+- photoshop cc
 
 ## 📌 주요 세부 산출물 문서 기록
 - [x] 1) 메뉴설계도
