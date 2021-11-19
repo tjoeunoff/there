@@ -77,6 +77,20 @@ var setting = {
     	$('#mzToListButton').click(function(){
     		document.location.href="${pageContext.request.contextPath}/admin/magazine";
     	});
+    	$('#mzAdd').attr('disabled',true);
+    	$('#magazine_thumb').change(function(){
+    		if($('#magazine_thumb').val()!=''){
+        		$('#mzAdd').attr('disabled',false);
+        	}
+    		else{
+    			$('#mzAdd').attr('disabled',true);
+    		}
+    		
+    	});
+    	
+    	
+    	
+    	
     	
     	
     });
@@ -167,10 +181,10 @@ var setting = {
                     </div>
                 </div>  
                 
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-	                <div class="btn-group"><button type="submit" class="btn btn-primary">입력</button></div>
-	                <div class="btn-group"><button type="reset" class="btn btn-default">취소</button></div>
-	                <div class="btn-group"><button type="button" class="btn btn-default" id="mzToListButton">목록으로</button></div>
+                <div class="btn-box">
+                	<button type="button" class="btn btn-default btn-margin" id="mzToListButton">목록</button>
+	                <button type="reset" class="btn btn-default btn- margin">초기화</button>
+	                <button type="submit" class="btn btn-primary btn-margin" id="mzAdd">입력</button>
 	            </div>
             </form>
         </div>
