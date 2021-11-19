@@ -12,6 +12,9 @@
 <script type="text/javascript">
 $(document).ready(function() {
   $('#summernote').summernote();
+  $('#mzToListButton').click(function(){
+		document.location.href="${pageContext.request.contextPath}/admin/magazine";
+	});
 });
 
 function setThumbnail(event) {  //썸네일 이미지를 업로드하는 <input> 의 값이 변할 시 해당 함수 호출
@@ -139,10 +142,11 @@ function setThumbnail(event) {  //썸네일 이미지를 업로드하는 <input>
                     </div>
                 </div>
                 
-	            <div class="btn-group btn-group-justified" role="group" aria-label="...">
-	                <div class="btn-group"><button type="submit" class="btn btn-primary">수정</button></div>
-	                <div class="btn-group"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#mzDelModal">삭제</button></div>
-	                <div class="btn-group"><button type="button" class="btn btn-default" onclick="history.back();">뒤로</button></div>
+	            <div class="btn-box">
+	            <button type="button" class="btn btn-default btn-margin" id="mzToListButton">목록</button>
+	                <button type="submit" class="btn btn-primary btn-margin">수정</button>
+	                <button type="button" class="btn btn-danger btn-margin" data-toggle="modal" data-target="#mzDelModal">삭제</button>
+	                
 	            </div>                   
             </form>
             
@@ -158,10 +162,8 @@ function setThumbnail(event) {  //썸네일 이미지를 업로드하는 <input>
 	                        <input type="hidden" name="_method" value="DELETE" />
 	                        <input type="hidden" name="magazine_idx" value="${mzbean.magazine_idx}" />
 	                        <div class="modal-footer">
-	                            <div class="btn-group btn-group-justified" role="group" aria-label="...">
-	                                <div class="btn-group"><button type="button" class="btn btn-default" data-dismiss="modal">취소</button></div>
-	                                <div class="btn-group"><button type="submit" class="btn btn-danger">삭제</button></div>
-	                            </div>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                                <button type="submit" class="btn btn-danger">삭제</button>
 	                        </div>
 	                    </form>
 	                </div>

@@ -45,11 +45,11 @@ public class PlaceController {
 	@GetMapping("/admin/place")
 	public String list(Model model,HttpServletRequest req) throws Exception {
 		try {
-			if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+			if((int)req.getSession().getAttribute("sessionAuth")!=1) {
 				return "redirect:/";
 			}
 		} catch(NullPointerException e) { //세션 값이 들어있지 않은 경우 이 예외가 발생하는 듯 하다. 즉, 로그아웃 상태에서 어드민 페이지를 요청할 때 예외를 잡고 메인페이지를 보여준다.
-			return "redirect:/";
+			return "redirect:/member/login";
 		}
 		model.addAttribute("list", placeService.list());
 		return "/admin/place/admin_place_list";
@@ -58,11 +58,11 @@ public class PlaceController {
 	@GetMapping("/admin/place/{place_idx}")
 	public String detail(@PathVariable("place_idx") int place_idx, Model model,HttpServletRequest req) throws SQLException {
 		try {
-			if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+			if((int)req.getSession().getAttribute("sessionAuth")!=1) {
 				return "redirect:/";
 			}
 		} catch(NullPointerException e) { //세션 값이 들어있지 않은 경우 이 예외가 발생하는 듯 하다. 즉, 로그아웃 상태에서 어드민 페이지를 요청할 때 예외를 잡고 메인페이지를 보여준다.
-			return "redirect:/";
+			return "redirect:/member/login";
 		}
 		HashMap<String, Object> map = new HashMap<>();
 		map = placeService.One(place_idx, false, false, null);
@@ -77,11 +77,11 @@ public class PlaceController {
 	@GetMapping("/admin/place/form")
 	public String moveAddPage(HttpServletRequest req) {
 		try {
-			if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+			if((int)req.getSession().getAttribute("sessionAuth")!=1) {
 				return "redirect:/";
 			}
 		} catch(NullPointerException e) { //세션 값이 들어있지 않은 경우 이 예외가 발생하는 듯 하다. 즉, 로그아웃 상태에서 어드민 페이지를 요청할 때 예외를 잡고 메인페이지를 보여준다.
-			return "redirect:/";
+			return "redirect:/member/login";
 		}
 		return "/admin/place/admin_place_add";
 	}
@@ -178,11 +178,11 @@ public class PlaceController {
 	@GetMapping("/admin/place/form/{place_idx}")
 	public String moveEditPage(@PathVariable("place_idx") int place_idx, Model model,HttpServletRequest req) throws SQLException {
 		try {
-			if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+			if((int)req.getSession().getAttribute("sessionAuth")!=1) {
 				return "redirect:/";
 			}
 		} catch(NullPointerException e) { //세션 값이 들어있지 않은 경우 이 예외가 발생하는 듯 하다. 즉, 로그아웃 상태에서 어드민 페이지를 요청할 때 예외를 잡고 메인페이지를 보여준다.
-			return "redirect:/";
+			return "redirect:/member/login";
 		}
 		HashMap<String, Object> map = new HashMap<>();
 		map = placeService.One(place_idx, false, false, null);
@@ -280,11 +280,11 @@ public class PlaceController {
 	@GetMapping("/admin/place/review")
 	public String ReviewList(Model model,HttpServletRequest req) throws SQLException {
 		try {
-			if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+			if((int)req.getSession().getAttribute("sessionAuth")!=1) {
 				return "redirect:/";
 			}
 		} catch(NullPointerException e) { //세션 값이 들어있지 않은 경우 이 예외가 발생하는 듯 하다. 즉, 로그아웃 상태에서 어드민 페이지를 요청할 때 예외를 잡고 메인페이지를 보여준다.
-			return "redirect:/";
+			return "redirect:/member/login";
 		}
 		model.addAttribute("list", placeService.reviewList());
 		return "/admin/place/admin_place_review";

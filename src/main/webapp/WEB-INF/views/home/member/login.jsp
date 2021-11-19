@@ -13,7 +13,6 @@ $(function(){
 		if($('#memberId').val() == '') {
 			e.preventDefault();
 			$('.err-msg').text('아이디를 입력해주세요');
-			console.log($('#memberId').val());		 
 		} else if ($('#memberPw').val() == '') {
 			e.preventDefault();
 			$('.err-msg').text('비밀번호를 입력해주세요');

@@ -26,11 +26,11 @@ public class AdminIndexController {
 	@RequestMapping(value = "/admin")
 	public String index(Model model,HttpServletRequest req) throws SQLException {
 		try {
-			if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+			if((int)req.getSession().getAttribute("sessionAuth")!=1) {
 				return "redirect:/";
 			}
 		} catch(NullPointerException e) { //세션 값이 들어있지 않은 경우 이 예외가 발생하는 듯 하다. 즉, 로그아웃 상태에서 어드민 페이지를 요청할 때 예외를 잡고 메인페이지를 보여준다.
-			return "redirect:/";
+			return "redirect:/member/login";
 		}
 		ClassPathResource resource = new ClassPathResource("");
 		System.out.println(resource.getPath());

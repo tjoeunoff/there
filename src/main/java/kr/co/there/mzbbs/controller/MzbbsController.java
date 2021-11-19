@@ -30,11 +30,11 @@ public class MzbbsController {
 	@GetMapping(value = "")
 	public String list(Model model,HttpServletRequest req) throws Exception {
 		try {
-			if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+			if((int)req.getSession().getAttribute("sessionAuth")!=1) {
 				return "redirect:/";
 			}
 		} catch(NullPointerException e) { //세션 값이 들어있지 않은 경우 이 예외가 발생하는 듯 하다. 즉, 로그아웃 상태에서 어드민 페이지를 요청할 때 예외를 잡고 메인페이지를 보여준다.
-			return "redirect:/";
+			return "redirect:/member/login";
 		}
 		model.addAttribute("mzList", mzbbsService.list());
 		return "/admin/magazine/magazineList";
@@ -43,11 +43,11 @@ public class MzbbsController {
 	@GetMapping("/{magazine_idx}")
 	public String detail(@PathVariable("magazine_idx") int magazine_idx, Model model,HttpServletRequest req) throws SQLException {
 		try {
-			if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+			if((int)req.getSession().getAttribute("sessionAuth")!=1) {
 				return "redirect:/";
 			}
 		} catch(NullPointerException e) { //세션 값이 들어있지 않은 경우 이 예외가 발생하는 듯 하다. 즉, 로그아웃 상태에서 어드민 페이지를 요청할 때 예외를 잡고 메인페이지를 보여준다.
-			return "redirect:/";
+			return "redirect:/member/login";
 		}
 		model.addAttribute("mzbean", mzbbsService.one(magazine_idx, false));
 		model.addAttribute("numLikes",mzbbsService.numLikes(magazine_idx));
@@ -88,11 +88,11 @@ public class MzbbsController {
 	@RequestMapping(value = "/form", method = RequestMethod.GET)
 	public String magazineAdd(HttpServletRequest req) {
 		try {
-			if(req.getSession()==null || (int)req.getSession().getAttribute("sessionAuth")!=1) {
+			if((int)req.getSession().getAttribute("sessionAuth")!=1) {
 				return "redirect:/";
 			}
 		} catch(NullPointerException e) { //세션 값이 들어있지 않은 경우 이 예외가 발생하는 듯 하다. 즉, 로그아웃 상태에서 어드민 페이지를 요청할 때 예외를 잡고 메인페이지를 보여준다.
-			return "redirect:/";
+			return "redirect:/member/login";
 		}
 		return "/admin/magazine/magazineAdd";
 	}
