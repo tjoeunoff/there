@@ -113,15 +113,16 @@ $(function(){
                 <h2 class="sect-tit mb20">❗ 이번 주 추천 매거진</h2>
                 <p class="wm-tag mb40"><span>#이번주말</span><span>#뭐하고놀지🤔</span></p>
             </div>
-            <div class="swiper magazine-slider"> <!-- 관리자에서 매거진 게시판에 등록한 게시글의 썸네일, 제목, #태그가 슬라이드로 노출 (최근게시글 10개) -->
+            <div class="swiper magazine-slider top20-place-sect"> <!-- 관리자에서 매거진 게시판에 등록한 게시글의 썸네일, 제목, #태그가 슬라이드로 노출 (최근게시글 10개) -->
                 <div class="swiper-wrapper">
                 	<c:forEach items="${mzList }" var="mzbean" begin="0" end="4">
-                    <div class="swiper-slide"> 
+                    <div class="swiper-slide list-item"> 
                         <a href="${pageContext.request.contextPath}/magazine/${mzbean.magazine_idx }">
                             <div class="thumb-img" style="background-image: url(${imgPath }/magazine/${mzbean.magazine_thumb });"></div> <!-- 썸네일의 경우 img태그가 아닌 background-image로 -->
                             <div class="thumb-desc">
                                 <strong>${mzbean.magazine_subject }</strong> <!-- 게시글 제목 -->
-                                <p><span>${mzbean.magazine_hashtag }</span></p> <!-- 게시글 관련태그 => 게시물 등록시 작성필요 -->
+                                <p class="tags"></p>
+								<p class="hidden-tags">${mzbean.magazine_hashtag }</p>
                             </div>
                         </a>
                     </div>
