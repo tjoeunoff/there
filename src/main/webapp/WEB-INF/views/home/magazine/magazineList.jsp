@@ -8,6 +8,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 <%@ include file="../template/include.jspf" %>	
+<script type="text/javascript">
+$(function(){
+	
+	// show hashtag
+	var tagsArr = new Array();
+	$.each($('.hidden-tags'), function(idx, ele){
+		tagsArr[idx] = $(this).text();
+	});
+	$('.hidden-tags').hide();
+	
+	const hashArr = new Array();
+	tagsArr.forEach(function(ele, idx){
+		hashArr[idx] = ele.split(';');
+		
+		hashArr[idx].forEach(function(ele2, idx2){
+			$('.list-item').eq(idx).find('p.tags').append('<span>#' + ele2 + '</span>');
+		});
+	});
+});
+</script>
 </head>
 <body>
 <%@ include file="../template/header.jspf" %>
@@ -42,7 +62,8 @@
                                 </div>
                                 <div class="caption">
                                     <h4>${mzbean.magazine_subject }</h4>   <!-- 게시글 제목 -->
-                                    <p><span>${mzbean.magazine_hashtag }</span></p>   <!-- 게시글 관련태그. -->
+                                    <p class="tags"></p>
+                                    <p class="hidden-tags">${mzbean.magazine_hashtag }</p>   <!-- 게시글 관련태그. -->
                                 </div>
                                 <ul>
                                     <li class="util-show">👁️‍🗨️ <span>${mzbean.magazine_viewcnt }</span></li>
@@ -56,10 +77,8 @@
                 <!-- // container -->
             </div>
             <!-- // bbs-list-wrap -->
-
         </div>
         <!-- // content-wrap  -->
-
     </main>
     <!-- // main -->
 

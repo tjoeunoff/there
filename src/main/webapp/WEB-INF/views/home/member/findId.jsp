@@ -29,29 +29,6 @@ $(document).ready(function(){
 				$('#modal-body').html('회원님의 아이디는 다음과 같습니다.<br/>'+data);
 			}
 		});
-		/*
-        if($('#inputId3').val() && $('#inputCellNum3').val()){
-            $('#myModal').modal('show');
-        }
-		
-          else {
-
-            $('#inputId3').each(function() {
-                    if (!$(this).val()) {
-                        is_empty = true;
-                        alert('아이디을 입력하세요');
-                    }
-                
-                    $('#inputCellNum3').each(function() {
-                        if (!$(this).val()) {
-                            is_empty = true;
-                            alert('전화번호를 입력하세요');
-                        }
-                    });
-
-            });
-        }
-		*/
 		
     });
 	

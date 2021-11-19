@@ -156,7 +156,7 @@ $(function(){
                 <h2 class="sect-tit mb40">지역별 📍 추천 PLACE</h2>
                 <div class="map-btns tac mb20">
                     <button class="around-btn abtn abtn-gray">내 주변 보기</button>
-                    <a class="abtn abtn-mint" href="${pageContext.request.contextPath}/location">자세히 보기</a>
+                    <a class="abtn abtn-mint" href="${pageContext.request.contextPath}/place/location">자세히 보기</a>
                 </div>
                 <div id="map"></div>
                 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e5f5bb9115d812a34ed32b190bd82edf"></script>

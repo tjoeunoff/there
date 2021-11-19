@@ -11,14 +11,18 @@ import kr.co.there.place.model.entity.PlaceVo;
 import kr.co.there.review.model.entity.ReviewVo;
 
 public interface MemberDao {
+	//admin페이지 리스트
 	List<MemberVo> selectAll() throws SQLException;
-	MemberVo selectOne(String member_id) throws SQLException;
-	int insertOne(MemberVo mbrbean) throws SQLException;
-	int updateOne(MemberVo mbrbean) throws SQLException;
-	int deleteOne(String member_id) throws SQLException;
-	List<Integer> myMzIdxList(String member_id) throws SQLException;
-	List<Integer> myPlIdxList(String member_id) throws SQLException;
-	List<ReviewVo> myRvList(String member_id) throws SQLException;
+	
+	//home페이지
+	MemberVo selectOne(String member_id) throws SQLException; //마이페이지에 정보 조회/수정시
+	int insertOne(MemberVo mbrbean) throws SQLException; //회원가입
+	int updateOne(MemberVo mbrbean) throws SQLException; //마이페이지에 정보 수정(초기값 필요)
+	int deleteOne(String member_id) throws SQLException; //마이페이지에 탈퇴
+	
+	List<Integer> myMzIdxList(String member_id) throws SQLException; //마이페이지에 매거진 좋아요 누른 리스트
+	List<Integer> myPlIdxList(String member_id) throws SQLException; //마이페이지에 플레이스 좋아요 누른 리스트
+	List<ReviewVo> myRvList(String member_id) throws SQLException; //마이페이지에 남긴 리뷰 리스트
 	
 	//회원가입 시 중복 체크에 사용할 메서드들
 	int isIdDuplicate(String member_id) throws SQLException; //겹쳐지지 않은 아이디일 경우 0 반환

@@ -9,14 +9,18 @@ import kr.co.there.place.model.entity.PlaceVo;
 import kr.co.there.review.model.entity.ReviewVo;
 
 public interface MemberService {
+	//admin 페이지에 회원 리스트
 	List<MemberVo> list() throws SQLException;
-	MemberVo One(String param) throws SQLException;
-	boolean add(MemberVo bean) throws SQLException;
-	boolean edit(MemberVo bean) throws SQLException;
-	boolean remove(String param) throws SQLException;
-	List<MzbbsVo> myMzList(String member_id) throws SQLException;
-	List<PlaceVo> myPlList(String member_id) throws SQLException;
-	List<ReviewVo> myRvList(String member_id) throws SQLException;
+	
+	//home 페이지
+	MemberVo One(String param) throws SQLException; //마이페이지 개인정보 조회
+	boolean add(MemberVo bean) throws SQLException; //회원가입
+	boolean edit(MemberVo bean) throws SQLException; //마이페이지 개인정보 수정
+	boolean remove(String param) throws SQLException; //마이페이지 회원 탈퇴
+	
+	List<MzbbsVo> myMzList(String member_id) throws SQLException; //마이페이지  매거진 좋아요 누른 리스트 
+	List<PlaceVo> myPlList(String member_id) throws SQLException; //마이페이지  플레이스 좋아요 누른 리스트
+	List<ReviewVo> myRvList(String member_id) throws SQLException; //마이페이지 작성한 리뷰 리스트
 	
 	//로그인
 	int isLogin(String member_id, String member_pw) throws SQLException; //0: 로그인 실패, 1: 로그인 성공, 2: 탈퇴한 아이디의 로그인 시도

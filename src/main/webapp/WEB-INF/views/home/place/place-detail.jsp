@@ -40,7 +40,7 @@ $(function(){
 	
 	
 	// 리뷰수정모달 기존평점 불러오기
-	var myScore = ${rvbean.review_score };
+	var myScore = ${empty rvbean.review_score ? 0 : rvbean.review_score };
 	$('#reviewModifyModal .select-star label').eq(myScore-1).children('input[type="radio"]').prop('checked', 'checked');
 	
 });
@@ -214,15 +214,15 @@ $(function(){
                 </div>
                 <!-- // place-view-wrap -->
             </div>
-
-
         </div>
         <!-- // content-wrap  -->
-
     </main>
     <!-- // main -->
 
-
+	<!-- 
+    로그인O 상태 : ❤️+1 이 게시글을 좋아합니다.
+    로그인X 상태 : 로그인이 필요한 서비스입니다. + 로그인화면으로 이동 버튼 
+    -->
 	<div class="modal fade like-modal" id="likeModal" tabindex="-1"
 		role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
@@ -232,24 +232,11 @@ $(function(){
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<!-- 로그인O 시 -->
-
-					<!-- // 로그인O 시 -->
-
-					<!-- 로그인X 시 -->
 					<h4 class="modal-title" id="myModalLabel">🤗 로그인이 필요한 서비스입니다.</h4>
-					<!-- // 로그인X 시 -->
 				</div>
 				<div class="modal-footer">
-					<!-- 로그인O 시 -->
 					<button type="button" class="abtn abtn-mint" data-dismiss="modal">확인</button>
 					<button type="button" class="abtn abtn-mint" data-dismiss="modal" onclick="location.href='${pageContext.request.contextPath}/member/login'">로그인 화면으로 이동</button>
-					<!-- // 로그인O 시 -->
-
-					<!-- 로그인X 시 -->
-					<!-- <a class="abtn abtn-mint" href="../member/login.html">로그인페이지로 이동</a>
-                    <button type="button" class="abtn abtn-gray" data-dismiss="modal">취소</button> -->
-					<!-- // 로그인X 시 -->
 
 				</div>
 			</div>
@@ -266,7 +253,7 @@ $(function(){
                 </div>
                 <form action="" method="post">
                 	<input type="hidden" name="review_placeidx" value="${plbean.place_idx }">
-                	<input type="hidden" name="review_memberid" value="${sessionScope.sessionId}" >  <!-- 현재 더미에넣은 사용자 아이디 -->
+                	<input type="hidden" name="review_memberid" value="${sessionScope.sessionId}" >  <!-- 현재 로그인한 사용자 아이디 -->
                     <div class="modal-body"> 
                         <div class="form-group">
                             <span>방문 장소</span>

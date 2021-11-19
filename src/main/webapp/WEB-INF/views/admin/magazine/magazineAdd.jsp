@@ -164,7 +164,7 @@ var setting = {
                     <label for="magazine_hashtag" class="col-sm-2 control-label">해시태그</label>
                     <div class="input-group-addon col-sm-1" id="magazine_hashtag">#</div>
                     <div class="col-sm-9">
-                        <input type="text" pattern=".{1,50}" name="magazine_hashtag" id="magazine_hashtag" class="form-control" value="${mzbean.magazine_hashtag}" placeholder="50자 이내" aria-describedby="basic-addon1" required>
+                        <input type="text" pattern=".{1,50}" name="magazine_hashtag" id="magazine_hashtag" class="form-control" value="${mzbean.magazine_hashtag}" placeholder="이 항목과 관련된 태그를 입력해주세요.(최대 5개 / 세미콜론(;)로 구분)" aria-describedby="basic-addon1" required>
                     </div>
                 </div>  
                 

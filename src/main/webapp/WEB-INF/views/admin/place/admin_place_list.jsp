@@ -29,7 +29,7 @@
                     <th class="col-md-3">주소</th>
                     <th>전화번호</th>
                     <th>영업시간</th>
-                    <th>조회수</th>    <!-- 좋아수도 리스트에서 보여지면 좋을 듯 -->
+                    <th>조회수</th>
                 </tr>
             </thead>
             <tbody>

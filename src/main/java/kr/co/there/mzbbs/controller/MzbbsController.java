@@ -54,7 +54,7 @@ public class MzbbsController {
 		return "/admin/magazine/magazineDetail";
 	}
 
-	//PUT 방법으로는 파일을 입력할 수 없다.
+	//수정시 PUT 방법으로는 파일을 입력할 수 없다.
 	@PostMapping("/{magazine_idx}/update")
 	public String edit(MultipartFile magazine_thumb,@PathVariable int magazine_idx, String magazine_subject,String magazine_content,String magazine_hashtag, HttpServletRequest req) throws Exception {
 		String path=req.getRealPath("")+"resources\\img\\magazine\\";

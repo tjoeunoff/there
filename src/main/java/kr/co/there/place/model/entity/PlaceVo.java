@@ -21,7 +21,7 @@ public class PlaceVo{
 		place_opentime, place_endtime, place_tel, place_content, place_thumb, place_hashtag, place_url;
 	private float place_latitude, place_longitude;
 
-	// �߰�
+	// Join 쿼리문으로 생성된 가상 칼럼들
 	private int placeLikeCnt;
 	private int placeReviewCnt;
 	private double placeScoreAvg;
