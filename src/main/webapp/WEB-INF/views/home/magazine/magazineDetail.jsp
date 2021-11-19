@@ -96,11 +96,6 @@
 						<!-- 게시글 제목 -->
 						<h3>${mzbean.magazine_subject }</h3>
 						<!-- 게시글 관련태그 -->
-						<!-- 
-						<p>
-							<span>${mzbean.magazine_hashtag }</span>
-						</p>
-						 -->
 						<p class="tags"></p>
 						<div class="view-util">
 							
