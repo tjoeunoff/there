@@ -154,7 +154,7 @@
 							<c:choose>
 								<c:when test="${mzPrevidx ne -1 }">
 									<li><a
-										href="${pageContext.request.contextPath }/magazine/${mzPrevidx}">좌측글(이전글)</a></li>
+										href="${pageContext.request.contextPath }/magazine/${mzPrevidx}">이전글</a></li>
 								</c:when>
 								<c:otherwise>
 									<li><a
@@ -165,7 +165,7 @@
 							<c:choose>
 								<c:when test="${mzNextidx ne -1 }">
 									<li><a
-										href="${pageContext.request.contextPath }/magazine/${mzNextidx}">다음글(우측글)</a></li>
+										href="${pageContext.request.contextPath }/magazine/${mzNextidx}">다음글</a></li>
 								</c:when>
 								<c:otherwise>
 									<li><a

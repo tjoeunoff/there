@@ -40,54 +40,55 @@ $(document).ready(function(){
 <%@ include file="../template/header.jspf" %>
 
 
-    <main class="login-util-page">
+	<main class="login-util-page">
         <div class="content-wrap">
-                <div class="tit-sect tac">
-                    <div class="container">
-                        <h2 class="sect-tit mb30">비밀번호 찾기 🤔</h2>
-                    </div>
-                </div>
+	        <div class="tit-sect tac">
+	            <div class="container">
+	                <h2 class="sect-tit mb30">비밀번호 찾기 <span class="emoji">🤔</span></h2>
+	            </div>
+	        </div>
 
-  <form class="form-horizontal">
-  <div class="form-group">
-    <label for="inputId3" class="col-sm-2 control-label">아이디</label>
-    <div class="col-sm-5">
-      <input type="text" class="form-control" id="inputId3" placeholder="ID" />
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="inputCellNum3" class="col-sm-2 control-label">전화번호</label>
-    <div class="col-sm-5">
-      <input type="text" class="form-control" id="inputCellNum3" placeholder="전화번호" />
-    </div>
-  </div>
-    <div class="form-group">
-	<div class="btn-group btn-group-justified" role="group" aria-label="...">
-		<div class="btn-group"><button type="button" class="btn btn-primary" id="ConfirmBtn">입력</button></div>
-	    <div class="btn-group"><button type="reset" class="btn btn-default">취소</button></div>
-	    <div class="btn-group"><button type="button" class="btn btn-default" onclick="history.back();">뒤로</button></div>
-	</div>
-  </div>
-</form>  
-
- <!-- -->
+			<div class="container">
+				<form class="form-horizontal" id="findPwForm">
+				  <div class="form-group">
+				    <label for="inputId3" class="col-sm-3 control-label">아이디</label>
+				    <div class="col-sm-6">
+				      <input type="text" class="form-control" id="inputId3" placeholder="ID" />
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="inputCellNum3" class="col-sm-3 control-label">전화번호</label>
+				    <div class="col-sm-6">
+				      <input type="text" class="form-control" id="inputCellNum3" placeholder="전화번호" />
+				    </div>
+				  </div>
+				    <div class="form-group text-center">
+						<button type="button" class="abtn abtn-mint" id="ConfirmBtn">비밀번호 찾기</button>
+				  </div>
+				</form>  
+			</div>
+		</div>
+	</main>
+	
+	
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">비밀번호 찾기</h4>
-      </div>
-      <div class="modal-body" id="modal-body">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">
-        확인
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">비밀번호 찾기</h4>
+	      </div>
+	      <div class="modal-body" id="modal-body">
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">
+	        확인
+	        </button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
 <%@ include file="../template/footer.jspf" %>
 </body>
 </html>

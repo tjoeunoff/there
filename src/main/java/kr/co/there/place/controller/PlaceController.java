@@ -114,59 +114,6 @@ public class PlaceController {
 				file.transferTo(new File(savePath + filename));
 				placeService.add(bean);
 				
-				// 踰덊샇, �씠由�, �쐞�룄, 寃쎈룄 json�뙆�씪濡� ���옣
-				int thisIdx = placeService.selectMaxIdx();
-				String jsonPath = request.getSession().getServletContext().getRealPath("/") + "resources\\json\\place.json";
-				
-				File existJsonFile = new File(jsonPath);
-				JSONObject obj = new JSONObject();	// 理쒖쥌�쑝濡� json�뿉 �엯�젰�릺�뒗 �궡�슜
-				
-				if(existJsonFile.exists()) {
-					JSONParser parser = new JSONParser();
-					
-					Reader reader = new FileReader(jsonPath);
-					JSONObject existObj = (JSONObject) parser.parse(reader);
-					
-					// json�뿉 �옉�꽦�릺�뼱�엳�뜕 �뵆�젅�씠�뒪 �젙蹂�
-					JSONObject existPlaceMap = (JSONObject) existObj.get("positions");
-					
-					// �깉濡� �엯�젰�븯�뒗 �뵆�젅�씠�뒪 �젙蹂�
-					JSONObject placeLatLngName = new JSONObject();
-					
-					placeLatLngName.put("name", place_name);
-					placeLatLngName.put("addr", place_addr);
-					placeLatLngName.put("tel", place_tel);
-					placeLatLngName.put("lat", Float.parseFloat(place_latitude));
-					placeLatLngName.put("lng", Float.parseFloat(place_longitude));
-					
-					existPlaceMap.put(thisIdx, placeLatLngName);
-					obj.put("positions", existPlaceMap);
-					
-				} else {
-					existJsonFile.createNewFile();
-					
-					JSONObject placeMap = new JSONObject();
-					JSONObject placeLatLngName = new JSONObject();
-					
-					placeLatLngName.put("name", place_name);
-					placeLatLngName.put("addr", place_addr);
-					placeLatLngName.put("tel", place_tel);
-					placeLatLngName.put("lat", Float.parseFloat(place_latitude));
-					placeLatLngName.put("lng", Float.parseFloat(place_longitude));
-					placeMap.put(thisIdx, placeLatLngName);
-					obj.put("positions", placeMap);
-				}
-				
-				try(
-						FileWriter fileJson = new FileWriter(jsonPath); 
-					) { 
-					fileJson.write(obj.toJSONString());
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				
-			
-				 
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
@@ -191,11 +138,7 @@ public class PlaceController {
 		return "/admin/place/admin_place_edit";
 	}
 	
-//	@PutMapping("/admin/place/{place_idx}")
-//	public String edit(@PathVariable("place_idx") int place_idx, PlaceVo bean, Model model) throws SQLException {
-//		model.addAttribute("plbean", placeService.edit(bean));
-//		return "redirect:/admin/place/{place_idx}";
-//	}
+
 	@PostMapping("/admin/place/{place_idx}")
 	public String edit(@PathVariable("place_idx") int place_idx, MultipartFile file, Model model, HttpServletRequest request,
 			String place_category, String place_name, String place_addr, String place_opentime, 
@@ -215,40 +158,6 @@ public class PlaceController {
 		bean.setPlace_hashtag(place_hashtag);
 		bean.setPlace_latitude(Float.parseFloat(place_latitude));
 		bean.setPlace_longitude(Float.parseFloat(place_longitude));
-		
-		
-		// 踰덊샇, �씠由�, �쐞�룄, 寃쎈룄 json�뙆�씪濡� ���옣
-		String jsonPath = request.getSession().getServletContext().getRealPath("/") + "resources\\json\\place.json";
-
-		JSONObject obj = new JSONObject();	// 理쒖쥌�쑝濡� json�뿉 �엯�젰�릺�뒗 �궡�슜
-		JSONParser parser = new JSONParser();
-		Reader reader = new FileReader(jsonPath);
-		JSONObject existObj = (JSONObject) parser.parse(reader);
-		
-		// json�뿉 �옉�꽦�릺�뼱�엳�뜕 �뵆�젅�씠�뒪 �젙蹂�
-		JSONObject existPlaceMap = (JSONObject) existObj.get("positions");
-		
-		// �깉濡� �엯�젰�븯�뒗 �뵆�젅�씠�뒪 �젙蹂�
-		JSONObject placeLatLngName = new JSONObject();
-		placeLatLngName.put("name", place_name);
-		placeLatLngName.put("addr", place_addr);
-		placeLatLngName.put("tel", place_tel);
-		placeLatLngName.put("lat", Float.parseFloat(place_latitude));
-		placeLatLngName.put("lng", Float.parseFloat(place_longitude));
-		
-		existPlaceMap.put(place_idx, placeLatLngName);
-
-		obj.put("positions", existPlaceMap);
-		System.out.println(place_idx + "踰� �닔�젙�븿 " + obj.get("positions"));	// json�닔�젙/�궘�젣 異붽��옉�뾽�븘�슂
-		
-		try(
-				FileWriter fileJson = new FileWriter(jsonPath); 
-			) { 
-			fileJson.write(obj.toJSONString());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
 		
         if (!file.isEmpty()) {
         	String savePath = request.getSession().getServletContext().getRealPath("/") + "resources\\img\\place\\";
@@ -309,15 +218,10 @@ public class PlaceController {
 		try {
 			HashMap<String, Object> map = new HashMap<>();
 			map = placeService.One(place_idx, true, true, (String)req.getSession().getAttribute("sessionId"));
-			model.addAttribute("plbean", map.get("placeInfo"));
-			model.addAttribute("rvlist", map.get("reviewList"));
-			model.addAttribute("likeCnt", map.get("likeCnt"));
-			model.addAttribute("reviewCnt", map.get("reviewCnt"));
-			model.addAttribute("scoreAvg", map.get("scoreAvg"));
+			model.addAttribute("plbean", map);	// 플레이스정보, 리뷰list, 리뷰one, 좋아요수, 리뷰수, 평점 포함된 map 
 			model.addAttribute("placeHasliked", placeService.hasLiked((String)req.getSession().getAttribute("sessionId"), place_idx));
 			model.addAttribute("placeHasReview", placeService.hasReview((String)req.getSession().getAttribute("sessionId"), place_idx));
 			model.addAttribute("idxList", placeService.selectIdx(place_idx));
-			model.addAttribute("rvbean", map.get("reviewOne"));
 			return "/home/place/place-detail";
 		} catch(IndexOutOfBoundsException e) { //작성하지 않은 place 문서를 요청하면 이 예외가 발생한다.
 			return "/errorpage";

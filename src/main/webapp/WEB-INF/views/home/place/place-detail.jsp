@@ -10,7 +10,7 @@
 <script>
 $(function(){
 	// 해시태그 출력
-	const tag = '${plbean.place_hashtag}';
+	const tag = '${plbean.placeInfo.place_hashtag}';
 	const hashArr = tag.split(';');
 	
 	hashArr.forEach(function(ele, idx){
@@ -19,7 +19,7 @@ $(function(){
 	
 	
 	// 좋아요 클릭
-	var place_idx = ${plbean.place_idx};
+	var place_idx = ${plbean.placeInfo.place_idx};
 	
 	$('#likeButton').click(function() {
 		$.post("./likes/" + place_idx, {
@@ -40,7 +40,7 @@ $(function(){
 	
 	
 	// 리뷰수정모달 기존평점 불러오기
-	var myScore = ${empty rvbean.review_score ? 0 : rvbean.review_score };
+	var myScore = ${empty plbean.reviewOne.review_score ? 0 : plbean.reviewOne.review_score };
 	$('#reviewModifyModal .select-star label').eq(myScore-1).children('input[type="radio"]').prop('checked', 'checked');
 	
 	function saveUrl(){
@@ -57,12 +57,12 @@ $(function(){
 
    <main class="place-detail-page">
         <div class="content-wrap">
-            <div class="top-banr-sect" style="background-image: url(${imgPath }/place/${plbean.place_thumb });"> <!-- 장소detail 페이지는 장소등록 시 등록한 썸네일이 배경이미지로 들어감 -->
+            <div class="top-banr-sect" style="background-image: url(${imgPath }/place/${plbean.placeInfo.place_thumb });"> <!-- 장소detail 페이지는 장소등록 시 등록한 썸네일이 배경이미지로 들어감 -->
                 <div class="container">
                     <ol class="breadcrumb">
                         <li><a href="${pageContext.request.contextPath }">Home</a></li>
                         <li><a href="${pageContext.request.contextPath }/place/category">카테고리별</a></li>
-                        <li class="active">${plbean.place_name }</li>    <!-- 장소명 breadcrumb으로 넣기 -->
+                        <li class="active">${plbean.placeInfo.place_name }</li>    <!-- 장소명 breadcrumb으로 넣기 -->
                     </ol>
                     </ol>
                     <div class="page-header mb40">
@@ -80,26 +80,26 @@ $(function(){
                         <div class="view-util">
                             <p class="tags"></p>  <!-- 장소 관련태그 -->
                             <ul>
-                                <li class="util-show">👁️‍🗨️ <span>${plbean.place_viewcnt }</span></li> <!-- span안에 조회수 넣기 -->
-                                <li class="util-like">❤️ <span id="numLikes">${likeCnt }</span></li> <!-- span안에 좋아요 수 넣기 / 클릭 시 바로 숫자 올라가야함  -->
-                                <li class="util-star">⭐ <span>${scoreAvg }</span></li> <!-- span안에 평점 넣기 -->
-                                <li class="util-reivew">📝 <span>${reviewCnt }</span></li> <!-- span안에 리뷰갯수 넣기 -->
+                                <li class="util-show">👁️‍🗨️ <span>${plbean.placeInfo.place_viewcnt }</span></li> <!-- span안에 조회수 넣기 -->
+                                <li class="util-like">❤️ <span id="numLikes">${plbean.likeCnt }</span></li> <!-- span안에 좋아요 수 넣기 / 클릭 시 바로 숫자 올라가야함  -->
+                                <li class="util-star">⭐ <span>${plbean.scoreAvg }</span></li> <!-- span안에 평점 넣기 -->
+                                <li class="util-reivew">📝 <span>${plbean.reviewCnt }</span></li> <!-- span안에 리뷰갯수 넣기 -->
                                 <li><a href="">🔗</a></li> <!-- 공유하기 => 이부분은 시간여유 있으면 진행 -->
                             </ul>
                         </div>
                         <div class="place-info">
                             <div class="thumb">
-                                <img src="${imgPath }/place/${plbean.place_thumb }" alt=""> <!-- 업로드하는 이미지 사이즈 고정 480x480 -->
+                                <img src="${imgPath }/place/${plbean.placeInfo.place_thumb }" alt=""> <!-- 업로드하는 이미지 사이즈 고정 480x480 -->
                             </div>
-                            <strong>${plbean.place_category }</strong>  <!-- 해당 장소의 카테고리명 -->
-                            <h3>${plbean.place_name }</h3>  <!-- 장소명 -->
-                            <p>${plbean.place_content }</p> <!-- 간단소개 -->
+                            <strong>${plbean.placeInfo.place_category }</strong>  <!-- 해당 장소의 카테고리명 -->
+                            <h3>${plbean.placeInfo.place_name }</h3>  <!-- 장소명 -->
+                            <p>${plbean.placeInfo.place_content }</p> <!-- 간단소개 -->
                             <div class="desc">
                                 <ul>
-                                    <li>📌<span>${plbean.place_addr }</span></li> <!-- 주소 -->
-                                    <li>📞<span>${plbean.place_tel }</span></li> <!-- 전화번호 -->
-                                    <li>⏰<span>${plbean.place_opentime } - ${plbean.place_endtime }</span></li> <!-- 영업시간 -->
-                                    <li>🏠<span><a href="${plbean.place_url }" target="_blank">${plbean.place_url }</a></span></li> <!-- 대표링크 -->
+                                    <li>📌<span>${plbean.placeInfo.place_addr }</span></li> <!-- 주소 -->
+                                    <li>📞<span>${plbean.placeInfo.place_tel }</span></li> <!-- 전화번호 -->
+                                    <li>⏰<span>${plbean.placeInfo.place_opentime } - ${plbean.placeInfo.place_endtime }</span></li> <!-- 영업시간 -->
+                                    <li>🏠<span><a href="${plbean.placeInfo.place_url }" target="_blank">${plbean.placeInfo.place_url }</a></span></li> <!-- 대표링크 -->
                                 </ul>
                             </div>
                         </div>
@@ -134,18 +134,18 @@ $(function(){
                         </div>
 
                         <div class="place-review mb60">
-                            <h4>📝 다녀온 회원 리뷰 <span>${reviewCnt }</span>개</h4>  <!-- span안에 리뷰갯수 넣기 -->
-                            <p>이 PLACE에 다녀온 사람들은 <strong>⭐<span>${scoreAvg }</span></strong>만큼 만족했어요!</p> <!-- span안에 평점 넣기 -->
+                            <h4>📝 다녀온 회원 리뷰 <span>${plbean.reviewCnt }</span>개</h4>  <!-- span안에 리뷰갯수 넣기 -->
+                            <p>이 PLACE에 다녀온 사람들은 <strong>⭐<span>${plbean.scoreAvg }</span></strong>만큼 만족했어요!</p> <!-- span안에 평점 넣기 -->
                             <div class="review-list">
                                 <ul>
                                 <c:choose> 
-                                	<c:when test="${fn:length(rvlist) eq 0}">
+                                	<c:when test="${fn:length(plbean.reviewList) eq 0}">
 	                					<li style="padding: 30px; color: #aaa; text-align: center;">
 	                						등록된 리뷰가 없습니다.
 	                					</li>
                                 	</c:when>
                                 	<c:otherwise>
-                                		<c:forEach items="${rvlist }" var="rvbean">
+                                		<c:forEach items="${plbean.reviewList }" var="rvbean">
 		                                	<li>                   
 		                                        <div class="rv-score">
 			                                        <c:forEach begin="1" end="${rvbean.review_score }">
@@ -179,8 +179,8 @@ $(function(){
                             <div id="map" style="width:100%;height:300px;"></div>
                             <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e5f5bb9115d812a34ed32b190bd82edf"></script>
                             <script>
-                            var lat = ${plbean.place_latitude},
-                            	lng = ${plbean.place_longitude};
+                            var lat = ${plbean.placeInfo.place_latitude},
+                            	lng = ${plbean.placeInfo.place_longitude};
                             
                             var mapContainer = document.getElementById('map'),
                                 mapOption = { 
@@ -190,10 +190,9 @@ $(function(){
 
                             var map = new kakao.maps.Map(mapContainer, mapOption);
 
-                            // 마커이미지 변경필요
-                            var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png',
-                                imageSize = new kakao.maps.Size(64, 69),
-                                imageOption = {offset: new kakao.maps.Point(27, 69)};
+                            var imageSrc = '${imgPath }/pin.png',
+                                imageSize = new kakao.maps.Size(32, 32),
+                                imageOption = {offset: new kakao.maps.Point(32, 32)};
                                 
                             var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
                                 markerPosition = new kakao.maps.LatLng(lat, lng);
@@ -258,12 +257,12 @@ $(function(){
                     <h4 class="modal-title" id="myModalLabel">✏️ 리뷰 작성하기</h4>
                 </div>
                 <form action="" method="post">
-                	<input type="hidden" name="review_placeidx" value="${plbean.place_idx }">
+                	<input type="hidden" name="review_placeidx" value="${plbean.placeInfo.place_idx }">
                 	<input type="hidden" name="review_memberid" value="${sessionScope.sessionId}" >  <!-- 현재 로그인한 사용자 아이디 -->
                     <div class="modal-body"> 
                         <div class="form-group">
                             <span>방문 장소</span>
-                            <p>${plbean.place_name }</p> <!-- 해당페이지의 플레이스명 -->
+                            <p>${plbean.placeInfo.place_name }</p> <!-- 해당페이지의 플레이스명 -->
                         </div>
                         <div class="form-group">
                             <span>평점</span>
@@ -322,13 +321,13 @@ $(function(){
 				</div>
 				<form action="" method="post">
 					<input type="hidden" name="_method" value="put">
-					<input type="hidden" name="review_placeidx"	value="${plbean.place_idx }">
+					<input type="hidden" name="review_placeidx"	value="${plbean.placeInfo.place_idx }">
 					<input type="hidden" name="review_memberid" value="${sessionScope.sessionId}">
 					<!-- 현재 더미에넣은 사용자 아이디 -->
 					<div class="modal-body">
 						<div class="form-group">
 							<span>방문 장소</span>
-							<p>${plbean.place_name }</p>
+							<p>${plbean.placeInfo.place_name }</p>
 							<!-- 해당페이지의 플레이스명 -->
 						</div>
                        <div class="form-group">
@@ -358,7 +357,7 @@ $(function(){
                         </div>
 						<div class="form-group">
 							<label for="reviewCnt">리뷰</label>
-							<textarea name="review_content" id="reviewCnt">${rvbean.review_content }</textarea>
+							<textarea name="review_content" id="reviewCnt">${plbean.reviewOne.review_content }</textarea>
 						</div>
 
 					</div>
@@ -380,13 +379,13 @@ $(function(){
 					</button>
 					<h4 class="modal-title" id="myModalLabel">✏️ 리뷰 삭제하기</h4>
 				</div>
-				<form action="${pageContext.request.contextPath }/place/${plbean.place_idx}" method="post">
-                	<input type="hidden" name="review_placeidx" value="${plbean.place_idx }">
+				<form action="${pageContext.request.contextPath }/place/${plbean.placeInfo.place_idx}" method="post">
+                	<input type="hidden" name="review_placeidx" value="${plbean.placeInfo.place_idx }">
                 	<input type="hidden" name="review_memberid" value="${sessionScope.sessionId}">
 					<input type="hidden" name="_method" value="delete">
 					<!-- 현재 더미에넣은 사용자 아이디 -->
 					<input type="hidden" id="delBtn" name="review_content"
-						value="${plbean.place_idx }" />
+						value="${plbean.placeInfo.place_idx }" />
 					<div class="modal-body">
 						리뷰를 삭제하시겠습니까?
 

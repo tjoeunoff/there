@@ -116,7 +116,7 @@
         <div class="content-wrap">
                 <div class="tit-sect tac">
                     <div class="container">
-                        <h2 class="sect-tit mb30">마이페이지 🧐</h2>
+                        <h2 class="sect-tit mb30">마이페이지 <span class="emoji">🧐</span></h2>
                         <p class="sect-desc mb10">개인정보 조회/수정</p>
                     </div>
                 </div>
@@ -155,47 +155,46 @@
 	                    </div>    
                     </div>
                 </div>
+                <!-- // my-info-sect -->
 
-                <div class="my-activity-sect mb100">
+                <div class="my-activity-sect">
                     <div class="container">
                         <div class="my-like-places mb100">
                             <div class="my-tit">
-                                <h3 class="mb30">내가 ❤️좋아하는 장소</h3> <!-- 최근 좋아요누른 장소 4개만 노출 -->
+                                <h3 class="mb30">내가 <span class="emoji">❤️</span>좋아하는 장소</h3> <!-- 최근 좋아요누른 장소 4개만 노출 -->
                             </div>
-							<div class="content-wrap">
-								<div class="weekly-magazine-sect">
-									<div class="swiper list-slider">
-										<div class="swiper-wrapper">
-											<c:forEach items="${myPlList }" var="plbean" begin="0" end="3">
-												<div class="swiper-slide list-item">
-													<a
-														href="${pageContext.request.contextPath}/place/${plbean.place_idx }">
-														<!-- 썸네일의 경우 img태그가 아닌 background-image로 -->
-														<div class="thumb-img" style="background-image: url(${imgPath }/place/${plbean.place_thumb });"></div>
-														<div class="thumb-desc">
-															<strong>${plbean.place_name }</strong>
-															<!-- 게시글 제목 -->
-															<p class="tags"></p>
-															<p class="hidden-tags">${plbean.place_hashtag }</p>
-															<!-- 게시글 관련태그 => 게시물 등록시 작성필요 -->
-														</div>
-													</a>
-												</div>
-											</c:forEach>
-										</div>
-										<div class="slide-next">👉</div>
-										<div class="slide-prev">👈</div>
+							<div class="weekly-magazine-sect">
+								<div class="swiper list-slider">
+									<div class="swiper-wrapper">
+										<c:forEach items="${myPlList }" var="plbean" begin="0" end="3">
+											<div class="swiper-slide list-item">
+												<a
+													href="${pageContext.request.contextPath}/place/${plbean.place_idx }">
+													<!-- 썸네일의 경우 img태그가 아닌 background-image로 -->
+													<div class="thumb-img" style="background-image: url(${imgPath }/place/${plbean.place_thumb });"></div>
+													<div class="thumb-desc">
+														<strong>${plbean.place_name }</strong>
+														<!-- 게시글 제목 -->
+														<p class="tags"></p>
+														<p class="hidden-tags">${plbean.place_hashtag }</p>
+														<!-- 게시글 관련태그 => 게시물 등록시 작성필요 -->
+													</div>
+												</a>
+											</div>
+										</c:forEach>
 									</div>
+									<div class="slide-next">👉</div>
+									<div class="slide-prev">👈</div>
 								</div>
 							</div>
-                        </div>
-
-					<div class="my-like-magazines mb100">
-						<div class="my-tit">
-							<h3 class="mb30">내가 ❤️좋아하는 매거진</h3>
-							<!-- 최근 좋아요누른 매거진 4개만 노출 -->
 						</div>
-						<div class="content-wrap">
+						<!-- // my-like-places -->
+						
+						<div class="my-like-magazines mb100">
+							<div class="my-tit">
+								<h3 class="mb30">내가 <span class="emoji">❤️</span>좋아하는 매거진</h3>
+								<!-- 최근 좋아요누른 매거진 4개만 노출 -->
+							</div>
 							<div class="weekly-magazine-sect">
 								<div class="swiper list-slider">
 									<div class="swiper-wrapper">
@@ -221,27 +220,29 @@
 								</div>
 							</div>
 						</div>
-					</div>
+						<!-- // my-like-magazines -->
 
-					<div class="my-reviews">
-                            <div class="my-tit">
-                                <h3 class="mb30">내가 작성한 리뷰 📝</h3>  <!-- 최근 작성한 리뷰 3개만 노출 -->
-                            </div>
-                            <div class="review-list">
-                                <ul>
-                                <c:forEach items="${myRvList}" var="rvbean">
-                                    <li>
-                                        <span><c:forEach var="i" begin="1" end="${rvbean.review_score}">⭐</c:forEach></span>
-                                        <p>${rvbean.review_content }</p>
-                                    </li>
-                             	</c:forEach>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-        </div>
+						<div class="my-reviews">
+							<div class="my-tit">
+								<h3 class="mb30">내가 작성한 리뷰 <span class="emoji">📝</span></h3>  <!-- 최근 작성한 리뷰 3개만 노출 -->
+	                        </div>
+	                        <div class="review-list">
+								<ul>
+									<c:forEach items="${myRvList}" var="rvbean">
+									<li>
+	                                	<span><c:forEach var="i" begin="1" end="${rvbean.review_score}">⭐</c:forEach></span>
+	                               		<p>${rvbean.review_content }</p>
+	                            	</li>
+	                             	</c:forEach>
+	                            </ul>
+	                        </div>
+	                    </div>
+	                    <!-- // my-reviews -->
+                   	</div>
+                   	<!-- // container -->
+        		</div>
+        		<!-- // my-activity-sect -->
+        		
         <!-- // content-wrap  -->
 
     </main>

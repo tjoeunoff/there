@@ -110,7 +110,7 @@ $(function(){
     <div class="content-wrap">
         <div class="weekly-magazine-sect">
             <div class="container">
-                <h2 class="sect-tit mb20">❗ 이번 주 추천 매거진</h2>
+                <h2 class="sect-tit mb20"><span class="emoji">❗</span> 이번 주 추천 매거진</h2>
                 <p class="wm-tag mb40"><span>#이번주말</span><span>#뭐하고놀지🤔</span></p>
             </div>
             <div class="swiper magazine-slider top20-place-sect"> <!-- 관리자에서 매거진 게시판에 등록한 게시글의 썸네일, 제목, #태그가 슬라이드로 노출 (최근게시글 10개) -->
@@ -138,7 +138,7 @@ $(function(){
         <div class="place-cate-sect">
             <div class="container">
                 <div class="tac">
-                    <h2 class="sect-tit tac mb80">카테고리별 추천 PLACE 👀</h2>
+                    <h2 class="sect-tit tac mb80">카테고리별 추천 PLACE <span class="emoji">👀</span></h2>
                     <ul class="cate-btns mb100">
                         <li><a href="${pageContext.request.contextPath}/place/category#food"><span>맛집</span></a></li>
                         <li><a href="${pageContext.request.contextPath}/place/category#cafe"><span>카페</span></a></li>
@@ -154,7 +154,7 @@ $(function(){
 
         <div class="place-location-sect">
             <div class="container">
-                <h2 class="sect-tit mb40">지역별 📍 추천 PLACE</h2>
+                <h2 class="sect-tit mb40">지역별 <span class="emoji">📍</span> 추천 PLACE</h2>
                 <div class="map-btns tac mb20">
                     <button class="around-btn abtn abtn-gray">내 주변 보기</button>
                     <a class="abtn abtn-mint" href="${pageContext.request.contextPath}/place/location">자세히 보기</a>
@@ -163,70 +163,69 @@ $(function(){
                 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e5f5bb9115d812a34ed32b190bd82edf"></script>
                 <script>
                 $(function(){
-                	
+                	// 맵 생성
                     var mapContainer = document.getElementById('map'),
-                        mapOption = { 
-                            center: new kakao.maps.LatLng(37.5642135, 127.0016985),
-                            level: 7
-                        };
-                    var map = new kakao.maps.Map(mapContainer, mapOption);
+                    mapOption = { 
+                        center: new kakao.maps.LatLng(37.5642135, 127.0016985),
+                        level: 7
+                    };
+					var map = new kakao.maps.Map(mapContainer, mapOption);
 
-                    $.get("${jsonPath }/place.json", function(data) {
-                        var place = $(data.positions)[0];
-                    	var placeIdx = Object.keys(place);
-                    	var info = new Array(4);
-                        var arr = new Array(placeIdx);
-                    	for(var i = 0; i < placeIdx.length; i++) {
-                    		key = placeIdx[i];
-                            info = ([place[key].lat, place[key].lng, place[key].name, key]);
-                            //console.log(info);
-                            arr[i] = info;
-                    	}
-
-
-                        for (var i = 0; i < placeIdx.length; i ++) {
+                    $.get("${pageContext.request.contextPath }/place/json", function(data) {
+                    	var place = $(data.positions)[0];
+                    	var placeIdxArr = Object.keys(place);
+                    	
+						for(var i = 0; i < placeIdxArr.length; i++) {
+                    		
+                    		// json데이터 변수설정
+                    		var plIdx = placeIdxArr[i];
+                            var positions = new kakao.maps.LatLng(place[plIdx].lat, place[plIdx].lng);
+                            var plName = place[plIdx].name,
+                            	plAddr =place[plIdx].addr,
+                            	plTel = place[plIdx].tel;
+                            
+                         	// 마커, 윈포윈도우 출력
                             var marker = new kakao.maps.Marker({
                                 map: map,
-                                position: new kakao.maps.LatLng(arr[i][0], arr[i][1]),
+                                position: positions,
                                 image: new kakao.maps.MarkerImage('${imgPath }/pin.png', new kakao.maps.Size(32, 32), {offset: new kakao.maps.Point(32, 32)})
                             });
 
                             var infowindow = new kakao.maps.InfoWindow({
-                                content: '<div style="padding: 10px; font-size: 14px;"><a href="${pageContext.request.contextPath}/place/'+ arr[i][3] +'">'+ arr[i][2] +'</a></div>',
+                                content: '<div style="padding: 10px; font-size: 14px;"><a href="${pageContext.request.contextPath}/place/'+ plIdx +'">'+ plName +'</a></div>',
                                 removable: true
                             });
+                            
+                            kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker, infowindow, positions));
+                    	}
+                    });
 
-                            kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker, infowindow));
-                        }
-
-                        });
-
-                        function makeClickListener(map, marker, infowindow) {
-                            return function() {
-                                infowindow.open(map, marker);
-                            };
-                        }
+                    function makeClickListener(map, marker, infowindow, positions) {
+                        return function() {
+                            infowindow.open(map, marker);
+                        };
+                    }
                         
                         
-                        // 내 주변 보기 클릭
-                        $('.around-btn').on('click', function(){
-                        	if (navigator.geolocation) {
-                                navigator.geolocation.getCurrentPosition(function(position) {
-                                    
-                                	var lat = position.coords.latitude, // 위도
-                                    	lon = position.coords.longitude; // 경도
-                                    var locPosition = new kakao.maps.LatLng(lat, lon);
-                                	
-                                    var marker = new kakao.maps.Marker({  
-                                        map: map, 
-                                        position: locPosition,
-                                        image: new kakao.maps.MarkerImage('${imgPath }/me.png', new kakao.maps.Size(64, 64), {offset: new kakao.maps.Point(64, 64)})
-                                    }); 
-                                    
-                                    map.setCenter(locPosition);  
-                                });
-                            }
-                        });
+                    // 내 주변 보기 클릭
+                    $('.around-btn').on('click', function(){
+                    	if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(function(position) {
+                                
+                            	var lat = position.coords.latitude, // 위도
+                                	lon = position.coords.longitude; // 경도
+                                var locPosition = new kakao.maps.LatLng(lat, lon);
+                            	
+                                var marker = new kakao.maps.Marker({  
+                                    map: map, 
+                                    position: locPosition,
+                                    image: new kakao.maps.MarkerImage('${imgPath }/me.png', new kakao.maps.Size(64, 64), {offset: new kakao.maps.Point(64, 64)})
+                                }); 
+                                
+                                map.setCenter(locPosition);  
+                            });
+                        }
+                    });
                 });
                 </script>
             </div>
@@ -236,7 +235,7 @@ $(function(){
 
         <div class="top20-place-sect">
             <div class="container">
-                <h2 class="sect-tit mb40">❤️ 좋아요 많은 장소 TOP 20</h2>
+                <h2 class="sect-tit mb40"><span class="emoji">❤️</span> 좋아요 많은 장소 TOP 20</h2>
             </div>
             <div class="swiper place-slider">   <!-- 관리자에서 등록한 장소 중 좋아요 눌린 수가 많은 상위 20개 장소를 썸네일, 장소명, #태그가 슬라이드로 노출 -->
                 <div class="swiper-wrapper">

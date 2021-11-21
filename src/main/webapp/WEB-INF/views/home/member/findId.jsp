@@ -41,36 +41,39 @@ $(document).ready(function(){
 
     <main class="login-util-page">
         <div class="content-wrap">
-                <div class="tit-sect tac">
-                    <div class="container">
-                        <h2 class="sect-tit mb30">아이디 찾기 🤔</h2>
-                    </div>
-                </div>
+	        <div class="tit-sect tac">
+	            <div class="container">
+	                <h2 class="sect-tit mb30">아이디 찾기 <span class="emoji">🤔</span></h2>
+	            </div>
+	        </div>
 
-                 <form class="form-horizontal">
-        <div class="form-group">
-            <label for="inputName3" class="col-sm-2 control-label">이름</label>
-            <div class="col-sm-5">
-                <input type="text" class="form-control" id="inputName3" placeholder="이름" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputCellNum3" class="col-sm-2 control-label">전화번호</label>
-            <div class="col-sm-5">
-                <input type="text" class="form-control" id="inputCellNum3" placeholder="전화번호" />
-            </div>
-        </div>
-
-        <div class="form-group">
-			<div class="btn-group btn-group-justified" role="group" aria-label="...">
-				<div class="btn-group"><button type="button" class="btn btn-primary" id="ConfirmBtn">입력</button></div>
-			    <div class="btn-group"><button type="reset" class="btn btn-default">취소</button></div>
-			    <div class="btn-group"><button type="button" class="btn btn-default" onclick="history.back();">뒤로</button></div>
+			<div class="container">
+				<form class="form-horizontal" id="findIdForm">
+					<div class="form-group">
+						<label for="inputName3" class="col-sm-3 control-label">이름</label>
+		         		<div class="col-sm-6">
+		             		<input type="text" class="form-control" id="inputName3" placeholder="이름" />
+		         		</div>
+	     			</div>
+				    <div class="form-group">
+				        <label for="inputCellNum3" class="col-sm-3 control-label">전화번호</label>
+				        <div class="col-sm-6">
+							<input type="text" class="form-control" id="inputCellNum3" placeholder="전화번호" />
+				        </div>
+				    </div>
+					<div class="form-group text-center">
+						<button type="button" class="abtn abtn-mint" id="ConfirmBtn">아이디 찾기</button>
+					</div>
+				</form>
 			</div>
         </div>
-    </form>
+        <!-- // content-wrap  -->
 
-    <!-- model -->
+    </main>
+    <!-- // main -->
+
+
+	<!-- model -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -89,11 +92,7 @@ $(document).ready(function(){
         </div>
     </div>
 
-        </div>
-        <!-- // content-wrap  -->
 
-    </main>
-    <!-- // main -->
 
 <%@ include file="../template/footer.jspf" %>
 </body>
