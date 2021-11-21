@@ -12,20 +12,23 @@
 <header id="header">
     <div class="head-inner">
         <h1 class="logo"><a href="${pageContext.servletContext.contextPath }"></a></h1>
-        <div class="util-box">
-        	<c:if test="${empty sessionScope.success }" var="v" scope="page">
-	            <ul>
-	                <li><a class="abtn abtn-gray" href="${pageContext.request.contextPath }/member/join">회원가입</a></li>
-	                <li><a class="abtn abtn-mint" href="${pageContext.request.contextPath }/member/login"  onclick="saveUrl();">로그인</a></li>
-	            </ul>
-	        </c:if>
-	        <c:if test="${not pageScope.v }">
-	        	<ul>
-	        		<li><a class="abtn abtn-mint" href="${pageContext.request.contextPath }/member/logout"  onclick="saveUrl();">로그아웃</a></li>
-	        		<li><a class="abtn abtn-mint" href="${pageContext.request.contextPath }/member/mypage">마이페이지</a></li>
-	        	</ul>
-	        </c:if>
+       	<c:if test="${empty sessionScope.success }" var="v" scope="page">
+       	<div class="util-box">
+            <ul>
+                <li><a class="abtn abtn-gray" href="${pageContext.request.contextPath }/member/join">회원가입</a></li>
+                <li><a class="abtn abtn-mint" href="${pageContext.request.contextPath }/member/login"  onclick="saveUrl();">로그인</a></li>
+            </ul>
         </div>
+        </c:if>
+        <c:if test="${not pageScope.v }">
+        <div class="util-box login-on">
+        	<span class="member-info">😊 ${sessionScope.sessionId }님 </span>
+        	<ul>
+        		<li><a class="abtn abtn-mint" href="${pageContext.request.contextPath }/member/logout"  onclick="saveUrl();">로그아웃</a></li>
+        		<li><a class="abtn abtn-mint" href="${pageContext.request.contextPath }/member/mypage">마이페이지</a></li>
+        	</ul>
+        </div>
+        </c:if>
     </div>
 </header>
 <!-- // header -->
@@ -50,11 +53,19 @@
 </div>
 <div id="mGnb">
     <div>
-        <ul>
+        <ul class="m-menu">
             <li><a href="${pageContext.servletContext.contextPath }/magazine">매거진</a></li>
             <li><a href="${pageContext.servletContext.contextPath }/place/location">지역별</a></li>
             <li><a href="${pageContext.servletContext.contextPath }/place/category">카테고리별</a></li>
         </ul>
+		<c:if test="${not pageScope.v }">
+		<div class="m-util-box">
+			<ul>
+				<li><a class="abtn abtn-mint" href="${pageContext.request.contextPath }/member/logout"  onclick="saveUrl();">로그아웃</a></li>
+				<li><a class="abtn abtn-mint" href="${pageContext.request.contextPath }/member/mypage">마이페이지</a></li>
+			</ul>
+		</div>
+		</c:if>
     </div>
 </div>
  <!-- // mobile-menu -->

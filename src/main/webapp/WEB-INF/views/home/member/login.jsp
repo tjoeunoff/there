@@ -64,20 +64,20 @@ $(document).ready(function(){
         <div class="content-wrap">
 			<div class="tit-sect tac">
 				<div class="container">
-					<h2 class="sect-tit mb30">로그인 😍</h2>
+					<h2 class="sect-tit mb30">로그인 <span class="emoji">😍</span></h2>
 				</div>
 			</div>
                
 			<div class="login-box">
 				<form id="loginForm" method="post">
 					<div class="box-border">
-						<label for="memberId">🙍</label>
+						<label for="memberId" class="emoji">🙍</label>
 						<div>
 					    	<input type="text" name="member_id" id="memberId" placeholder="아이디" value="${mbrbean.member_id}"/>
 					    </div>
 					</div>
 					<div class="box-border">
-						<label for="memberPw">🔒</label>
+						<label for="memberPw" class="emoji">🔒</label>
 						<div>
 							<input type="password" name="member_pw" id="memberPw" placeholder="비밀번호" value="${mbrbean.member_pw}" />
 						</div>
