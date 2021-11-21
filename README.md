@@ -30,7 +30,7 @@
 - [x] 5) 물리 ERD  
 
 ## 🔗 ER 다이어그램 모델링
-URL : https://aquerytool.com/aquerymain/index/?rurl=54e2cfd8-c532-40bf-9811-8745dad34815&
+URL : https://aquerytool.com/aquerymain/index/?rurl=54e2cfd8-c532-40bf-9811-8745dad34815& <br>
 Password : 72681x
 
 ## 🔗 프로젝트 문서 산출물 전용 레파지토리 주소
