@@ -6,6 +6,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="../template/include.jspf" %>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/search.js"></script>
+<style>
+table a{
+	text-decoration: none;
+	display: block;
+}
+table a:hover{
+	text-decoration: none;
+}
+</style>
 </head>
 <body>
 <%@ include file="../template/header.jspf" %>
@@ -15,12 +25,20 @@
         <div class="page-header">
             <h2>플레이스 목록 <SMALL>Place List</SMALL></h2>
         </div>
+        
+        <div class="form-group form-inline">
+            <select class="form-control searchSelect"></select>
+            <input type="text" class="form-control searchInput" placeholder="Search for ..."/>
+            <button type="button" class="btn btn-default searchButton">검색</button>
+            <a class="btn btn-default" href="${pageContext.request.contextPath}/admin/place" role="button">전체보기</a>
+        </div>
+        
         <div class="panel panel-default">
             <div class="panel-heading">
                 현재 기준으로 등록된 플레이스들을 관리할 수 있습니다.
             </div>
         </div>            
-        <table class="table table-bordered table-hover">
+        <table class="table table-bordered table-hover searchTable tableWithPage">
             <thead>
                 <tr>
                     <th class="col-md-1">번호</th>

@@ -95,7 +95,7 @@
         </ul>
         <div class="sub_nav_box">
             <ul class="sub_nav_list" id="nomargin">
-                <li class="on"><a href="${pageContext.servletContext.contextPath }/admin/member">&#12596; 회원 목록</a></li>
+                <li><a href="${pageContext.servletContext.contextPath }/admin/member">&#12596; 회원 목록</a></li>
             </ul>
         </div>
     </div>
