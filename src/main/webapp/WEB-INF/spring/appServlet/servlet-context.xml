@@ -30,11 +30,6 @@
 	5mb=5*1024*1024
 	10mb=10*1024*1024
 	 -->
-	<!-- 업로드 패스 설정 -->
-	<beans:bean
-	class="java.lang.String" id="uploadPath">
-		<beans:constructor-arg value="D:/DockerAWS/framework/workspace/there/src/main/webapp/resources"></beans:constructor-arg>
-	</beans:bean>
 	
 	<!-- MultipartResolver -->
 	<beans:bean id="multipartResolver"
