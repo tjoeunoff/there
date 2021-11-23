@@ -106,7 +106,7 @@ public class PlaceController {
 		bean.setPlace_longitude(Float.parseFloat(place_longitude));
 		
         if (!file.isEmpty()) {
-        	String savePath = request.getSession().getServletContext().getRealPath("/") + "resources\\img\\place\\";
+        	String savePath = request.getSession().getServletContext().getRealPath("/") + "resources/img/place/";
             String filename = System.currentTimeMillis() + "_" + file.getOriginalFilename();
             bean.setPlace_thumb(filename);
        
@@ -160,7 +160,7 @@ public class PlaceController {
 		bean.setPlace_longitude(Float.parseFloat(place_longitude));
 		
         if (!file.isEmpty()) {
-        	String savePath = request.getSession().getServletContext().getRealPath("/") + "resources\\img\\place\\";
+        	String savePath = request.getSession().getServletContext().getRealPath("/") + "resources/img/place/";
             String filename = System.currentTimeMillis() + "_" + file.getOriginalFilename();
             bean.setPlace_thumb(filename);
        
